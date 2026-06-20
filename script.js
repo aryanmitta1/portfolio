@@ -231,4 +231,43 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   nums.forEach((n) => io.observe(n));
 })();
 
+/* ---------- Fly-by rocket ---------- */
+(() => {
+  if (REDUCED) return;
+  const rocket = document.getElementById("rocket");
+  if (!rocket) return;
+  let flying = false;
+
+  function launch() {
+    if (flying || document.hidden) return;
+    flying = true;
+    const dur = 5 + Math.random() * 2.5;
+    rocket.style.setProperty("--dur", dur + "s");
+    rocket.style.setProperty("--y0", (68 + Math.random() * 26) + "vh");
+    rocket.style.setProperty("--y1", (4 + Math.random() * 34) + "vh");
+    rocket.style.setProperty("--rot", (48 + Math.random() * 18) + "deg");
+    rocket.classList.remove("rocket--fly");
+    void rocket.offsetWidth;            // force reflow to restart animation
+    rocket.classList.add("rocket--fly");
+    setTimeout(() => { rocket.classList.remove("rocket--fly"); flying = false; }, dur * 1000 + 120);
+  }
+
+  setTimeout(launch, 3200);                                  // first flyby after load
+  setInterval(() => { if (Math.random() > 0.4) launch(); }, 15000);  // periodic
+
+  const brand = document.querySelector(".nav__brand");       // easter egg: click logo to launch
+  if (brand) brand.addEventListener("click", () => launch());
+})();
+
+/* ---------- Section dividers: animate only while in view ---------- */
+(() => {
+  const dividers = document.querySelectorAll(".divider");
+  if (!dividers.length) return;
+  if (!("IntersectionObserver" in window)) { dividers.forEach((d) => d.classList.add("is-in")); return; }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => e.target.classList.toggle("is-in", e.isIntersecting));
+  }, { threshold: 0 });
+  dividers.forEach((d) => io.observe(d));
+})();
+
 document.getElementById("year").textContent = new Date().getFullYear();

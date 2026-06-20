@@ -23,6 +23,20 @@
   <div class="vignette" aria-hidden="true"></div>
   <div class="cursor" id="cursor" aria-hidden="true"></div>
 
+  <!-- Fly-by rocket -->
+  <div class="rocket" id="rocket" aria-hidden="true">
+    <div class="rocket__trail"></div>
+    <div class="rocket__flame"></div>
+    <svg class="rocket__body" width="30" height="44" viewBox="0 0 30 44" fill="none">
+      <path d="M15 0C22 7 24 18 24 26H6C6 18 8 7 15 0Z" fill="#eef1ff"/>
+      <path d="M15 0C22 7 24 18 24 26H15V0Z" fill="#c3ccf0"/>
+      <circle cx="15" cy="14" r="3.6" fill="#79e8ff" stroke="#2b3556" stroke-width="1"/>
+      <path d="M6 22L1 32L6 29Z" fill="#aebcff"/>
+      <path d="M24 22L29 32L24 29Z" fill="#8c9ad6"/>
+      <rect x="11" y="26" width="8" height="4" rx="1" fill="#6f7cb0"/>
+    </svg>
+  </div>
+
   <div class="scroll-progress" id="scrollProgress"></div>
 
   <!-- Navigation -->
@@ -126,7 +140,7 @@
         <h2 class="section__title">Between software,<br>hardware &amp; flight.</h2>
       </div>
       <div class="about">
-        <div class="about__lead reveal">
+        <div class="about__lead reveal reveal--left">
           <p>
             I'm an Electrical &amp; Computer Engineering student at
             <strong>NYU Tandon</strong>, drawn to the work that sits at the
@@ -140,7 +154,7 @@
             engineering. I like building the things that bridge firmware and physics.
           </p>
         </div>
-        <ul class="about__tags reveal">
+        <ul class="about__tags reveal reveal--right">
           <li>Aerospace Systems</li>
           <li>Embedded Software</li>
           <li>Avionics</li>
@@ -152,6 +166,8 @@
         </ul>
       </div>
     </section>
+
+    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
 
     <!-- EXPERIENCE -->
     <section class="section" id="experience">
@@ -237,6 +253,8 @@
       </div>
     </section>
 
+    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
+
     <!-- FEATURED PROJECT -->
     <section class="section" id="project">
       <div class="section__head reveal">
@@ -294,6 +312,8 @@
       </article>
     </section>
 
+    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
+
     <!-- SKILLS -->
     <section class="section" id="skills">
       <div class="section__head reveal">
@@ -350,6 +370,8 @@
       </div>
     </section>
 
+    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
+
     <!-- EDUCATION + LEADERSHIP -->
     <section class="section" id="education">
       <div class="section__head reveal">
@@ -358,7 +380,7 @@
       </div>
 
       <div class="edu-grid">
-        <article class="edu-card reveal">
+        <article class="edu-card reveal reveal--left">
           <h3 class="edu-card__school">New York University</h3>
           <p class="edu-card__sub">Tandon School of Engineering</p>
           <p class="edu-card__degree">B.S. Electrical &amp; Computer Engineering</p>
@@ -375,7 +397,7 @@
           </div>
         </article>
 
-        <div class="lead-stack">
+        <div class="lead-stack reveal reveal--right">
           <article class="lead-card reveal">
             <h3>Payload Electronics Lead</h3>
             <p class="lead-card__org">NYU Rogue Aerospace · NASA USLI</p>
@@ -394,6 +416,8 @@
         </div>
       </div>
     </section>
+
+    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
 
     <!-- CONTACT -->
     <section class="section section--contact" id="contact">
