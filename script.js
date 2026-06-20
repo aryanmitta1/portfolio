@@ -242,20 +242,22 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   function launch() {
     if (flying || document.hidden) return;
     flying = true;
-    const dur = 5 + Math.random() * 2.5;
+    const dur = 28 + Math.random() * 10;                     // slow cruise, 28–38s across
+    const y0 = 42 + Math.random() * 34;                      // gentle, near-horizontal path
+    const y1 = Math.max(8, y0 - (12 + Math.random() * 20));  // drift upward a little
     rocket.style.setProperty("--dur", dur + "s");
-    rocket.style.setProperty("--y0", (68 + Math.random() * 26) + "vh");
-    rocket.style.setProperty("--y1", (4 + Math.random() * 34) + "vh");
-    rocket.style.setProperty("--rot", (48 + Math.random() * 18) + "deg");
+    rocket.style.setProperty("--y0", y0 + "vh");
+    rocket.style.setProperty("--y1", y1 + "vh");
+    rocket.style.setProperty("--rot", (74 + Math.random() * 8) + "deg");
     rocket.classList.remove("rocket--fly");
     void rocket.offsetWidth;            // force reflow to restart animation
     rocket.classList.add("rocket--fly");
     if (window.__spaceWhoosh) window.__spaceWhoosh();
-    setTimeout(() => { rocket.classList.remove("rocket--fly"); flying = false; }, dur * 1000 + 120);
+    setTimeout(() => { rocket.classList.remove("rocket--fly"); flying = false; }, dur * 1000 + 200);
   }
 
-  setTimeout(launch, 3200);                                  // first flyby after load
-  setInterval(() => { if (Math.random() > 0.4) launch(); }, 15000);  // periodic
+  setTimeout(launch, 4000);                                  // first cruise after load
+  setInterval(() => { if (Math.random() > 0.5) launch(); }, 22000);  // occasional, with gaps
 
   const brand = document.querySelector(".nav__brand");       // easter egg: click logo to launch
   if (brand) brand.addEventListener("click", () => launch());
@@ -364,40 +366,6 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     }
   }
   setTimeout(loop, 1400);
-})();
-
-/* ---------- Launch sequence (once per session) ---------- */
-(() => {
-  const launch = document.getElementById("launch");
-  if (!launch) return;
-  if (REDUCED || sessionStorage.getItem("launched")) { launch.remove(); return; }
-
-  const count = document.getElementById("launchCount");
-  const status = document.getElementById("launchStatus");
-  const skip = document.getElementById("launchSkip");
-  const timers = [];
-  let ended = false;
-
-  document.body.style.overflow = "hidden";
-  function setCount(t) { count.textContent = t; count.style.animation = "none"; void count.offsetWidth; count.style.animation = ""; }
-  function end() {
-    if (ended) return; ended = true;
-    timers.forEach(clearTimeout);
-    sessionStorage.setItem("launched", "1");
-    document.body.style.overflow = "";
-    launch.classList.add("is-hidden");
-    setTimeout(() => launch.remove(), 900);
-  }
-  skip.addEventListener("click", end);
-
-  const steps = [
-    [0,    () => { setCount("T-3"); status.textContent = "IGNITION SEQUENCE START"; }],
-    [850,  () => { setCount("T-2"); }],
-    [1700, () => { setCount("T-1"); status.textContent = "ENGINES AT FULL THRUST"; launch.classList.add("launch--ignite"); }],
-    [2550, () => { setCount("LIFTOFF"); status.textContent = "WE HAVE LIFTOFF"; launch.classList.add("launch--liftoff"); if (window.__spaceWhoosh) window.__spaceWhoosh(); }],
-    [3700, () => { end(); }],
-  ];
-  steps.forEach(([t, fn]) => timers.push(setTimeout(fn, t)));
 })();
 
 /* ---------- Ambient sound (off by default) ---------- */

@@ -82,28 +82,6 @@
 
   <div class="scroll-progress" id="scrollProgress"></div>
 
-  <!-- Launch sequence overlay -->
-  <div class="launch" id="launch" aria-hidden="true">
-    <div class="launch__grid"></div>
-    <div class="launch__count" id="launchCount">T-3</div>
-    <div class="launch__status" id="launchStatus">IGNITION SEQUENCE START</div>
-    <div class="launch__rocket" id="launchRocket">
-      <div class="launch__exhaust"></div>
-      <svg width="56" height="84" viewBox="0 0 40 60" fill="none">
-        <defs>
-          <linearGradient id="lkBody" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff"/><stop offset="0.5" stop-color="#e6eaff"/><stop offset="1" stop-color="#a6b1d8"/></linearGradient>
-          <linearGradient id="lkNose" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffd9a8"/><stop offset="1" stop-color="#ff8f4c"/></linearGradient>
-        </defs>
-        <path d="M20 1C28 9 31 18 31 24v20H9V24C9 18 12 9 20 1Z" fill="url(#lkBody)"/>
-        <path d="M20 1C24 6 26.5 12 27 18H13C13.5 12 16 6 20 1Z" fill="url(#lkNose)"/>
-        <circle cx="20" cy="22" r="4.6" fill="#0c1430"/><circle cx="20" cy="22" r="4.6" fill="none" stroke="#d2dbff" stroke-width="1.4"/><circle cx="20" cy="22" r="2.5" fill="#79e8ff"/>
-        <path d="M9 35L2 50L9 45Z" fill="#8c9ad6"/><path d="M31 35L38 50L31 45Z" fill="#6f7eb6"/>
-        <rect x="9" y="39" width="22" height="3.4" fill="#aebcff"/><path d="M14 44h12l-3 6h-6Z" fill="#586699"/>
-      </svg>
-    </div>
-    <button class="launch__skip" id="launchSkip">SKIP ▸</button>
-  </div>
-
   <!-- Sound toggle -->
   <button class="sound" id="soundToggle" aria-label="Toggle ambient sound" title="Ambient sound">
     <svg class="sound__icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -486,24 +464,37 @@
 
       <div class="starmap reveal" id="starmap" aria-label="Coursework constellation">
         <svg class="starmap__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <polyline points="9,30 30,22 42,46 20,58 52,70" />
-          <polyline points="42,46 60,28 80,30 92,40" />
-          <polyline points="60,28 72,52 88,62" />
-          <polyline points="72,52 66,78 52,70" />
-          <polyline points="80,30 88,62" />
+          <!-- hardware chain -->
+          <polyline points="14,26 12,52" />
+          <polyline points="12,52 37,44" />
+          <!-- digital chain -->
+          <polyline points="16,78 40,72" />
+          <polyline points="40,72 37,44" />
+          <!-- systems / networking -->
+          <polyline points="40,72 80,75" />
+          <!-- signals chain -->
+          <polyline points="12,52 42,22" />
+          <polyline points="42,22 62,13" />
+          <polyline points="42,22 66,42" />
+          <!-- software chain -->
+          <polyline points="86,22 84,50" />
+          <polyline points="84,50 66,42" />
+          <polyline points="84,50 80,75" />
+          <!-- embedded ↔ ML bridge -->
+          <polyline points="37,44 66,42" />
         </svg>
         <!-- stars (positioned via --x / --y) -->
-        <button class="star" style="--x:9%;  --y:30%;" data-course="PCB Design"><span class="star__dot"></span><span class="star__label">PCB Design</span></button>
-        <button class="star" style="--x:30%; --y:22%;" data-course="Machine Learning"><span class="star__dot"></span><span class="star__label">Machine Learning</span></button>
-        <button class="star" style="--x:42%; --y:46%;" data-course="Signals &amp; Systems"><span class="star__dot"></span><span class="star__label">Signals &amp; Systems</span></button>
-        <button class="star" style="--x:20%; --y:58%;" data-course="Embedded Systems Design"><span class="star__dot"></span><span class="star__label">Embedded Systems Design</span></button>
-        <button class="star" style="--x:52%; --y:70%;" data-course="Electronics"><span class="star__dot"></span><span class="star__label">Electronics</span></button>
-        <button class="star" style="--x:60%; --y:28%;" data-course="Object-Oriented Programming"><span class="star__dot"></span><span class="star__label">Object-Oriented Programming</span></button>
-        <button class="star" style="--x:80%; --y:30%;" data-course="Feedback Control"><span class="star__dot"></span><span class="star__label">Feedback Control</span></button>
-        <button class="star" style="--x:92%; --y:40%;" data-course="Computer Architecture"><span class="star__dot"></span><span class="star__label">Computer Architecture</span></button>
-        <button class="star" style="--x:72%; --y:52%;" data-course="Data Structures &amp; Algorithms"><span class="star__dot"></span><span class="star__label">Data Structures &amp; Algorithms</span></button>
-        <button class="star" style="--x:88%; --y:62%;" data-course="Digital Logic &amp; State Machines"><span class="star__dot"></span><span class="star__label">Digital Logic &amp; State Machines</span></button>
-        <button class="star" style="--x:66%; --y:78%;" data-course="Computer Networking"><span class="star__dot"></span><span class="star__label">Computer Networking</span></button>
+        <button class="star" style="--x:14%; --y:26%;" data-course="PCB Design"><span class="star__dot"></span><span class="star__label">PCB Design</span></button>
+        <button class="star" style="--x:12%; --y:52%;" data-course="Electronics"><span class="star__dot"></span><span class="star__label">Electronics</span></button>
+        <button class="star" style="--x:16%; --y:78%;" data-course="Digital Logic &amp; State Machines"><span class="star__dot"></span><span class="star__label">Digital Logic &amp; State Machines</span></button>
+        <button class="star" style="--x:37%; --y:44%;" data-course="Embedded Systems Design"><span class="star__dot"></span><span class="star__label">Embedded Systems Design</span></button>
+        <button class="star" style="--x:40%; --y:72%;" data-course="Computer Architecture"><span class="star__dot"></span><span class="star__label">Computer Architecture</span></button>
+        <button class="star" style="--x:42%; --y:22%;" data-course="Signals &amp; Systems"><span class="star__dot"></span><span class="star__label">Signals &amp; Systems</span></button>
+        <button class="star" style="--x:62%; --y:13%;" data-course="Feedback Control"><span class="star__dot"></span><span class="star__label">Feedback Control</span></button>
+        <button class="star" style="--x:66%; --y:42%;" data-course="Machine Learning"><span class="star__dot"></span><span class="star__label">Machine Learning</span></button>
+        <button class="star" style="--x:86%; --y:22%;" data-course="Object-Oriented Programming"><span class="star__dot"></span><span class="star__label">Object-Oriented Programming</span></button>
+        <button class="star" style="--x:84%; --y:50%;" data-course="Data Structures &amp; Algorithms"><span class="star__dot"></span><span class="star__label">Data Structures &amp; Algorithms</span></button>
+        <button class="star" style="--x:80%; --y:75%;" data-course="Computer Networking"><span class="star__dot"></span><span class="star__label">Computer Networking</span></button>
       </div>
 
       <ul class="starmap__list" aria-hidden="false">
