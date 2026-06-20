@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open index.html)",
+      "Bash(git add *)",
+      "Bash(git -c user.email=\"aryanmitta@gmail.com\" -c user.name=\"Aryan Mitta\" commit -qm \"Add coursework constellation, portrait, real links, grander rocket, GPA 3.93, title fix\")",
+      "Bash(git push *)"
+    ]
+  }
+}

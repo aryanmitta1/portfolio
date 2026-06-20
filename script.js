@@ -212,15 +212,16 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
 /* ---------- Stat counters ---------- */
 (() => {
   const nums = document.querySelectorAll(".stat__num");
-  const fmt = (v, t) => (Number.isInteger(t) ? Math.round(v).toString() : v.toFixed(1));
   const run = (el) => {
     const target = parseFloat(el.dataset.target);
     const suffix = el.dataset.suffix || "";
+    const decimals = (el.dataset.target.split(".")[1] || "").length;
+    const fmt = (v) => v.toFixed(decimals);
     const start = performance.now(), dur = 1500;
     const tick = (now) => {
       const p = Math.min((now - start) / dur, 1);
       const e = 1 - Math.pow(1 - p, 3);
-      el.textContent = fmt(target * e, target) + (p === 1 ? suffix : "");
+      el.textContent = fmt(target * e) + (p === 1 ? suffix : "");
       if (p < 1) requestAnimationFrame(tick);
     };
     requestAnimationFrame(tick);
@@ -257,6 +258,17 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
 
   const brand = document.querySelector(".nav__brand");       // easter egg: click logo to launch
   if (brand) brand.addEventListener("click", () => launch());
+})();
+
+/* ---------- Coursework constellation: draw lines in on view ---------- */
+(() => {
+  const map = document.getElementById("starmap");
+  if (!map) return;
+  if (!("IntersectionObserver" in window)) { map.classList.add("is-drawn"); return; }
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) { map.classList.add("is-drawn"); io.unobserve(map); } });
+  }, { threshold: 0.3 });
+  io.observe(map);
 })();
 
 /* ---------- Section dividers: animate only while in view ---------- */
