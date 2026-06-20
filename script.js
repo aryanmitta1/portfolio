@@ -1,13 +1,16 @@
 /* ============================================================
-   Aryan Mitta — Space Portfolio · interactions (perf build)
+   Aryan Mitta — Space Portfolio · interactions
    ============================================================ */
 
-/* ---------- Starfield: lightweight white stars ---------- */
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const COARSE  = matchMedia("(pointer: coarse)").matches;
+
+/* ---------- Interactive constellation ---------- */
 (() => {
   const canvas = document.getElementById("starfield");
   const ctx = canvas.getContext("2d", { alpha: true });
-  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let w, h, dpr, stars = [], shooting = null, scrollY = 0, paused = false;
+  let w, h, dpr, nodes = [], dust = [], shooting = null, paused = false;
+  const mouse = { x: -9999, y: -9999 };
 
   function resize() {
     dpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -18,85 +21,154 @@
     build();
   }
   function build() {
-    const count = Math.min(140, Math.floor((innerWidth * innerHeight) / 11000));
-    stars = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      z: Math.random() * 0.85 + 0.15,
-      r: Math.random() * 1.0 + 0.25,
-      tw: Math.random() * Math.PI * 2,
-      tws: Math.random() * 0.012 + 0.003,
+    const n = Math.min(80, Math.floor((innerWidth * innerHeight) / 17000));
+    nodes = Array.from({ length: n }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.18 * dpr,
+      vy: (Math.random() - 0.5) * 0.18 * dpr,
+      r: Math.random() * 1.3 + 0.6,
+    }));
+    const d = Math.min(90, Math.floor((innerWidth * innerHeight) / 14000));
+    dust = Array.from({ length: d }, () => ({
+      x: Math.random() * w, y: Math.random() * h,
+      r: Math.random() * 0.8 + 0.2,
+      tw: Math.random() * Math.PI * 2, tws: Math.random() * 0.012 + 0.004,
     }));
   }
   function spawnShooting() {
-    if (reduced) return;
+    if (REDUCED) return;
     shooting = {
-      x: Math.random() * w * 0.7, y: Math.random() * h * 0.35,
+      x: Math.random() * w * 0.7, y: Math.random() * h * 0.3,
       vx: (Math.random() * 4 + 5) * dpr, vy: (Math.random() * 1.8 + 2) * dpr, life: 1,
     };
   }
+
+  const LINK = 150 * dpr;       // recomputed below per-frame via factor
   function draw() {
-    if (!paused) {
-      ctx.clearRect(0, 0, w, h);
-      const off = scrollY * 0.12 * dpr;
-      for (const s of stars) {
-        s.tw += s.tws;
-        const tw = 0.5 + Math.sin(s.tw) * 0.5;
-        let py = (s.y + off * s.z) % h;
-        if (py < 0) py += h;
-        ctx.globalAlpha = tw * (0.25 + s.z * 0.55);
-        ctx.fillStyle = "#fff";
-        ctx.beginPath();
-        ctx.arc(s.x, py, s.r * (0.5 + s.z) * dpr, 0, 6.2832);
-        ctx.fill();
+    if (paused) { requestAnimationFrame(draw); return; }
+    ctx.clearRect(0, 0, w, h);
+    const linkDist = 150 * dpr;
+    const mouseDist = 200 * dpr;
+    const mx = mouse.x * dpr, my = mouse.y * dpr;
+
+    // faint background dust
+    for (const s of dust) {
+      s.tw += s.tws;
+      ctx.globalAlpha = (0.4 + Math.sin(s.tw) * 0.4) * 0.5;
+      ctx.fillStyle = "#fff";
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r * dpr, 0, 6.2832); ctx.fill();
+    }
+
+    // move + draw nodes
+    for (const p of nodes) {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x += w; else if (p.x > w) p.x -= w;
+      if (p.y < 0) p.y += h; else if (p.y > h) p.y -= h;
+    }
+
+    // links between nodes
+    ctx.lineWidth = 1 * dpr;
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < linkDist) {
+          ctx.globalAlpha = (1 - dist / linkDist) * 0.22;
+          ctx.strokeStyle = "#9fb0ff";
+          ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+        }
       }
-      ctx.globalAlpha = 1;
-      if (shooting) {
-        const s = shooting;
-        const tx = s.x - s.vx * 9, ty = s.y - s.vy * 9;
-        const g = ctx.createLinearGradient(tx, ty, s.x, s.y);
-        g.addColorStop(0, "rgba(255,255,255,0)");
-        g.addColorStop(1, `rgba(220,228,255,${s.life * 0.9})`);
-        ctx.strokeStyle = g; ctx.lineWidth = 1.6 * dpr;
-        ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(s.x, s.y); ctx.stroke();
-        s.x += s.vx; s.y += s.vy; s.life -= 0.012;
-        if (s.life <= 0 || s.x > w || s.y > h) shooting = null;
+      // link to cursor
+      const dmx = a.x - mx, dmy = a.y - my;
+      const dm = Math.hypot(dmx, dmy);
+      let near = false;
+      if (dm < mouseDist) {
+        near = true;
+        ctx.globalAlpha = (1 - dm / mouseDist) * 0.5;
+        ctx.strokeStyle = "#aebcff";
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mx, my); ctx.stroke();
       }
+      // node dot
+      ctx.globalAlpha = near ? 0.95 : 0.6;
+      ctx.fillStyle = near ? "#cdd6ff" : "#aab4d8";
+      ctx.beginPath(); ctx.arc(a.x, a.y, a.r * dpr, 0, 6.2832); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    // shooting star
+    if (shooting) {
+      const s = shooting;
+      const tx = s.x - s.vx * 9, ty = s.y - s.vy * 9;
+      const g = ctx.createLinearGradient(tx, ty, s.x, s.y);
+      g.addColorStop(0, "rgba(255,255,255,0)");
+      g.addColorStop(1, `rgba(220,228,255,${s.life * 0.9})`);
+      ctx.strokeStyle = g; ctx.lineWidth = 1.6 * dpr;
+      ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(s.x, s.y); ctx.stroke();
+      s.x += s.vx; s.y += s.vy; s.life -= 0.012;
+      if (s.life <= 0 || s.x > w || s.y > h) shooting = null;
     }
     requestAnimationFrame(draw);
   }
+
   addEventListener("resize", resize, { passive: true });
-  addEventListener("scroll", () => { scrollY = window.scrollY; }, { passive: true });
+  if (!COARSE) addEventListener("mousemove", (e) => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
+  addEventListener("mouseout", () => { mouse.x = -9999; mouse.y = -9999; });
   document.addEventListener("visibilitychange", () => { paused = document.hidden; });
   resize(); draw();
-  if (!reduced) setInterval(() => { if (!shooting && !paused && Math.random() > 0.5) spawnShooting(); }, 5500);
+  if (!REDUCED) setInterval(() => { if (!shooting && !paused && Math.random() > 0.55) spawnShooting(); }, 5500);
 })();
 
-/* ---------- Spotlight + planet parallax (transform only) ---------- */
+/* ---------- Custom cursor + spotlight + planet parallax ---------- */
 (() => {
-  if (matchMedia("(pointer: coarse)").matches || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (COARSE || REDUCED) return;
+  const cursor = document.getElementById("cursor");
   const spot = document.getElementById("spotlight");
   const planet = document.querySelector(".planet");
-  let tx = innerWidth / 2, ty = innerHeight * 0.3, cx = tx, cy = ty, active = false;
+  let tx = innerWidth / 2, ty = innerHeight * 0.3;
+  let cx = tx, cy = ty, sx = tx, sy = ty, shown = false;
 
-  addEventListener("mousemove", (e) => { tx = e.clientX; ty = e.clientY; active = true; }, { passive: true });
+  addEventListener("mousemove", (e) => {
+    tx = e.clientX; ty = e.clientY;
+    cursor.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+    if (!shown) { cursor.classList.add("is-visible"); shown = true; }
+  }, { passive: true });
+
+  // grow cursor over interactive elements
+  document.querySelectorAll("a, button, .about__tags li, .chips span").forEach((el) => {
+    el.addEventListener("mouseenter", () => cursor.classList.add("is-hover"));
+    el.addEventListener("mouseleave", () => cursor.classList.remove("is-hover"));
+  });
 
   (function loop() {
-    if (active) {
-      cx += (tx - cx) * 0.09;
-      cy += (ty - cy) * 0.09;
-      spot.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
-      if (planet) {
-        const px = (cx / innerWidth - 0.5) * 26;
-        const py = (cy / innerHeight - 0.5) * 26;
-        planet.style.transform = `translate3d(${px}px, ${py}px, 0)`;
-      }
+    sx += (tx - sx) * 0.08; sy += (ty - sy) * 0.08;
+    spot.style.transform = `translate3d(${sx}px, ${sy}px, 0)`;
+    if (planet) {
+      const px = (sx / innerWidth - 0.5) * 26, py = (sy / innerHeight - 0.5) * 26;
+      planet.style.transform = `translate3d(${px}px, ${py}px, 0)`;
     }
     requestAnimationFrame(loop);
   })();
 })();
 
-/* ---------- Nav: scroll state, mobile, active link ---------- */
+/* ---------- Card cursor-spotlight glow ---------- */
+(() => {
+  if (COARSE) return;
+  const cards = document.querySelectorAll(".xp__card, .skill-card, .lead-card, .edu-card, .mission, .contact");
+  cards.forEach((card) => {
+    card.classList.add("glow-target");
+    card.addEventListener("pointermove", (e) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      card.style.setProperty("--my", (e.clientY - r.top) + "px");
+    });
+    card.addEventListener("pointerenter", () => card.classList.add("is-glow"));
+    card.addEventListener("pointerleave", () => card.classList.remove("is-glow"));
+  });
+})();
+
+/* ---------- Nav ---------- */
 (() => {
   const nav = document.getElementById("nav");
   const toggle = document.getElementById("navToggle");
