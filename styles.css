@@ -478,19 +478,52 @@ a { color: inherit; text-decoration: none; }
 .hero__caret { color: var(--cyan); font-weight: 700; animation: blink 1s steps(1) infinite; }
 .scramble { color: var(--cyan); opacity: 0.85; }
 @keyframes blink { 50% { opacity: 0; } }
-.hero__constellation {
-  position: absolute; right: 1%; top: 52%; transform: translateY(-50%);
-  width: clamp(220px, 28vw, 350px); height: auto; z-index: 1; opacity: 0.55; pointer-events: none;
+/* ---------- Hero orbiting planet ---------- */
+.hero__orbit {
+  position: absolute; right: 2%; top: 50%; transform: translateY(-50%) rotateX(12deg);
+  width: clamp(260px, 30vw, 400px); aspect-ratio: 1; z-index: 1; pointer-events: none;
+  transform-style: preserve-3d;
 }
-.hero__cline { fill: none; stroke: rgba(174,188,255,0.32); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.hero__cstars circle { fill: #d2dbff; filter: drop-shadow(0 0 5px rgba(174,188,255,0.85)); animation: twinkle 3.6s ease-in-out infinite; }
-.hero__cstars circle:nth-child(even) { animation-delay: 1.3s; }
-.hero__cstars circle:nth-child(3n) { animation-delay: 2.2s; }
+.hero__orbit > * { position: absolute; top: 50%; left: 50%; }
+.orbit__glow {
+  width: 60%; height: 60%; transform: translate(-50%, -50%);
+  border-radius: 50%; background: radial-gradient(circle, rgba(150,170,255,0.18), transparent 65%); filter: blur(14px);
+}
+.orbit__planet {
+  width: 27%; height: 27%; transform: translate(-50%, -50%); border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 30%, #e7ecff 0%, #aab6e0 22%, #6f78a8 52%, #2f3450 82%, #1a1d30 100%);
+  box-shadow: inset -8px -8px 22px rgba(0,0,0,0.55), 0 0 34px rgba(150,170,255,0.35);
+}
+.orbit__saturn {
+  width: 56%; height: 56%; transform: translate(-50%, -50%) rotateX(74deg);
+  border-radius: 50%; border: 2px solid rgba(174,188,255,0.4);
+  box-shadow: 0 0 10px rgba(174,188,255,0.18);
+}
+.orbit__path {
+  border-radius: 50%; border: 1px solid rgba(174,188,255,0.14);
+  transform: translate(-50%, -50%); transform-origin: center; animation: spin linear infinite;
+}
+.orbit__path--1 { width: 50%;  height: 50%;  animation-duration: 14s; }
+.orbit__path--2 { width: 74%;  height: 74%;  animation-duration: 24s; animation-direction: reverse; }
+.orbit__path--3 { width: 98%;  height: 98%;  animation-duration: 36s; }
+.orbit__moon {
+  position: absolute; top: -4px; left: 50%; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fff, #aab6e0 70%);
+  box-shadow: 0 0 10px 1px rgba(174,188,255,0.6);
+}
+.orbit__path--2 .orbit__moon { width: 6px; height: 6px; margin-left: -3px; background: radial-gradient(circle at 35% 30%, #fff, #cdd6ff 70%); }
+.orbit__path--3 .orbit__moon { width: 10px; height: 10px; margin-left: -5px; }
+.orbit__star {
+  left: var(--sx); top: var(--sy); width: 3px; height: 3px; border-radius: 50%; transform: translate(-50%, -50%);
+  background: #d2dbff; box-shadow: 0 0 6px rgba(174,188,255,0.8); animation: twinkle 3.4s ease-in-out infinite;
+}
+.orbit__star:nth-child(odd) { animation-delay: 1.4s; }
 @keyframes flyby {
-  0%   { opacity: 0; transform: translate3d(-12vw, var(--y0, 86vh), 0) rotate(var(--rot, 56deg)); }
-  10%  { opacity: 1; }
-  90%  { opacity: 1; }
-  100% { opacity: 0; transform: translate3d(116vw, var(--y1, 16vh), 0) rotate(var(--rot, 56deg)); }
+  0%   { opacity: 0; transform: translate3d(var(--x0, -14vw), var(--y0, 60vh), 0) rotate(var(--rot, 75deg)); }
+  8%   { opacity: 1; }
+  92%  { opacity: 1; }
+  100% { opacity: 0; transform: translate3d(var(--x1, 116vw), var(--y1, 30vh), 0) rotate(var(--rot, 75deg)); }
 }
 
 /* ---------- Section dividers (signal scan) ---------- */
@@ -514,7 +547,7 @@ a { color: inherit; text-decoration: none; }
 .reveal--left.visible, .reveal--right.visible { transform: none; }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 1040px) { .hero__hud, .hero__constellation { display: none; } }
+@media (max-width: 1040px) { .hero__hud, .hero__orbit { display: none; } }
 @media (max-width: 920px) {
   .about, .mission__grid, .edu-grid { grid-template-columns: 1fr; }
   .skills { grid-template-columns: repeat(2, 1fr); }

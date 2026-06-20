@@ -119,17 +119,19 @@
         <span class="hero__hud-line">NYU TANDON · BROOKLYN</span>
       </div>
 
-      <!-- Constellation rocket (decorative) -->
-      <svg class="hero__constellation" viewBox="0 0 200 320" aria-hidden="true">
-        <polyline class="hero__cline" points="100,18 62,92 62,210 30,262 70,228 100,250 130,228 170,262 138,210 138,92 100,18" />
-        <line class="hero__cline" x1="100" y1="120" x2="100" y2="250" />
-        <g class="hero__cstars">
-          <circle cx="100" cy="18" r="3.4"/><circle cx="62" cy="92" r="2.8"/><circle cx="138" cy="92" r="2.8"/>
-          <circle cx="62" cy="210" r="2.8"/><circle cx="138" cy="210" r="2.8"/><circle cx="30" cy="262" r="3"/>
-          <circle cx="170" cy="262" r="3"/><circle cx="70" cy="228" r="2.4"/><circle cx="130" cy="228" r="2.4"/>
-          <circle cx="100" cy="250" r="3"/><circle cx="100" cy="120" r="2.6"/>
-        </g>
-      </svg>
+      <!-- Orbiting planet (decorative) -->
+      <div class="hero__orbit" aria-hidden="true">
+        <span class="orbit__glow"></span>
+        <span class="orbit__planet"></span>
+        <span class="orbit__saturn"></span>
+        <div class="orbit__path orbit__path--1"><span class="orbit__moon"></span></div>
+        <div class="orbit__path orbit__path--2"><span class="orbit__moon"></span></div>
+        <div class="orbit__path orbit__path--3"><span class="orbit__moon"></span></div>
+        <span class="orbit__star" style="--sx:6%;  --sy:18%;"></span>
+        <span class="orbit__star" style="--sx:92%; --sy:30%;"></span>
+        <span class="orbit__star" style="--sx:80%; --sy:88%;"></span>
+        <span class="orbit__star" style="--sx:14%; --sy:82%;"></span>
+      </div>
       <div class="hero__inner">
         <p class="hero__eyebrow reveal">
           <span class="status-dot"></span>

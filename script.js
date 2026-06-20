@@ -242,13 +242,24 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   function launch() {
     if (flying || document.hidden) return;
     flying = true;
-    const dur = 28 + Math.random() * 10;                     // slow cruise, 28–38s across
-    const y0 = 42 + Math.random() * 34;                      // gentle, near-horizontal path
-    const y1 = Math.max(8, y0 - (12 + Math.random() * 20));  // drift upward a little
+    const dur = 28 + Math.random() * 12;                     // slow cruise, 28–40s across
+    const leftToRight = Math.random() < 0.5;                 // random horizontal direction
+    const x0 = leftToRight ? -14 : 116;                      // (vw)
+    const x1 = leftToRight ? 116 : -14;
+    const y0 = 18 + Math.random() * 60;                      // (vh) random entry height
+    const y1 = 12 + Math.random() * 64;                      // random exit height → up OR down
+
+    // point the nose along the actual travel vector
+    const dx = (x1 - x0) / 100 * innerWidth;
+    const dy = (y1 - y0) / 100 * innerHeight;
+    const rot = Math.atan2(dx, -dy) * 180 / Math.PI;
+
     rocket.style.setProperty("--dur", dur + "s");
+    rocket.style.setProperty("--x0", x0 + "vw");
+    rocket.style.setProperty("--x1", x1 + "vw");
     rocket.style.setProperty("--y0", y0 + "vh");
     rocket.style.setProperty("--y1", y1 + "vh");
-    rocket.style.setProperty("--rot", (74 + Math.random() * 8) + "deg");
+    rocket.style.setProperty("--rot", rot.toFixed(1) + "deg");
     rocket.classList.remove("rocket--fly");
     void rocket.offsetWidth;            // force reflow to restart animation
     rocket.classList.add("rocket--fly");
