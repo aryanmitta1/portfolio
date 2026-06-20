@@ -338,32 +338,6 @@ a { color: inherit; text-decoration: none; }
 .footer { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 44px 20px; border-top: 1px solid var(--line-soft); color: var(--dim); font-size: 0.84rem; }
 .footer__sep { color: var(--faint); }
 
-/* ---------- Cruising rocket (slow, satellite-like, behind content) ---------- */
-.rocket {
-  position: fixed; top: 0; left: 0; z-index: -1;
-  width: 40px; height: 60px; pointer-events: none; opacity: 0; will-change: transform;
-  filter: drop-shadow(0 0 8px rgba(120,140,220,0.4));
-}
-.rocket--fly { animation: flyby var(--dur, 30s) linear forwards; }
-.rocket__body { position: relative; z-index: 3; display: block; }
-.rocket__flame {
-  position: absolute; left: 50%; top: 49px; width: 13px; height: 22px; transform: translateX(-50%); z-index: 2;
-  background: radial-gradient(circle at 50% 0%, #fff 0%, #ffe7a8 18%, #ff9d5c 44%, #ff5638 68%, transparent 82%);
-  border-radius: 50% 50% 50% 50% / 28% 28% 80% 80%;
-  filter: blur(1px); transform-origin: top center; animation: flame 0.12s steps(2) infinite;
-}
-.rocket__flame::before {
-  content: ""; position: absolute; left: 50%; top: 2px; width: 7px; height: 14px; transform: translateX(-50%);
-  background: radial-gradient(circle at 50% 0%, #fff 0%, #d4f0ff 38%, #79e8ff 70%, transparent 86%);
-  border-radius: 50% 50% 50% 50% / 28% 28% 80% 80%;
-}
-.rocket__trail {
-  position: absolute; left: 50%; top: 56px; width: 8px; height: 150px; transform: translateX(-50%);
-  background: linear-gradient(to bottom, rgba(255,140,80,0.4) 0%, rgba(174,188,255,0.32) 18%, rgba(121,232,255,0.12) 55%, transparent 90%);
-  filter: blur(2.5px); border-radius: 50%;
-}
-@keyframes flame { 0% { transform: translateX(-50%) scaleY(1); opacity: 0.9; } 100% { transform: translateX(-50%) scaleY(1.3); opacity: 1; } }
-
 /* ---------- About portrait ---------- */
 .about__media { display: flex; justify-content: center; }
 .portrait {
@@ -444,18 +418,6 @@ a { color: inherit; text-decoration: none; }
 .stars--mid  { z-index: -8; }
 .stars--near { z-index: -7; }
 
-/* ---------- Drifting satellite ---------- */
-.satellite {
-  position: fixed; top: 16%; left: 0; z-index: -1; opacity: 0.8; pointer-events: none; will-change: transform;
-  filter: drop-shadow(0 0 8px rgba(120,140,220,0.35));
-  animation: satDrift 64s linear infinite;
-}
-.satellite svg { display: block; }
-@keyframes satDrift {
-  0%   { transform: translate(-12vw, 0) rotate(-6deg); }
-  100% { transform: translate(118vw, -14vh) rotate(6deg); }
-}
-
 /* ---------- Sound toggle ---------- */
 .sound {
   position: fixed; bottom: 20px; right: 20px; z-index: 96; width: 44px; height: 44px; border-radius: 50%;
@@ -519,12 +481,6 @@ a { color: inherit; text-decoration: none; }
   background: #d2dbff; box-shadow: 0 0 6px rgba(174,188,255,0.8); animation: twinkle 3.4s ease-in-out infinite;
 }
 .orbit__star:nth-child(odd) { animation-delay: 1.4s; }
-@keyframes flyby {
-  0%   { opacity: 0; transform: translate3d(var(--x0, -14vw), var(--y0, 60vh), 0) rotate(var(--rot, 75deg)); }
-  8%   { opacity: 1; }
-  92%  { opacity: 1; }
-  100% { opacity: 0; transform: translate3d(var(--x1, 116vw), var(--y1, 30vh), 0) rotate(var(--rot, 75deg)); }
-}
 
 /* ---------- Section dividers (signal scan) ---------- */
 .divider {
