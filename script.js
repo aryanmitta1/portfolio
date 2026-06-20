@@ -250,6 +250,7 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     rocket.classList.remove("rocket--fly");
     void rocket.offsetWidth;            // force reflow to restart animation
     rocket.classList.add("rocket--fly");
+    if (window.__spaceWhoosh) window.__spaceWhoosh();
     setTimeout(() => { rocket.classList.remove("rocket--fly"); flying = false; }, dur * 1000 + 120);
   }
 
@@ -280,6 +281,173 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     entries.forEach((e) => e.target.classList.toggle("is-in", e.isIntersecting));
   }, { threshold: 0 });
   dividers.forEach((d) => io.observe(d));
+})();
+
+/* ---------- Parallax star layers ---------- */
+(() => {
+  const layers = [
+    { el: document.getElementById("starsFar"),  cap: 130, divisor: 9000,  size: 1.0, speed: 0.10, alpha: 0.5 },
+    { el: document.getElementById("starsMid"),  cap: 90,  divisor: 15000, size: 1.5, speed: 0.26, alpha: 0.7 },
+    { el: document.getElementById("starsNear"), cap: 45,  divisor: 28000, size: 2.2, speed: 0.48, alpha: 0.95 },
+  ].filter((L) => L.el);
+
+  function gen() {
+    const w = Math.max(document.documentElement.clientWidth, 320);
+    const h = Math.max(document.documentElement.scrollHeight, innerHeight);
+    layers.forEach((L) => {
+      const count = Math.min(L.cap, Math.floor((w * h) / L.divisor));
+      const out = [];
+      for (let i = 0; i < count; i++) {
+        const x = Math.floor(Math.random() * w);
+        const y = Math.floor(Math.random() * h);
+        const spread = (Math.random() * L.size).toFixed(1);
+        out.push(`${x}px ${y}px 0 ${spread}px rgba(222,230,255,${L.alpha})`);
+      }
+      L.el.style.boxShadow = out.join(",");
+    });
+  }
+  gen();
+  let raf = 0;
+  addEventListener("scroll", () => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      const y = window.scrollY;
+      layers.forEach((L) => { L.el.style.transform = `translate3d(0, ${(-y * L.speed).toFixed(1)}px, 0)`; });
+      raf = 0;
+    });
+  }, { passive: true });
+  let rt;
+  addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(gen, 300); }, { passive: true });
+})();
+
+/* ---------- Decrypt / scramble role line ---------- */
+(() => {
+  const el = document.getElementById("decryptText");
+  if (!el || REDUCED) return;
+  const titles = [
+    "Avionics Software Engineer", "Embedded Systems Developer", "Aerospace Software",
+    "Telemetry & Test Engineer", "Sensor Fusion Tinkerer",
+  ];
+  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&_/<>*";
+  let idx = 0;
+
+  function scrambleTo(text) {
+    return new Promise((resolve) => {
+      const from = el.textContent;
+      const len = Math.max(from.length, text.length);
+      const q = [];
+      for (let i = 0; i < len; i++) {
+        q.push({ a: from[i] || "", b: text[i] || "", s: Math.floor(Math.random() * 16), e: 0, c: "" });
+        q[i].e = q[i].s + 10 + Math.floor(Math.random() * 16);
+      }
+      let frame = 0;
+      (function tick() {
+        let out = "", done = 0;
+        for (const it of q) {
+          if (frame >= it.e) { done++; out += it.b; }
+          else if (frame >= it.s) {
+            if (!it.c || Math.random() < 0.28) it.c = charset[(Math.random() * charset.length) | 0];
+            out += `<span class="scramble">${it.c}</span>`;
+          } else out += it.a;
+        }
+        el.innerHTML = out;
+        if (done === q.length) { resolve(); return; }
+        frame++; requestAnimationFrame(tick);
+      })();
+    });
+  }
+  async function loop() {
+    while (true) {
+      await new Promise((r) => setTimeout(r, 2400));
+      idx = (idx + 1) % titles.length;
+      await scrambleTo(titles[idx]);
+    }
+  }
+  setTimeout(loop, 1400);
+})();
+
+/* ---------- Launch sequence (once per session) ---------- */
+(() => {
+  const launch = document.getElementById("launch");
+  if (!launch) return;
+  if (REDUCED || sessionStorage.getItem("launched")) { launch.remove(); return; }
+
+  const count = document.getElementById("launchCount");
+  const status = document.getElementById("launchStatus");
+  const skip = document.getElementById("launchSkip");
+  const timers = [];
+  let ended = false;
+
+  document.body.style.overflow = "hidden";
+  function setCount(t) { count.textContent = t; count.style.animation = "none"; void count.offsetWidth; count.style.animation = ""; }
+  function end() {
+    if (ended) return; ended = true;
+    timers.forEach(clearTimeout);
+    sessionStorage.setItem("launched", "1");
+    document.body.style.overflow = "";
+    launch.classList.add("is-hidden");
+    setTimeout(() => launch.remove(), 900);
+  }
+  skip.addEventListener("click", end);
+
+  const steps = [
+    [0,    () => { setCount("T-3"); status.textContent = "IGNITION SEQUENCE START"; }],
+    [850,  () => { setCount("T-2"); }],
+    [1700, () => { setCount("T-1"); status.textContent = "ENGINES AT FULL THRUST"; launch.classList.add("launch--ignite"); }],
+    [2550, () => { setCount("LIFTOFF"); status.textContent = "WE HAVE LIFTOFF"; launch.classList.add("launch--liftoff"); if (window.__spaceWhoosh) window.__spaceWhoosh(); }],
+    [3700, () => { end(); }],
+  ];
+  steps.forEach(([t, fn]) => timers.push(setTimeout(fn, t)));
+})();
+
+/* ---------- Ambient sound (off by default) ---------- */
+(() => {
+  const btn = document.getElementById("soundToggle");
+  if (!btn) return;
+  let ctx, master, started = false, on = false;
+
+  function build() {
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return false;
+    ctx = new AC();
+    master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
+    const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 340; lp.connect(master);
+    const bus = ctx.createGain(); bus.gain.value = 0.5; bus.connect(lp);
+    [[55, "sine", 0.4], [55.5, "sine", 0.4], [82.5, "triangle", 0.12]].forEach(([f, type, g]) => {
+      const o = ctx.createOscillator(); o.type = type; o.frequency.value = f;
+      const gn = ctx.createGain(); gn.gain.value = g; o.connect(gn); gn.connect(bus); o.start();
+    });
+    const lfo = ctx.createOscillator(); lfo.frequency.value = 0.07;
+    const lg = ctx.createGain(); lg.gain.value = 0.16; lfo.connect(lg); lg.connect(master.gain); lfo.start();
+    started = true; return true;
+  }
+  function setOn(v) {
+    on = v; btn.classList.toggle("is-on", on);
+    if (on) {
+      if (!started && !build()) { on = false; btn.classList.remove("is-on"); return; }
+      if (ctx.resume) ctx.resume();
+      master.gain.cancelScheduledValues(ctx.currentTime);
+      master.gain.linearRampToValueAtTime(0.16, ctx.currentTime + 0.8);
+    } else if (started) {
+      master.gain.cancelScheduledValues(ctx.currentTime);
+      master.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.4);
+    }
+  }
+  btn.addEventListener("click", () => setOn(!on));
+
+  window.__spaceWhoosh = function () {
+    if (!on || !started) return;
+    const t = ctx.currentTime, dur = 0.9;
+    const buf = ctx.createBuffer(1, (ctx.sampleRate * dur) | 0, ctx.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
+    const src = ctx.createBufferSource(); src.buffer = buf;
+    const bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.Q.value = 0.8;
+    bp.frequency.setValueAtTime(280, t); bp.frequency.exponentialRampToValueAtTime(1700, t + dur);
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(0.1, t + 0.1); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    src.connect(bp); bp.connect(g); g.connect(ctx.destination); src.start(t); src.stop(t + dur);
+  };
 })();
 
 document.getElementById("year").textContent = new Date().getFullYear();
