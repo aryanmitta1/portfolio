@@ -326,6 +326,23 @@ a { color: inherit; text-decoration: none; }
 .lead-card__org { color: var(--accent); font-size: 0.86rem; margin: 5px 0 11px; }
 .lead-card p:last-child { color: var(--muted); font-size: 0.93rem; font-weight: 300; }
 
+/* ---------- Extracurriculars ---------- */
+.extra { margin-top: 22px; }
+.extra__title { font-family: "JetBrains Mono", monospace; font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--dim); margin-bottom: 16px; }
+.extra__list { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.extra__list li {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 14px 16px; border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.012));
+  background-color: rgba(13,13,17,0.5); border: 1px solid var(--line);
+  font-family: "Space Grotesk", sans-serif; font-size: 0.95rem; color: var(--ink);
+  transition: transform 0.25s var(--ease), border-color 0.25s;
+}
+.extra__list li:hover { transform: translateY(-3px); border-color: rgba(174,188,255,0.4); }
+.extra__role { font-family: "JetBrains Mono", monospace; font-size: 0.68rem; letter-spacing: 0.04em; color: var(--accent); text-transform: uppercase; }
+@media (max-width: 720px) { .extra__list { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 460px) { .extra__list { grid-template-columns: 1fr; } }
+
 /* ---------- Contact ---------- */
 .section--contact { padding-bottom: 60px; }
 .contact { text-align: center; padding: clamp(50px, 8vw, 90px) clamp(24px, 5vw, 60px); }

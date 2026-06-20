@@ -46,7 +46,6 @@
     <nav class="nav__links" id="navLinks">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
-      <a href="#project">Mission</a>
       <a href="#skills">Skills</a>
       <a href="#coursework">Courses</a>
       <a href="#education">Education</a>
@@ -107,17 +106,17 @@
         <div class="hero__stats reveal">
           <div class="stat">
             <span class="stat__num" data-target="3.93" data-suffix="">0</span>
-            <span class="stat__label">GPA · GLASS Honors</span>
+            <span class="stat__label">GPA</span>
           </div>
           <div class="stat__div"></div>
           <div class="stat">
-            <span class="stat__num" data-target="4" data-suffix="">0</span>
+            <span class="stat__num" data-target="3" data-suffix="">0</span>
             <span class="stat__label">Engineering Internships</span>
           </div>
           <div class="stat__div"></div>
           <div class="stat">
-            <span class="stat__num" data-target="5" data-suffix="">0</span>
-            <span class="stat__label">Sensor Systems Integrated</span>
+            <span class="stat__num" data-target="3" data-suffix="">0</span>
+            <span class="stat__label">On-Campus Engineering Roles</span>
           </div>
         </div>
       </div>
@@ -286,69 +285,10 @@
 
     <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
 
-    <!-- FEATURED PROJECT -->
-    <section class="section" id="project">
-      <div class="section__head reveal">
-        <span class="section__index">03 — Featured Mission</span>
-        <h2 class="section__title">Telemetry to NASA,<br>at 144 MHz.</h2>
-      </div>
-
-      <article class="mission reveal">
-        <div class="mission__head">
-          <div>
-            <p class="mission__tag">NASA USLI · NYU Rogue Aerospace</p>
-            <h3 class="mission__title">Rocket Payload Telemetry System</h3>
-            <p class="mission__role">Payload Electronics Lead</p>
-          </div>
-          <div class="mission__badge">🚀</div>
-        </div>
-
-        <p class="mission__desc">
-          Led payload electronics for a NASA University Student Launch Initiative
-          rocket — designing the full telemetry chain that transmitted live flight
-          data to NASA's ground receiver, plus a mission-control GUI to arm,
-          disarm, launch, and visualize data in real time.
-        </p>
-
-        <div class="mission__grid">
-          <div class="mission__col">
-            <h4>What I built</h4>
-            <ul>
-              <li>Telemetry chain: Arduino + BMP390 + RTC → APRS over VHF radio.</li>
-              <li>Serial packet formatting &amp; APRS message encoding (AFSK 1200 baud).</li>
-              <li>Radio / TNC chain: Mobilinkd TNC4 → Yaesu FT-70DR → NASA receiver.</li>
-              <li>Mission-control GUI: arm / disarm / launch + live data viz.</li>
-              <li>Battery, shielding &amp; manual-override planning; NASA review docs.</li>
-            </ul>
-          </div>
-          <div class="mission__col">
-            <h4>Live downlink data</h4>
-            <ul class="mission__telemetry">
-              <li><span>Temperature</span><em>BMP390</em></li>
-              <li><span>Apogee Reached</span><em>Altitude</em></li>
-              <li><span>Battery Status</span><em>LiPo check</em></li>
-              <li><span>Landing Time</span><em>RTC module</em></li>
-            </ul>
-            <div class="mission__freq">
-              <span class="mission__freq-band">2 m band</span>
-              <span class="mission__freq-val">144–148 MHz</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="mission__stack">
-          <span>Arduino</span><span>APRS</span><span>AFSK 1200</span><span>BMP390</span>
-          <span>TNC4</span><span>VHF Radio</span><span>Python GUI</span>
-        </div>
-      </article>
-    </section>
-
-    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
-
     <!-- SKILLS -->
     <section class="section" id="skills">
       <div class="section__head reveal">
-        <span class="section__index">04 — Capabilities</span>
+        <span class="section__index">03 — Capabilities</span>
         <h2 class="section__title">Technical skills.</h2>
       </div>
 
@@ -356,46 +296,43 @@
         <div class="skill-card reveal">
           <h3>Languages</h3>
           <div class="chips">
-            <span>Python</span><span>C</span><span>C++</span><span>Java</span>
-            <span>MATLAB</span><span>SQL</span><span>JavaScript</span>
+            <span>Python</span><span>C</span><span>C++</span>
+            <span>MATLAB</span><span>SQL</span>
           </div>
         </div>
         <div class="skill-card reveal">
           <h3>Aerospace &amp; Avionics</h3>
           <div class="chips">
-            <span>Avionics SW</span><span>Telemetry</span><span>APRS</span>
-            <span>VHF Radio Chain</span><span>Payload Electronics</span>
-            <span>Test Automation</span><span>Guidance &amp; Nav</span>
+            <span>Flight Software</span><span>Avionics</span><span>Telemetry</span>
+            <span>Hardware-in-the-Loop</span><span>Test Automation</span><span>Sensor Integration</span>
           </div>
         </div>
         <div class="skill-card reveal">
           <h3>Embedded &amp; Hardware</h3>
           <div class="chips">
-            <span>Arduino</span><span>Raspberry Pi</span><span>Sensors</span>
-            <span>RTC / OLED</span><span>LiPo</span><span>PCB Basics</span>
-            <span>Multimeters</span><span>HiPot Testing</span>
+            <span>Embedded C</span><span>Microcontrollers</span><span>RTOS</span>
+            <span>UART / SPI / I²C</span><span>PCB Design</span><span>Firmware</span>
           </div>
         </div>
         <div class="skill-card reveal">
           <h3>Robotics &amp; Sensors</h3>
           <div class="chips">
-            <span>ROS2 Humble</span><span>Sensor Fusion</span><span>LiDAR</span>
-            <span>IMU</span><span>GNSS</span><span>PPS Timing</span><span>REP-103</span>
+            <span>ROS2</span><span>Sensor Fusion</span><span>LiDAR</span>
+            <span>IMU</span><span>GNSS</span><span>Real-Time Systems</span>
           </div>
         </div>
         <div class="skill-card reveal">
           <h3>ML &amp; Computer Vision</h3>
           <div class="chips">
-            <span>PyTorch</span><span>TensorFlow</span><span>ResNet</span>
-            <span>OpenCV</span><span>YOLO</span><span>Embeddings</span>
-            <span>Haversine Loss</span>
+            <span>PyTorch</span><span>TensorFlow</span><span>OpenCV</span>
+            <span>CNNs</span><span>NumPy</span><span>Pandas</span>
           </div>
         </div>
         <div class="skill-card reveal">
-          <h3>Data &amp; Tools</h3>
+          <h3>Tools &amp; Workflow</h3>
           <div class="chips">
-            <span>Postgres</span><span>FastAPI</span><span>Data Pipelines</span>
-            <span>Git</span><span>Linux</span><span>Fusion 360</span><span>Altium</span>
+            <span>Git</span><span>Linux</span><span>Docker</span>
+            <span>SQL / Postgres</span><span>Bash</span><span>Altium / Fusion 360</span>
           </div>
         </div>
       </div>
@@ -406,7 +343,7 @@
     <!-- COURSEWORK CONSTELLATION -->
     <section class="section" id="coursework">
       <div class="section__head reveal">
-        <span class="section__index">05 — Star Map</span>
+        <span class="section__index">04 — Star Map</span>
         <h2 class="section__title">Relevant coursework.</h2>
         <p class="section__lead reveal">Every course, a star. Together they chart where I'm headed — hover a star to read it.</p>
       </div>
@@ -459,7 +396,7 @@
     <!-- EDUCATION + LEADERSHIP -->
     <section class="section" id="education">
       <div class="section__head reveal">
-        <span class="section__index">06 — Background</span>
+        <span class="section__index">05 — Background</span>
         <h2 class="section__title">Education &amp; leadership.</h2>
       </div>
 
@@ -482,9 +419,9 @@
 
         <div class="lead-stack reveal reveal--right">
           <article class="lead-card reveal">
-            <h3>Payload Electronics Lead</h3>
+            <h3>Payload Electronics</h3>
             <p class="lead-card__org">NYU Rogue Aerospace · NASA USLI</p>
-            <p>Led electronics-side payload work and coordinated technical design decisions for telemetry and sensor integration.</p>
+            <p>Built electronics-side payload work and coordinated technical design decisions for telemetry and sensor integration.</p>
           </article>
           <article class="lead-card reveal">
             <h3>Teaching Assistant</h3>
@@ -492,11 +429,23 @@
             <p>Communications, Inventory &amp; Purchasing Leader — maintained course materials, managed lab kits, and supported showcase events.</p>
           </article>
           <article class="lead-card reveal">
-            <h3>Theta Tau</h3>
-            <p class="lead-card__org">Professional Engineering Fraternity</p>
-            <p>Organized professional service initiatives and community events as an active member.</p>
+            <h3>Tau Beta Pi</h3>
+            <p class="lead-card__org">Engineering Honor Society</p>
+            <p>Inducted member of the national engineering honor society recognizing scholarship and character.</p>
           </article>
         </div>
+      </div>
+
+      <div class="extra reveal">
+        <h3 class="extra__title">Involvement &amp; Extracurriculars</h3>
+        <ul class="extra__list">
+          <li><span class="extra__role">Vice President</span>IEEE</li>
+          <li><span class="extra__role">Member</span>Theta Tau</li>
+          <li><span class="extra__role">Ambassador</span>Admissions</li>
+          <li><span class="extra__role">Member</span>Space Exploration Society</li>
+          <li><span class="extra__role">Member</span>SASE</li>
+          <li><span class="extra__role">Member</span>Indian Cultural Club (ICC)</li>
+        </ul>
       </div>
     </section>
 
