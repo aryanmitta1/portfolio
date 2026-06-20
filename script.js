@@ -9,7 +9,7 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
 (() => {
   const canvas = document.getElementById("starfield");
   const ctx = canvas.getContext("2d", { alpha: true });
-  let w, h, dpr, nodes = [], dust = [], shooting = null, paused = false;
+  let w, h, dpr, nodes = [], dust = [], shooting = null;
   const mouse = { x: -9999, y: -9999 };
 
   function resize() {
@@ -43,9 +43,12 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     };
   }
 
-  const LINK = 150 * dpr;       // recomputed below per-frame via factor
-  function draw() {
-    if (paused) { requestAnimationFrame(draw); return; }
+  let rafId = 0, last = 0;
+  const FRAME = 1000 / 30;       // cap at 30fps to cut sustained CPU/GPU load
+  function draw(now) {
+    rafId = requestAnimationFrame(draw);
+    if (now - last < FRAME) return;
+    last = now;
     ctx.clearRect(0, 0, w, h);
     const linkDist = 150 * dpr;
     const mouseDist = 200 * dpr;
@@ -109,15 +112,17 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
       s.x += s.vx; s.y += s.vy; s.life -= 0.012;
       if (s.life <= 0 || s.x > w || s.y > h) shooting = null;
     }
-    requestAnimationFrame(draw);
   }
+
+  function start() { if (!rafId) { last = 0; rafId = requestAnimationFrame(draw); } }
+  function stop()  { if (rafId) { cancelAnimationFrame(rafId); rafId = 0; } }
 
   addEventListener("resize", resize, { passive: true });
   if (!COARSE) addEventListener("mousemove", (e) => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
   addEventListener("mouseout", () => { mouse.x = -9999; mouse.y = -9999; });
-  document.addEventListener("visibilitychange", () => { paused = document.hidden; });
-  resize(); draw();
-  if (!REDUCED) setInterval(() => { if (!shooting && !paused && Math.random() > 0.55) spawnShooting(); }, 5500);
+  document.addEventListener("visibilitychange", () => { document.hidden ? stop() : start(); });
+  resize(); start();
+  if (!REDUCED) setInterval(() => { if (!shooting && !document.hidden && Math.random() > 0.55) spawnShooting(); }, 5500);
 })();
 
 /* ---------- Custom cursor + spotlight + planet parallax ---------- */
@@ -127,29 +132,34 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   const spot = document.getElementById("spotlight");
   const planet = document.querySelector(".planet");
   let tx = innerWidth / 2, ty = innerHeight * 0.3;
-  let cx = tx, cy = ty, sx = tx, sy = ty, shown = false;
+  let sx = tx, sy = ty, raf = 0, shown = false;
+
+  function frame() {
+    sx += (tx - sx) * 0.1; sy += (ty - sy) * 0.1;
+    spot.style.transform = `translate3d(${sx}px, ${sy}px, 0)`;
+    if (planet) {
+      const px = (sx / innerWidth - 0.5) * 26, py = (sy / innerHeight - 0.5) * 26;
+      planet.style.transform = `translate3d(${px}px, ${py}px, 0)`;
+    }
+    // keep animating only until it settles, then idle (no perpetual rAF)
+    if (Math.abs(tx - sx) > 0.4 || Math.abs(ty - sy) > 0.4) raf = requestAnimationFrame(frame);
+    else raf = 0;
+  }
 
   addEventListener("mousemove", (e) => {
     tx = e.clientX; ty = e.clientY;
     cursor.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
     if (!shown) { cursor.classList.add("is-visible"); shown = true; }
+    if (!raf && !document.hidden) raf = requestAnimationFrame(frame);
   }, { passive: true });
+
+  document.addEventListener("visibilitychange", () => { if (document.hidden && raf) { cancelAnimationFrame(raf); raf = 0; } });
 
   // grow cursor over interactive elements
   document.querySelectorAll("a, button, .about__tags li, .chips span").forEach((el) => {
     el.addEventListener("mouseenter", () => cursor.classList.add("is-hover"));
     el.addEventListener("mouseleave", () => cursor.classList.remove("is-hover"));
   });
-
-  (function loop() {
-    sx += (tx - sx) * 0.08; sy += (ty - sy) * 0.08;
-    spot.style.transform = `translate3d(${sx}px, ${sy}px, 0)`;
-    if (planet) {
-      const px = (sx / innerWidth - 0.5) * 26, py = (sy / innerHeight - 0.5) * 26;
-      planet.style.transform = `translate3d(${px}px, ${py}px, 0)`;
-    }
-    requestAnimationFrame(loop);
-  })();
 })();
 
 /* ---------- Card cursor-spotlight glow ---------- */
@@ -232,6 +242,16 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   nums.forEach((n) => io.observe(n));
 })();
 
+/* ---------- Freeze offscreen CSS animations (orbit, marquee) ---------- */
+(() => {
+  const targets = document.querySelectorAll(".hero__orbit, .marquee");
+  if (!targets.length || !("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => e.target.classList.toggle("anim-paused", !e.isIntersecting));
+  }, { threshold: 0 });
+  targets.forEach((t) => io.observe(t));
+})();
+
 /* ---------- Coursework constellation: draw lines in on view ---------- */
 (() => {
   const map = document.getElementById("starmap");
@@ -300,7 +320,12 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     "Telemetry & Test Engineer", "Sensor Fusion Tinkerer",
   ];
   const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&_/<>*";
-  let idx = 0;
+  let idx = 0, heroSeen = true;
+
+  const hero = document.getElementById("hero");
+  if (hero && "IntersectionObserver" in window) {
+    new IntersectionObserver((e) => { heroSeen = e[0].isIntersecting; }, { threshold: 0.05 }).observe(hero);
+  }
 
   function scrambleTo(text) {
     return new Promise((resolve) => {
@@ -330,6 +355,7 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   async function loop() {
     while (true) {
       await new Promise((r) => setTimeout(r, 2400));
+      if (document.hidden || !heroSeen) continue;   // don't churn the DOM when unseen
       idx = (idx + 1) % titles.length;
       await scrambleTo(titles[idx]);
     }
