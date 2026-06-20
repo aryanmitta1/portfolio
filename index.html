@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Aryan Mitta — Electrical & Computer Engineering student at NYU Tandon. Avionics, embedded software, and aerospace systems." />
+  <meta name="theme-color" content="#050505" />
+  <title>Aryan Mitta — Aerospace & Avionics Software</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰️</text></svg>" />
+</head>
+<body>
+  <!-- Backdrop layers -->
+  <canvas id="starfield"></canvas>
+  <div class="planet" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="spotlight" id="spotlight" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__brand">
+      <span class="nav__brand-mark">AM</span>
+      <span class="nav__brand-text">Aryan&nbsp;Mitta</span>
+    </a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#project">Mission</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact" class="nav__cta">Contact</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero__inner">
+        <p class="hero__eyebrow reveal">
+          <span class="status-dot"></span>
+          Avionics Software Engineering Intern&nbsp;·&nbsp;Blue Origin
+        </p>
+        <h1 class="hero__title">
+          <span class="reveal">Aryan</span>
+          <span class="reveal">Mitta</span>
+        </h1>
+        <p class="hero__role reveal">
+          Electrical &amp; Computer Engineering — NYU Tandon
+        </p>
+        <p class="hero__tagline reveal">
+          I build <span class="hl">software</span> and <span class="hl">test systems</span> for aerospace,
+          embedded hardware, and sensor-driven platforms — working in the space
+          between code, circuits, and real-world flight.
+        </p>
+        <div class="hero__actions reveal">
+          <a href="#project" class="btn btn--primary">View Mission Work<span class="btn__arrow">→</span></a>
+          <a href="#contact" class="btn btn--ghost">Get in Touch</a>
+        </div>
+        <div class="hero__stats reveal">
+          <div class="stat">
+            <span class="stat__num" data-target="3.9" data-suffix="+">0</span>
+            <span class="stat__label">GPA · GLASS Honors</span>
+          </div>
+          <div class="stat__div"></div>
+          <div class="stat">
+            <span class="stat__num" data-target="4" data-suffix="">0</span>
+            <span class="stat__label">Engineering Internships</span>
+          </div>
+          <div class="stat__div"></div>
+          <div class="stat">
+            <span class="stat__num" data-target="144" data-suffix=" MHz">0</span>
+            <span class="stat__label">VHF Telemetry to NASA</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="#about" class="scroll-cue" aria-label="Scroll down">
+        <span class="scroll-cue__line"></span>
+        <span class="scroll-cue__txt">SCROLL</span>
+      </a>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="section__head reveal">
+        <span class="section__index">01 — About</span>
+        <h2 class="section__title">Between software,<br>hardware &amp; flight.</h2>
+      </div>
+      <div class="about">
+        <div class="about__lead reveal">
+          <p>
+            I'm an Electrical &amp; Computer Engineering student at
+            <strong>NYU Tandon</strong>, drawn to the work that sits at the
+            intersection of <strong>software, hardware, and real-world
+            systems</strong> — rockets, satellites, avionics, sensors, and
+            autonomous platforms that have to perform once they leave the ground.
+          </p>
+          <p>
+            My experience spans Python automation, embedded systems, ROS2,
+            computer vision, telemetry processing, and electrical test
+            engineering. I like building the things that bridge firmware and physics.
+          </p>
+        </div>
+        <ul class="about__tags reveal">
+          <li>Aerospace Systems</li>
+          <li>Embedded Software</li>
+          <li>Avionics</li>
+          <li>Robotics</li>
+          <li>Sensor Fusion</li>
+          <li>Test Automation</li>
+          <li>Telemetry</li>
+          <li>HW / SW Integration</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
+      <div class="section__head reveal">
+        <span class="section__index">02 — Experience</span>
+        <h2 class="section__title">Where I've worked.</h2>
+      </div>
+
+      <div class="timeline">
+        <article class="xp reveal">
+          <div class="xp__marker"><span></span></div>
+          <div class="xp__card">
+            <div class="xp__top">
+              <div>
+                <h3 class="xp__role">Avionics Software Engineering Intern</h3>
+                <p class="xp__company">Blue Origin</p>
+              </div>
+              <span class="xp__badge xp__badge--live">Current</span>
+            </div>
+            <p class="xp__desc">
+              Developing avionics software within a flight systems environment —
+              contributing to embedded software and test tooling for spaceflight
+              hardware.
+            </p>
+            <ul class="xp__bullets">
+              <li>Avionics software development for aerospace systems.</li>
+              <li>Embedded software and test automation for flight hardware.</li>
+            </ul>
+            <div class="xp__stack">
+              <span>Embedded</span><span>Avionics SW</span><span>Test Automation</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="xp reveal">
+          <div class="xp__marker"><span></span></div>
+          <div class="xp__card">
+            <div class="xp__top">
+              <div>
+                <h3 class="xp__role">Aerospace / Systems Engineering Intern</h3>
+                <p class="xp__company">Kearfott Corporation — Guidance &amp; Navigation</p>
+              </div>
+            </div>
+            <p class="xp__desc">
+              Built machine-learning tooling for celestial / skyline navigation and
+              integrated a full sensor suite on an NVIDIA Jetson platform for field testing.
+            </p>
+            <ul class="xp__bullets">
+              <li>Developed CV &amp; ML navigation tooling in PyTorch (ResNet, custom layers, Haversine loss) — accurate to roughly ~1 mile.</li>
+              <li>Integrated camera, LiDAR, IMU, GNSS, and PPS timing hardware on a Jetson Orin Nano.</li>
+              <li>Built ROS2-based sensor publishing &amp; evaluation tools for real-world van tests.</li>
+              <li>Evaluated IMUs on drift, stability, and accuracy from field data.</li>
+            </ul>
+            <div class="xp__stack">
+              <span>PyTorch</span><span>ROS2 Humble</span><span>Jetson</span><span>LiDAR</span><span>IMU / GNSS</span><span>OpenCV</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="xp reveal">
+          <div class="xp__marker"><span></span></div>
+          <div class="xp__card">
+            <div class="xp__top">
+              <div>
+                <h3 class="xp__role">Software Engineering Intern</h3>
+                <p class="xp__company">Soria Analytics</p>
+              </div>
+            </div>
+            <p class="xp__desc">
+              Built data pipelines for a financial news &amp; research terminal —
+              ingesting, cleaning, ranking, and summarizing articles for analyst review.
+            </p>
+            <ul class="xp__bullets">
+              <li>Engineered RSS / OPML ingestion pipelines into a Postgres backend.</li>
+              <li>Implemented semantic filtering with Gemini embeddings &amp; cosine similarity.</li>
+              <li>Built reviewer logging &amp; ranking tools (logistic regression) to improve relevance over time.</li>
+            </ul>
+            <div class="xp__stack">
+              <span>Python</span><span>Postgres</span><span>Embeddings</span><span>SQL</span><span>LLMs</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECT -->
+    <section class="section" id="project">
+      <div class="section__head reveal">
+        <span class="section__index">03 — Featured Mission</span>
+        <h2 class="section__title">Telemetry to NASA,<br>at 144 MHz.</h2>
+      </div>
+
+      <article class="mission reveal">
+        <div class="mission__head">
+          <div>
+            <p class="mission__tag">NASA USLI · NYU Rogue Aerospace</p>
+            <h3 class="mission__title">Rocket Payload Telemetry System</h3>
+            <p class="mission__role">Payload Electronics Lead</p>
+          </div>
+          <div class="mission__badge">🚀</div>
+        </div>
+
+        <p class="mission__desc">
+          Led payload electronics for a NASA University Student Launch Initiative
+          rocket — designing the full telemetry chain that transmitted live flight
+          data to NASA's ground receiver, plus a mission-control GUI to arm,
+          disarm, launch, and visualize data in real time.
+        </p>
+
+        <div class="mission__grid">
+          <div class="mission__col">
+            <h4>What I built</h4>
+            <ul>
+              <li>Telemetry chain: Arduino + BMP390 + RTC → APRS over VHF radio.</li>
+              <li>Serial packet formatting &amp; APRS message encoding (AFSK 1200 baud).</li>
+              <li>Radio / TNC chain: Mobilinkd TNC4 → Yaesu FT-70DR → NASA receiver.</li>
+              <li>Mission-control GUI: arm / disarm / launch + live data viz.</li>
+              <li>Battery, shielding &amp; manual-override planning; NASA review docs.</li>
+            </ul>
+          </div>
+          <div class="mission__col">
+            <h4>Live downlink data</h4>
+            <ul class="mission__telemetry">
+              <li><span>Temperature</span><em>BMP390</em></li>
+              <li><span>Apogee Reached</span><em>Altitude</em></li>
+              <li><span>Battery Status</span><em>LiPo check</em></li>
+              <li><span>Landing Time</span><em>RTC module</em></li>
+            </ul>
+            <div class="mission__freq">
+              <span class="mission__freq-band">2 m band</span>
+              <span class="mission__freq-val">144–148 MHz</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mission__stack">
+          <span>Arduino</span><span>APRS</span><span>AFSK 1200</span><span>BMP390</span>
+          <span>TNC4</span><span>VHF Radio</span><span>Python GUI</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="section__head reveal">
+        <span class="section__index">04 — Capabilities</span>
+        <h2 class="section__title">Technical skills.</h2>
+      </div>
+
+      <div class="skills">
+        <div class="skill-card reveal">
+          <h3>Languages</h3>
+          <div class="chips">
+            <span>Python</span><span>C</span><span>C++</span><span>Java</span>
+            <span>MATLAB</span><span>SQL</span><span>JavaScript</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h3>Aerospace &amp; Avionics</h3>
+          <div class="chips">
+            <span>Avionics SW</span><span>Telemetry</span><span>APRS</span>
+            <span>VHF Radio Chain</span><span>Payload Electronics</span>
+            <span>Test Automation</span><span>Guidance &amp; Nav</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h3>Embedded &amp; Hardware</h3>
+          <div class="chips">
+            <span>Arduino</span><span>Raspberry Pi</span><span>Sensors</span>
+            <span>RTC / OLED</span><span>LiPo</span><span>PCB Basics</span>
+            <span>Multimeters</span><span>HiPot Testing</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h3>Robotics &amp; Sensors</h3>
+          <div class="chips">
+            <span>ROS2 Humble</span><span>Sensor Fusion</span><span>LiDAR</span>
+            <span>IMU</span><span>GNSS</span><span>PPS Timing</span><span>REP-103</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h3>ML &amp; Computer Vision</h3>
+          <div class="chips">
+            <span>PyTorch</span><span>TensorFlow</span><span>ResNet</span>
+            <span>OpenCV</span><span>YOLO</span><span>Embeddings</span>
+            <span>Haversine Loss</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <h3>Data &amp; Tools</h3>
+          <div class="chips">
+            <span>Postgres</span><span>FastAPI</span><span>Data Pipelines</span>
+            <span>Git</span><span>Linux</span><span>Fusion 360</span><span>Altium</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION + LEADERSHIP -->
+    <section class="section" id="education">
+      <div class="section__head reveal">
+        <span class="section__index">05 — Background</span>
+        <h2 class="section__title">Education &amp; leadership.</h2>
+      </div>
+
+      <div class="edu-grid">
+        <article class="edu-card reveal">
+          <h3 class="edu-card__school">New York University</h3>
+          <p class="edu-card__sub">Tandon School of Engineering</p>
+          <p class="edu-card__degree">B.S. Electrical &amp; Computer Engineering</p>
+          <div class="edu-card__meta">
+            <span>GPA 3.9+</span>
+            <span>GLASS Honors Program</span>
+          </div>
+          <h4>Relevant Coursework</h4>
+          <div class="chips">
+            <span>Embedded Systems</span><span>Digital Logic</span><span>Electronics</span>
+            <span>Signals &amp; Systems</span><span>Computer Networks</span>
+            <span>Control Systems</span><span>Circuits</span><span>Data Structures</span>
+            <span>E&amp;M Physics</span><span>Computer Architecture</span>
+          </div>
+        </article>
+
+        <div class="lead-stack">
+          <article class="lead-card reveal">
+            <h3>Payload Electronics Lead</h3>
+            <p class="lead-card__org">NYU Rogue Aerospace · NASA USLI</p>
+            <p>Led electronics-side payload work and coordinated technical design decisions for telemetry and sensor integration.</p>
+          </article>
+          <article class="lead-card reveal">
+            <h3>Teaching Assistant</h3>
+            <p class="lead-card__org">EG-UY 1004 General Engineering</p>
+            <p>Communications, Inventory &amp; Purchasing Leader — maintained course materials, managed lab kits, and supported showcase events.</p>
+          </article>
+          <article class="lead-card reveal">
+            <h3>Theta Tau</h3>
+            <p class="lead-card__org">Professional Engineering Fraternity</p>
+            <p>Organized professional service initiatives and community events as an active member.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section section--contact" id="contact">
+      <div class="contact reveal">
+        <p class="contact__eyebrow">Let's build something that flies</p>
+        <h2 class="contact__title">Get in touch</h2>
+        <p class="contact__text">
+          Open to opportunities in aerospace, avionics, embedded systems, and
+          test engineering. Always happy to talk rockets, sensors, or anything
+          between software and hardware.
+        </p>
+        <div class="contact__actions">
+          <a href="mailto:aryanmitta@gmail.com" class="btn btn--primary">aryanmitta@gmail.com<span class="btn__arrow">→</span></a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" class="btn btn--ghost">LinkedIn</a>
+          <a href="https://github.com/" target="_blank" rel="noopener" class="btn btn--ghost">GitHub</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> Aryan Mitta</span>
+    <span class="footer__sep">·</span>
+    <span>Built among the stars</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
