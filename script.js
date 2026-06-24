@@ -329,8 +329,11 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   const el = document.getElementById("decryptText");
   if (!el || REDUCED) return;
   const titles = [
-    "Avionics Software Engineer", "Embedded Systems Developer", "Aerospace Software",
-    "Telemetry & Test Engineer", "Sensor Fusion Tinkerer",
+    "Avionics & Flight Software Engineer",
+    "Embedded C / RTOS Developer",
+    "ROS2 & Sensor Fusion (EKF) Engineer",
+    "PyTorch & Computer Vision Engineer",
+    "Hardware-in-the-Loop Test Engineer",
   ];
   const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&_/<>*";
   let idx = 0, heroSeen = true;
@@ -424,6 +427,61 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(0.1, t + 0.1); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
     src.connect(bp); bp.connect(g); g.connect(ctx.destination); src.start(t); src.stop(t + dur);
   };
+})();
+
+/* ---------- On-campus roles carousel ---------- */
+(() => {
+  const root = document.getElementById("campusCarousel");
+  if (!root) return;
+  const viewport = root.querySelector(".carousel__viewport");
+  const track = document.getElementById("carouselTrack");
+  const cards = Array.from(track.children);
+  const dotsWrap = document.getElementById("carouselDots");
+  const prev = document.getElementById("carouselPrev");
+  const next = document.getElementById("carouselNext");
+  if (!cards.length) return;
+
+  let idx = Math.min(1, cards.length - 1); // start on the middle card
+
+  // build dots
+  cards.forEach((_, i) => {
+    const b = document.createElement("button");
+    b.className = "carousel__dot";
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-label", `Role ${i + 1} of ${cards.length}`);
+    b.addEventListener("click", () => { idx = i; render(); });
+    dotsWrap.appendChild(b);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function render() {
+    const vpCenter = viewport.clientWidth / 2;
+    const card = cards[idx];
+    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+    track.style.transform = `translateX(${vpCenter - cardCenter}px)`;
+    cards.forEach((c, i) => c.classList.toggle("is-active", i === idx));
+    dots.forEach((d, i) => d.classList.toggle("is-active", i === idx));
+    prev.disabled = false; next.disabled = false;
+  }
+
+  function go(delta) { idx = (idx + delta + cards.length) % cards.length; render(); }
+  prev.addEventListener("click", () => go(-1));
+  next.addEventListener("click", () => go(1));
+
+  // clicking a side card brings it to focus
+  cards.forEach((c, i) => c.addEventListener("click", () => { if (i !== idx) { idx = i; render(); } }));
+
+  // keyboard support when carousel is in view
+  root.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") { go(-1); e.preventDefault(); }
+    else if (e.key === "ArrowRight") { go(1); e.preventDefault(); }
+  });
+
+  let rAF;
+  window.addEventListener("resize", () => { cancelAnimationFrame(rAF); rAF = requestAnimationFrame(render); });
+  // recenter once fonts/layout settle
+  requestAnimationFrame(render);
+  setTimeout(render, 350);
 })();
 
 document.getElementById("year").textContent = new Date().getFullYear();

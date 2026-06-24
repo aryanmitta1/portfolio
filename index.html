@@ -43,8 +43,8 @@
     <nav class="nav__links" id="navLinks">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
+      <a href="#campus">On Campus</a>
       <a href="#skills">Skills</a>
-      <a href="#coursework">Courses</a>
       <a href="#education">Education</a>
       <a href="glass/index.html">GLASS</a>
       <a href="#contact" class="nav__cta">Contact</a>
@@ -216,16 +216,18 @@
               <span class="xp__badge xp__badge--live">Current</span>
             </div>
             <p class="xp__desc">
-              Developing avionics software within a flight systems environment —
-              contributing to embedded software and test tooling for spaceflight
-              hardware.
+              Working on satellite brightness mitigation for the
+              <strong>Terawave</strong> constellation — modeling how bright each
+              spacecraft appears from the ground so the fleet stays friendly to
+              astronomers and dark skies.
             </p>
             <ul class="xp__bullets">
-              <li>Avionics software development for aerospace systems.</li>
-              <li>Embedded software and test automation for flight hardware.</li>
+              <li>Building a brightness model from GNC state, material &amp; optical properties, and BRDF sensor data.</li>
+              <li>Developing a full-stack app that predicts a satellite's apparent brightness anywhere on Earth.</li>
+              <li>Implementing the physics &amp; modeling pipeline primarily in MATLAB.</li>
             </ul>
             <div class="xp__stack">
-              <span>Embedded</span><span>Avionics SW</span><span>Test Automation</span>
+              <span>MATLAB</span><span>BRDF / Optics</span><span>GNC</span><span>Full-Stack App</span><span>Modeling</span>
             </div>
           </div>
         </article>
@@ -283,54 +285,145 @@
 
     <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
 
+    <!-- ON-CAMPUS ROLES (carousel) -->
+    <section class="section" id="campus">
+      <div class="section__head reveal">
+        <span class="section__index">03 — On Campus</span>
+        <h2 class="section__title">Building &amp; leading<br>at NYU.</h2>
+        <p class="section__lead reveal">Research, leadership, and teaching alongside the degree — the work I do between classes.</p>
+      </div>
+
+      <div class="carousel reveal" id="campusCarousel" aria-roledescription="carousel" aria-label="On-campus roles">
+        <div class="carousel__viewport">
+          <div class="carousel__track" id="carouselTrack">
+
+            <article class="ccard" data-i="0">
+              <div class="ccard__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c2.5 2.5 4 6 4 10a8 8 0 0 1-8 0c0-4 1.5-7.5 4-10Z"/><circle cx="12" cy="9" r="1.6"/><path d="M8 14l-2.5 3.5L9 18M16 14l2.5 3.5L15 18"/></svg>
+              </div>
+              <p class="ccard__period">FALL 2024 — PRESENT</p>
+              <h3 class="ccard__org">NYU Rogue Aerospace</h3>
+              <p class="ccard__role">Payload Electronics</p>
+              <p class="ccard__loc">NASA USLI · Brooklyn, NY</p>
+              <div class="ccard__rule"></div>
+              <p class="ccard__team">STUDENT LAUNCH · PAYLOAD TEAM</p>
+              <p class="ccard__desc">
+                Lead the electronics side of a NASA Student Launch payload — designing the
+                telemetry chain and coordinating sensor-integration and design decisions
+                with the avionics team.
+              </p>
+              <div class="ccard__chips">
+                <span>Telemetry</span><span>Sensors</span><span>APRS</span><span>Embedded</span>
+              </div>
+            </article>
+
+            <article class="ccard" data-i="1">
+              <div class="ccard__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>
+              </div>
+              <p class="ccard__period">RESEARCH · PAST SEMESTER</p>
+              <h3 class="ccard__org">FAMS Lab</h3>
+              <p class="ccard__role">Computer Vision Research Assistant</p>
+              <p class="ccard__loc">NYU Tandon · Brooklyn, NY</p>
+              <div class="ccard__rule"></div>
+              <p class="ccard__team">FLEXIBLE AI-POWERED MECHATRONICS LAB</p>
+              <p class="ccard__desc">
+                Trained and evaluated computer-vision models for a mechatronics research
+                project — building and tuning the perception pipeline that lets the lab's
+                systems see and react to their environment.
+              </p>
+              <div class="ccard__chips">
+                <span>PyTorch</span><span>OpenCV</span><span>CNNs</span><span>Model Eval</span>
+              </div>
+            </article>
+
+            <article class="ccard" data-i="2">
+              <div class="ccard__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4-9-4Z"/><path d="M7 10v5c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5v-5"/><path d="M21 8v5"/></svg>
+              </div>
+              <p class="ccard__period">TEACHING · GENERAL ENGINEERING</p>
+              <h3 class="ccard__org">NYU Tandon</h3>
+              <p class="ccard__role">Teaching Assistant — EG-UY 1004</p>
+              <p class="ccard__loc">Brooklyn, NY</p>
+              <div class="ccard__rule"></div>
+              <p class="ccard__team">GENERAL ENGINEERING · COMMS &amp; INVENTORY LEAD</p>
+              <p class="ccard__desc">
+                Support first-year engineers through hands-on design and prototyping as
+                Communications, Inventory &amp; Purchasing Leader — maintaining course
+                materials, managing lab kits, and running showcase events.
+              </p>
+              <div class="ccard__chips">
+                <span>Mentorship</span><span>Prototyping</span><span>Design</span><span>Logistics</span>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <div class="carousel__nav">
+          <button class="carousel__arrow" id="carouselPrev" aria-label="Previous role">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="carousel__dots" id="carouselDots" role="tablist" aria-label="Select role"></div>
+          <button class="carousel__arrow" id="carouselNext" aria-label="Next role">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
+
     <!-- SKILLS -->
     <section class="section" id="skills">
       <div class="section__head reveal">
-        <span class="section__index">03 — Capabilities</span>
+        <span class="section__index">04 — Capabilities</span>
         <h2 class="section__title">Technical skills.</h2>
       </div>
 
       <div class="skills">
         <div class="skill-card reveal">
-          <h3>Languages</h3>
+          <h3>Languages &amp; Scripting</h3>
           <div class="chips">
-            <span>Python</span><span>C</span><span>C++</span>
-            <span>MATLAB</span><span>SQL</span>
+            <span>Python</span><span>Embedded C</span><span>C++</span>
+            <span>MATLAB</span><span>SQL</span><span>Bash</span>
           </div>
         </div>
         <div class="skill-card reveal">
-          <h3>Aerospace &amp; Avionics</h3>
+          <h3>Flight &amp; Avionics Software</h3>
           <div class="chips">
-            <span>Flight Software</span><span>Avionics</span><span>Telemetry</span>
-            <span>Hardware-in-the-Loop</span><span>Test Automation</span><span>Sensor Integration</span>
+            <span>Flight Software (C&amp;DH)</span><span>Telemetry &amp; Command</span>
+            <span>Hardware-in-the-Loop (HIL)</span><span>Fault Detection (FDIR)</span>
+            <span>Flight-Test Automation</span><span>Data Reduction</span>
           </div>
         </div>
         <div class="skill-card reveal">
-          <h3>Embedded &amp; Hardware</h3>
+          <h3>Embedded &amp; Real-Time</h3>
           <div class="chips">
-            <span>Embedded C</span><span>Microcontrollers</span><span>RTOS</span>
-            <span>UART / SPI / I²C</span><span>PCB Design</span><span>Firmware</span>
+            <span>Bare-Metal C</span><span>RTOS / FreeRTOS</span><span>Device Drivers</span>
+            <span>UART / SPI / I²C / CAN</span><span>Interrupts &amp; DMA</span>
+            <span>Bootloaders &amp; Flashing</span>
           </div>
         </div>
         <div class="skill-card reveal">
-          <h3>Robotics &amp; Sensors</h3>
+          <h3>Robotics &amp; Sensor Fusion</h3>
           <div class="chips">
-            <span>ROS2</span><span>Sensor Fusion</span><span>LiDAR</span>
-            <span>IMU</span><span>GNSS</span><span>Real-Time Systems</span>
+            <span>ROS2 (Humble)</span><span>Kalman / EKF</span><span>LiDAR · IMU · GNSS</span>
+            <span>PPS Time-Sync</span><span>tf2 / rosbag</span><span>Real-Time Pipelines</span>
           </div>
         </div>
         <div class="skill-card reveal">
           <h3>ML &amp; Computer Vision</h3>
           <div class="chips">
-            <span>PyTorch</span><span>TensorFlow</span><span>OpenCV</span>
-            <span>CNNs</span><span>NumPy</span><span>Pandas</span>
+            <span>PyTorch</span><span>Transfer Learning (ResNet)</span><span>Custom Loss Functions</span>
+            <span>OpenCV</span><span>Edge Deploy (Jetson / TensorRT)</span><span>Model Eval Pipelines</span>
           </div>
         </div>
         <div class="skill-card reveal">
-          <h3>Tools &amp; Workflow</h3>
+          <h3>Data, Infra &amp; Tooling</h3>
           <div class="chips">
-            <span>Git</span><span>Linux</span><span>Docker</span>
-            <span>SQL / Postgres</span><span>Bash</span><span>Altium / Fusion 360</span>
+            <span>ETL Pipelines</span><span>Postgres / SQL</span><span>Vector / Semantic Search</span>
+            <span>Docker</span><span>Linux</span><span>Git + CI/CD</span>
           </div>
         </div>
       </div>
@@ -338,64 +431,11 @@
 
     <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
 
-    <!-- COURSEWORK CONSTELLATION -->
-    <section class="section" id="coursework">
-      <div class="section__head reveal">
-        <span class="section__index">04 — Star Map</span>
-        <h2 class="section__title">Relevant coursework.</h2>
-        <p class="section__lead reveal">Every course, a star. Together they chart where I'm headed — hover a star to read it.</p>
-      </div>
-
-      <div class="starmap reveal" id="starmap" aria-label="Coursework constellation">
-        <svg class="starmap__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-          <!-- hardware chain -->
-          <polyline points="14,26 12,52" />
-          <polyline points="12,52 37,44" />
-          <!-- digital chain -->
-          <polyline points="16,78 40,72" />
-          <polyline points="40,72 37,44" />
-          <!-- systems / networking -->
-          <polyline points="40,72 80,75" />
-          <!-- signals chain -->
-          <polyline points="12,52 42,22" />
-          <polyline points="42,22 62,13" />
-          <polyline points="42,22 66,42" />
-          <!-- software chain -->
-          <polyline points="86,22 84,50" />
-          <polyline points="84,50 66,42" />
-          <polyline points="84,50 80,75" />
-          <!-- embedded ↔ ML bridge -->
-          <polyline points="37,44 66,42" />
-        </svg>
-        <!-- stars (positioned via --x / --y) -->
-        <button class="star" style="--x:14%; --y:26%;" data-course="PCB Design"><span class="star__dot"></span><span class="star__label">PCB Design</span></button>
-        <button class="star" style="--x:12%; --y:52%;" data-course="Electronics"><span class="star__dot"></span><span class="star__label">Electronics</span></button>
-        <button class="star" style="--x:16%; --y:78%;" data-course="Digital Logic &amp; State Machines"><span class="star__dot"></span><span class="star__label">Digital Logic &amp; State Machines</span></button>
-        <button class="star" style="--x:37%; --y:44%;" data-course="Embedded Systems Design"><span class="star__dot"></span><span class="star__label">Embedded Systems Design</span></button>
-        <button class="star" style="--x:40%; --y:72%;" data-course="Computer Architecture"><span class="star__dot"></span><span class="star__label">Computer Architecture</span></button>
-        <button class="star" style="--x:42%; --y:22%;" data-course="Signals &amp; Systems"><span class="star__dot"></span><span class="star__label">Signals &amp; Systems</span></button>
-        <button class="star" style="--x:62%; --y:13%;" data-course="Feedback Control"><span class="star__dot"></span><span class="star__label">Feedback Control</span></button>
-        <button class="star" style="--x:66%; --y:42%;" data-course="Machine Learning"><span class="star__dot"></span><span class="star__label">Machine Learning</span></button>
-        <button class="star" style="--x:86%; --y:22%;" data-course="Object-Oriented Programming"><span class="star__dot"></span><span class="star__label">Object-Oriented Programming</span></button>
-        <button class="star" style="--x:84%; --y:50%;" data-course="Data Structures &amp; Algorithms"><span class="star__dot"></span><span class="star__label">Data Structures &amp; Algorithms</span></button>
-        <button class="star" style="--x:80%; --y:75%;" data-course="Computer Networking"><span class="star__dot"></span><span class="star__label">Computer Networking</span></button>
-      </div>
-
-      <ul class="starmap__list" aria-hidden="false">
-        <li>PCB Design</li><li>Embedded Systems Design</li><li>Machine Learning</li>
-        <li>Signals &amp; Systems</li><li>Electronics</li><li>Object-Oriented Programming</li>
-        <li>Data Structures &amp; Algorithms</li><li>Feedback Control</li>
-        <li>Digital Logic &amp; State Machines</li><li>Computer Networking</li><li>Computer Architecture</li>
-      </ul>
-    </section>
-
-    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
-
-    <!-- EDUCATION + LEADERSHIP -->
+    <!-- EDUCATION + COURSEWORK + INVOLVEMENT -->
     <section class="section" id="education">
       <div class="section__head reveal">
         <span class="section__index">05 — Background</span>
-        <h2 class="section__title">Education &amp; leadership.</h2>
+        <h2 class="section__title">Education, courses &amp; involvement.</h2>
       </div>
 
       <div class="edu-grid">
@@ -405,7 +445,8 @@
           <p class="edu-card__degree">B.S. Electrical &amp; Computer Engineering</p>
           <div class="edu-card__meta">
             <span>GPA 3.93</span>
-            <span>GLASS Honors Program</span>
+            <span>GLASS Honors · Cohort 5</span>
+            <span>Tau Beta Pi</span>
           </div>
           <h4>Focus Areas</h4>
           <div class="chips">
@@ -417,14 +458,14 @@
 
         <div class="lead-stack reveal reveal--right">
           <article class="lead-card reveal">
-            <h3>Payload Electronics</h3>
-            <p class="lead-card__org">NYU Rogue Aerospace · NASA USLI</p>
-            <p>Built electronics-side payload work and coordinated technical design decisions for telemetry and sensor integration.</p>
+            <h3>Vice President</h3>
+            <p class="lead-card__org">IEEE · NYU Tandon Chapter</p>
+            <p>Lead the student branch — running technical events, growing membership, and connecting students to industry.</p>
           </article>
           <article class="lead-card reveal">
-            <h3>Teaching Assistant</h3>
-            <p class="lead-card__org">EG-UY 1004 General Engineering</p>
-            <p>Communications, Inventory &amp; Purchasing Leader — maintained course materials, managed lab kits, and supported showcase events.</p>
+            <h3>Executive Board</h3>
+            <p class="lead-card__org">Theta Tau · Engineering Fraternity</p>
+            <p>Serve on the E-board of the professional engineering fraternity; previously Service Chair leading outreach.</p>
           </article>
           <article class="lead-card reveal">
             <h3>Tau Beta Pi</h3>
@@ -433,6 +474,106 @@
           </article>
         </div>
       </div>
+
+      <!-- Coursework: charted as Orion -->
+      <div class="edu-sub reveal" id="coursework">
+        <h3 class="edu-sub__title">Relevant coursework — charted as Orion.</h3>
+        <p class="edu-sub__lead">Eleven courses mapped onto the Hunter: hardware grounding his <em>feet</em>, the computing core along his <em>belt</em>, signals &amp; control in his <em>shoulders</em>, machine learning in his <em>head</em>, and the software tools at his <em>sword</em>. Hover a star.</p>
+
+        <div class="starmap reveal" id="starmap" aria-label="Coursework constellation — Orion">
+          <svg class="starmap__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <!-- head to shoulders -->
+            <polyline points="50,11 35,29" />
+            <polyline points="50,11 65,27" />
+            <!-- shoulders down to belt -->
+            <polyline points="35,29 44,51" />
+            <polyline points="65,27 56,53" />
+            <!-- the belt -->
+            <polyline points="44,51 50,52" />
+            <polyline points="50,52 56,53" />
+            <!-- belt down to feet -->
+            <polyline points="44,51 31,85" />
+            <polyline points="56,53 72,86" />
+            <!-- the sword -->
+            <polyline points="50,52 46,63" />
+            <polyline points="46,63 45,70" />
+            <polyline points="45,70 44,77" />
+          </svg>
+
+          <!-- HEAD — frontier / the mind -->
+          <button class="star star--bright" style="--x:50%; --y:11%;" data-course="Machine Learning">
+            <span class="star__dot"></span>
+            <span class="star__label"><span class="star__name">Meissa · head</span>Machine Learning</span>
+          </button>
+          <!-- SHOULDERS — analysis -->
+          <button class="star" style="--x:35%; --y:29%;" data-course="Signals &amp; Systems">
+            <span class="star__dot"></span>
+            <span class="star__label"><span class="star__name">Betelgeuse · shoulder</span>Signals &amp; Systems</span>
+          </button>
+          <button class="star" style="--x:65%; --y:27%;" data-course="Feedback Control">
+            <span class="star__dot"></span>
+            <span class="star__label"><span class="star__name">Bellatrix · shoulder</span>Feedback Control</span>
+          </button>
+          <!-- BELT — computing core -->
+          <button class="star" style="--x:44%; --y:51%;" data-course="Computer Architecture">
+            <span class="star__dot"></span>
+            <span class="star__label"><span class="star__name">Alnitak · belt</span>Computer Architecture</span>
+          </button>
+          <button class="star star--bright" style="--x:50%; --y:52%;" data-course="Embedded Systems Design">
+            <span class="star__dot"></span>
+            <span class="star__label"><span class="star__name">Alnilam · belt</span>Embedded Systems Design</span>
+          </button>
+          <button class="star" style="--x:56%; --y:53%;" data-course="Digital Logic &amp; State Machines">
+            <span class="star__dot"></span>
+            <span class="star__label"><span class="star__name">Mintaka · belt</span>Digital Logic &amp; State Machines</span>
+          </button>
+          <!-- FEET — hardware foundations -->
+          <button class="star" style="--x:31%; --y:85%;" data-course="PCB Design">
+            <span class="star__dot"></span>
+            <span class="star__label"><span class="star__name">Saiph · foot</span>PCB Design</span>
+          </button>
+          <button class="star star--bright" style="--x:72%; --y:86%;" data-course="Electronics">
+            <span class="star__dot"></span>
+            <span class="star__label"><span class="star__name">Rigel · foot</span>Electronics</span>
+          </button>
+          <!-- SWORD — software tools -->
+          <button class="star" style="--x:46%; --y:63%;" data-course="Object-Oriented Programming">
+            <span class="star__dot"></span>
+            <span class="star__label"><span class="star__name">sword</span>Object-Oriented Programming</span>
+          </button>
+          <button class="star" style="--x:45%; --y:70%;" data-course="Data Structures &amp; Algorithms">
+            <span class="star__dot"></span>
+            <span class="star__label"><span class="star__name">sword</span>Data Structures &amp; Algorithms</span>
+          </button>
+          <button class="star" style="--x:44%; --y:77%;" data-course="Computer Networking">
+            <span class="star__dot"></span>
+            <span class="star__label"><span class="star__name">sword</span>Computer Networking</span>
+          </button>
+        </div>
+
+        <ul class="starmap__list" aria-hidden="false">
+          <li>Machine Learning</li><li>Signals &amp; Systems</li><li>Feedback Control</li>
+          <li>Computer Architecture</li><li>Embedded Systems Design</li><li>Digital Logic &amp; State Machines</li>
+          <li>PCB Design</li><li>Electronics</li><li>Object-Oriented Programming</li>
+          <li>Data Structures &amp; Algorithms</li><li>Computer Networking</li>
+        </ul>
+      </div>
+
+      <!-- Involvement, tagged by GLASS window -->
+      <div class="extra reveal" id="involvement">
+        <h3 class="extra__title">Involvement &amp; Leadership</h3>
+        <ul class="extra__list">
+          <li><span class="extra__role">Leadership</span>Exec Board · Theta Tau</li>
+          <li><span class="extra__role">Academic</span>Teaching Assistant · EG-UY 1004</li>
+          <li><span class="extra__role">Professional</span>SASE National Conference</li>
+          <li><span class="extra__role">Service</span>Service Chair · Theta Tau</li>
+          <li><span class="extra__role">Professional</span>CUSP Hackathon</li>
+          <li><span class="extra__role">Global</span>Study Abroad · Paris</li>
+          <li><span class="extra__role">Professional</span>Smart Cities Research · IEEE</li>
+          <li><span class="extra__role">Service</span>FNPF Volunteer · Bali</li>
+          <li><span class="extra__role">Global</span>Korea Program</li>
+        </ul>
+      </div>
     </section>
 
     <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
@@ -440,12 +581,11 @@
     <!-- CONTACT -->
     <section class="section section--contact" id="contact">
       <div class="contact reveal">
-        <p class="contact__eyebrow">Let's build something that flies</p>
+        <p class="contact__eyebrow">Let's connect!</p>
         <h2 class="contact__title">Get in touch</h2>
         <p class="contact__text">
           Open to opportunities in aerospace, avionics, embedded systems, and
-          test engineering. Always happy to talk rockets, sensors, or anything
-          between software and hardware.
+          test engineering. Always happy to chat.
         </p>
         <div class="contact__actions">
           <a href="mailto:aryanmitta@gmail.com" class="btn btn--primary">aryanmitta@gmail.com<span class="btn__arrow">→</span></a>
