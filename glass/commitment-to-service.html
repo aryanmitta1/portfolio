@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Commitment to Service — Aryan Mitta's GLASS window: service learning, mentoring, and community engagement." />
+  <meta name="theme-color" content="#050505" />
+  <title>Commitment to Service — GLASS · Aryan Mitta</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="glass.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰️</text></svg>" />
+</head>
+<body>
+  <div class="stars stars--far" id="starsFar" aria-hidden="true"></div>
+  <div class="stars stars--mid" id="starsMid" aria-hidden="true"></div>
+  <div class="stars stars--near" id="starsNear" aria-hidden="true"></div>
+  <canvas id="starfield"></canvas>
+  <div class="planet" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"></div>
+
+  <div class="spotlight" id="spotlight" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="nav" id="nav">
+    <a href="../index.html" class="nav__brand">
+      <span class="nav__brand-mark">AM</span>
+      <span class="nav__brand-text">Aryan&nbsp;Mitta</span>
+    </a>
+    <nav class="nav__links" id="navLinks">
+      <a href="../index.html">Portfolio</a>
+      <a href="index.html">GLASS Home</a>
+      <a href="index.html#windows" class="nav__cta">The Five Windows</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav class="crumb" aria-label="Breadcrumb">
+    <a href="index.html">GLASS</a>
+    <span class="crumb__sep">/</span>
+    <span>Commitment to Service</span>
+  </nav>
+
+  <main id="top">
+    <section class="g-hero" style="padding-top:24px;">
+      <p class="g-hero__eyebrow"><span class="status-dot"></span> Window 03 of 05</p>
+      <h1 class="g-hero__title"><span class="grad">Commitment<br>to Service</span></h1>
+      <p class="g-hero__lead">
+        Engineering is only worth as much as the people it serves. This window is about
+        service learning, mentoring, and community engagement — connecting my technical
+        work to the UN SDGs and the Tandon Impact Areas.
+      </p>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <article class="g-card reveal">
+        <h3>What GLASS means by this</h3>
+        <p>
+          The Commitment to Service window asks scholars to give back — through service
+          learning, community engagement, mentoring, and alternative break experiences.
+          GLASS frames this service around the <strong>NYU Tandon Impact Areas</strong>
+          and the <strong>UN Sustainable Development Goals</strong>, so that helping
+          others and advancing global priorities go hand in hand.
+        </p>
+      </article>
+
+      <div class="facet reveal">
+        <p class="facet__label">My approach</p>
+        <ul class="bullets">
+          <li>Share what I know — teaching and mentoring younger engineers so the next cohort starts further ahead.</li>
+          <li>Make STEM accessible: lower the barrier for students who don't see themselves as "engineering people" yet.</li>
+          <li>Direct service toward the SDGs my work touches — quality education, and resilient infrastructure.</li>
+          <li>Lead by contribution, not just by title — support the teams and events that hold a program together.</li>
+        </ul>
+      </div>
+
+      <div class="facet reveal">
+        <p class="facet__label">Evidence &amp; engagement</p>
+        <ul class="bullets">
+          <li><strong>Teaching Assistant — EG-UY 1004 General Engineering:</strong> Communications, Inventory &amp; Purchasing Leader; maintained course materials, managed lab kits, and supported showcase events.</li>
+          <li><strong>NYU Rogue Aerospace (NASA USLI):</strong> mentoring teammates on payload electronics and technical design decisions.</li>
+          <li>Peer support and onboarding for new engineering students.</li>
+        </ul>
+      </div>
+
+      <div class="facet reveal">
+        <p class="facet__label">Goals through GLASS</p>
+        <div class="chip-row">
+          <span class="statuschip statuschip--done">TA leadership in General Engineering</span>
+          <span class="statuschip statuschip--plan">STEM outreach / mentoring program</span>
+          <span class="statuschip statuschip--plan">Service project tied to a UN SDG</span>
+          <span class="statuschip statuschip--plan">Alternative break / community engagement</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
+
+    <section class="section" style="padding-top:clamp(50px,7vw,90px);">
+      <div class="pager reveal">
+        <a class="prev" href="academic-excellence.html"><small>← Previous window</small><span>Academic Excellence</span></a>
+        <a class="next" href="global-competency.html"><small>Next window →</small><span>Global Competency</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> Aryan Mitta</span>
+    <span class="footer__sep">·</span>
+    <span>GLASS · NYU Tandon</span>
+  </footer>
+
+  <script src="glass.js"></script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 /* ============================================================
-   Aryan Mitta — Space Portfolio · interactions
+   Aryan Mitta — GLASS · interactions
+   Multi-page-safe trim of the main portfolio script.
+   Same backdrop / reveal / nav behavior, no single-page hash spy.
    ============================================================ */
 
 const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -8,6 +10,7 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
 /* ---------- Interactive constellation ---------- */
 (() => {
   const canvas = document.getElementById("starfield");
+  if (!canvas) return;
   const ctx = canvas.getContext("2d", { alpha: true });
   let w, h, dpr, nodes = [], dust = [], shooting = null;
   const mouse = { x: -9999, y: -9999 };
@@ -44,7 +47,7 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   }
 
   let rafId = 0, last = 0;
-  const FRAME = 1000 / 30;       // cap at 30fps to cut sustained CPU/GPU load
+  const FRAME = 1000 / 30;
   function draw(now) {
     rafId = requestAnimationFrame(draw);
     if (now - last < FRAME) return;
@@ -54,7 +57,6 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     const mouseDist = 200 * dpr;
     const mx = mouse.x * dpr, my = mouse.y * dpr;
 
-    // faint background dust
     for (const s of dust) {
       s.tw += s.tws;
       ctx.globalAlpha = (0.4 + Math.sin(s.tw) * 0.4) * 0.5;
@@ -62,14 +64,12 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
       ctx.beginPath(); ctx.arc(s.x, s.y, s.r * dpr, 0, 6.2832); ctx.fill();
     }
 
-    // move + draw nodes
     for (const p of nodes) {
       p.x += p.vx; p.y += p.vy;
       if (p.x < 0) p.x += w; else if (p.x > w) p.x -= w;
       if (p.y < 0) p.y += h; else if (p.y > h) p.y -= h;
     }
 
-    // links between nodes
     ctx.lineWidth = 1 * dpr;
     for (let i = 0; i < nodes.length; i++) {
       const a = nodes[i];
@@ -83,7 +83,6 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
         }
       }
-      // link to cursor
       const dmx = a.x - mx, dmy = a.y - my;
       const dm = Math.hypot(dmx, dmy);
       let near = false;
@@ -93,14 +92,12 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
         ctx.strokeStyle = "#aebcff";
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mx, my); ctx.stroke();
       }
-      // node dot
       ctx.globalAlpha = near ? 0.95 : 0.6;
       ctx.fillStyle = near ? "#cdd6ff" : "#aab4d8";
       ctx.beginPath(); ctx.arc(a.x, a.y, a.r * dpr, 0, 6.2832); ctx.fill();
     }
     ctx.globalAlpha = 1;
 
-    // shooting star
     if (shooting) {
       const s = shooting;
       const tx = s.x - s.vx * 9, ty = s.y - s.vy * 9;
@@ -131,6 +128,7 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   const cursor = document.getElementById("cursor");
   const spot = document.getElementById("spotlight");
   const planet = document.querySelector(".planet");
+  if (!cursor || !spot) return;
   let tx = innerWidth / 2, ty = innerHeight * 0.3;
   let sx = tx, sy = ty, raf = 0, shown = false;
 
@@ -141,7 +139,6 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
       const px = (sx / innerWidth - 0.5) * 26, py = (sy / innerHeight - 0.5) * 26;
       planet.style.transform = `translate3d(${px}px, ${py}px, 0)`;
     }
-    // keep animating only until it settles, then idle (no perpetual rAF)
     if (Math.abs(tx - sx) > 0.4 || Math.abs(ty - sy) > 0.4) raf = requestAnimationFrame(frame);
     else raf = 0;
   }
@@ -155,7 +152,6 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
 
   document.addEventListener("visibilitychange", () => { if (document.hidden && raf) { cancelAnimationFrame(raf); raf = 0; } });
 
-  // grow cursor over interactive elements
   document.querySelectorAll("a, button, .about__tags li, .chips span").forEach((el) => {
     el.addEventListener("mouseenter", () => cursor.classList.add("is-hover"));
     el.addEventListener("mouseleave", () => cursor.classList.remove("is-hover"));
@@ -165,7 +161,7 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
 /* ---------- Card cursor-spotlight glow ---------- */
 (() => {
   if (COARSE) return;
-  const cards = document.querySelectorAll(".xp__card, .skill-card, .lead-card, .edu-card, .mission, .contact");
+  const cards = document.querySelectorAll(".g-card, .skill-card, .lead-card, .edu-card, .contact");
   cards.forEach((card) => {
     card.classList.add("glow-target");
     card.addEventListener("pointermove", (e) => {
@@ -178,39 +174,35 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   });
 })();
 
-/* ---------- Nav ---------- */
+/* ---------- Nav (scrolled state + progress + mobile toggle) ---------- */
 (() => {
   const nav = document.getElementById("nav");
   const toggle = document.getElementById("navToggle");
   const links = document.getElementById("navLinks");
   const progress = document.getElementById("scrollProgress");
-  const anchors = [...links.querySelectorAll("a")];
-  const sections = anchors
-    .map((a) => a.getAttribute("href"))
-    .filter((h) => h && h.startsWith("#"))
-    .map((h) => document.querySelector(h))
-    .filter(Boolean);
   let ticking = false;
 
   function update() {
     const y = window.scrollY;
-    nav.classList.toggle("scrolled", y > 30);
-    const docH = document.documentElement.scrollHeight - innerHeight;
-    progress.style.width = (docH > 0 ? (y / docH) * 100 : 0) + "%";
-    let current = sections[0];
-    for (const sec of sections) if (sec.getBoundingClientRect().top <= innerHeight * 0.35) current = sec;
-    anchors.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + (current && current.id)));
+    if (nav) nav.classList.toggle("scrolled", y > 30);
+    if (progress) {
+      const docH = document.documentElement.scrollHeight - innerHeight;
+      progress.style.width = (docH > 0 ? (y / docH) * 100 : 0) + "%";
+    }
     ticking = false;
   }
   addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
   update();
-  toggle.addEventListener("click", () => { links.classList.toggle("open"); toggle.classList.toggle("open"); });
-  links.addEventListener("click", (e) => { if (e.target.tagName === "A") { links.classList.remove("open"); toggle.classList.remove("open"); } });
+  if (toggle && links) {
+    toggle.addEventListener("click", () => { links.classList.toggle("open"); toggle.classList.toggle("open"); });
+    links.addEventListener("click", (e) => { if (e.target.tagName === "A") { links.classList.remove("open"); toggle.classList.remove("open"); } });
+  }
 })();
 
 /* ---------- Scroll reveal ---------- */
 (() => {
   const items = document.querySelectorAll(".reveal");
+  if (!items.length) return;
   if (!("IntersectionObserver" in window)) { items.forEach((i) => i.classList.add("visible")); return; }
   const io = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
@@ -223,30 +215,7 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   items.forEach((i) => io.observe(i));
 })();
 
-/* ---------- Stat counters ---------- */
-(() => {
-  const nums = document.querySelectorAll(".stat__num");
-  const run = (el) => {
-    const target = parseFloat(el.dataset.target);
-    const suffix = el.dataset.suffix || "";
-    const decimals = (el.dataset.target.split(".")[1] || "").length;
-    const fmt = (v) => v.toFixed(decimals);
-    const start = performance.now(), dur = 1500;
-    const tick = (now) => {
-      const p = Math.min((now - start) / dur, 1);
-      const e = 1 - Math.pow(1 - p, 3);
-      el.textContent = fmt(target * e) + (p === 1 ? suffix : "");
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  };
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } });
-  }, { threshold: 0.6 });
-  nums.forEach((n) => io.observe(n));
-})();
-
-/* ---------- Freeze offscreen CSS animations (orbit, marquee) ---------- */
+/* ---------- Freeze offscreen CSS animations ---------- */
 (() => {
   const targets = document.querySelectorAll(".hero__orbit, .marquee");
   if (!targets.length || !("IntersectionObserver" in window)) return;
@@ -254,17 +223,6 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     entries.forEach((e) => e.target.classList.toggle("anim-paused", !e.isIntersecting));
   }, { threshold: 0 });
   targets.forEach((t) => io.observe(t));
-})();
-
-/* ---------- Coursework constellation: draw lines in on view ---------- */
-(() => {
-  const map = document.getElementById("starmap");
-  if (!map) return;
-  if (!("IntersectionObserver" in window)) { map.classList.add("is-drawn"); return; }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => { if (e.isIntersecting) { map.classList.add("is-drawn"); io.unobserve(map); } });
-  }, { threshold: 0.3 });
-  io.observe(map);
 })();
 
 /* ---------- Section dividers: animate only while in view ---------- */
@@ -285,6 +243,7 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     { el: document.getElementById("starsMid"),  cap: 90,  divisor: 15000, size: 1.5, speed: 0.26, alpha: 0.7 },
     { el: document.getElementById("starsNear"), cap: 45,  divisor: 28000, size: 2.2, speed: 0.48, alpha: 0.95 },
   ].filter((L) => L.el);
+  if (!layers.length) return;
 
   function gen() {
     const w = Math.max(document.documentElement.clientWidth, 320);
@@ -315,106 +274,8 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(gen, 300); }, { passive: true });
 })();
 
-/* ---------- Decrypt / scramble role line ---------- */
+/* ---------- Footer year ---------- */
 (() => {
-  const el = document.getElementById("decryptText");
-  if (!el || REDUCED) return;
-  const titles = [
-    "Avionics Software Engineer", "Embedded Systems Developer", "Aerospace Software",
-    "Telemetry & Test Engineer", "Sensor Fusion Tinkerer",
-  ];
-  const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&_/<>*";
-  let idx = 0, heroSeen = true;
-
-  const hero = document.getElementById("hero");
-  if (hero && "IntersectionObserver" in window) {
-    new IntersectionObserver((e) => { heroSeen = e[0].isIntersecting; }, { threshold: 0.05 }).observe(hero);
-  }
-
-  function scrambleTo(text) {
-    return new Promise((resolve) => {
-      const from = el.textContent;
-      const len = Math.max(from.length, text.length);
-      const q = [];
-      for (let i = 0; i < len; i++) {
-        q.push({ a: from[i] || "", b: text[i] || "", s: Math.floor(Math.random() * 16), e: 0, c: "" });
-        q[i].e = q[i].s + 10 + Math.floor(Math.random() * 16);
-      }
-      let frame = 0;
-      (function tick() {
-        let out = "", done = 0;
-        for (const it of q) {
-          if (frame >= it.e) { done++; out += it.b; }
-          else if (frame >= it.s) {
-            if (!it.c || Math.random() < 0.28) it.c = charset[(Math.random() * charset.length) | 0];
-            out += `<span class="scramble">${it.c}</span>`;
-          } else out += it.a;
-        }
-        el.innerHTML = out;
-        if (done === q.length) { resolve(); return; }
-        frame++; requestAnimationFrame(tick);
-      })();
-    });
-  }
-  async function loop() {
-    while (true) {
-      await new Promise((r) => setTimeout(r, 2400));
-      if (document.hidden || !heroSeen) continue;   // don't churn the DOM when unseen
-      idx = (idx + 1) % titles.length;
-      await scrambleTo(titles[idx]);
-    }
-  }
-  setTimeout(loop, 1400);
+  const y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
 })();
-
-/* ---------- Ambient sound (off by default) ---------- */
-(() => {
-  const btn = document.getElementById("soundToggle");
-  if (!btn) return;
-  let ctx, master, started = false, on = false;
-
-  function build() {
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return false;
-    ctx = new AC();
-    master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
-    const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 340; lp.connect(master);
-    const bus = ctx.createGain(); bus.gain.value = 0.5; bus.connect(lp);
-    [[55, "sine", 0.4], [55.5, "sine", 0.4], [82.5, "triangle", 0.12]].forEach(([f, type, g]) => {
-      const o = ctx.createOscillator(); o.type = type; o.frequency.value = f;
-      const gn = ctx.createGain(); gn.gain.value = g; o.connect(gn); gn.connect(bus); o.start();
-    });
-    const lfo = ctx.createOscillator(); lfo.frequency.value = 0.07;
-    const lg = ctx.createGain(); lg.gain.value = 0.16; lfo.connect(lg); lg.connect(master.gain); lfo.start();
-    started = true; return true;
-  }
-  function setOn(v) {
-    on = v; btn.classList.toggle("is-on", on);
-    if (on) {
-      if (!started && !build()) { on = false; btn.classList.remove("is-on"); return; }
-      if (ctx.resume) ctx.resume();
-      master.gain.cancelScheduledValues(ctx.currentTime);
-      master.gain.linearRampToValueAtTime(0.16, ctx.currentTime + 0.8);
-    } else if (started) {
-      master.gain.cancelScheduledValues(ctx.currentTime);
-      master.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.4);
-    }
-  }
-  btn.addEventListener("click", () => setOn(!on));
-
-  window.__spaceWhoosh = function () {
-    if (!on || !started) return;
-    const t = ctx.currentTime, dur = 0.9;
-    const buf = ctx.createBuffer(1, (ctx.sampleRate * dur) | 0, ctx.sampleRate);
-    const d = buf.getChannelData(0);
-    for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
-    const src = ctx.createBufferSource(); src.buffer = buf;
-    const bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.Q.value = 0.8;
-    bp.frequency.setValueAtTime(280, t); bp.frequency.exponentialRampToValueAtTime(1700, t + dur);
-    const g = ctx.createGain();
-    g.gain.setValueAtTime(0.0001, t); g.gain.linearRampToValueAtTime(0.1, t + 0.1); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    src.connect(bp); bp.connect(g); g.connect(ctx.destination); src.start(t); src.stop(t + dur);
-  };
-})();
-
-document.getElementById("year").textContent = new Date().getFullYear();

@@ -1,0 +1,177 @@
+/* ============================================================
+   GLASS — extends ../styles.css (same theme tokens & components)
+   Only GLASS-specific layout lives here.
+   ============================================================ */
+
+/* ---------- Page hero (shorter than the portfolio's full-screen hero) ---------- */
+.g-hero {
+  position: relative; max-width: var(--max); margin: 0 auto;
+  padding: clamp(140px, 20vh, 200px) clamp(20px, 5vw, 56px) clamp(40px, 7vw, 80px);
+}
+.g-hero__eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: "JetBrains Mono", monospace; font-size: 0.76rem; letter-spacing: 0.03em;
+  color: var(--muted); padding: 8px 16px; border: 1px solid var(--line);
+  border-radius: 999px; background: rgba(255,255,255,0.025); margin-bottom: 26px;
+}
+.g-hero__title {
+  font-family: "Space Grotesk", sans-serif; font-weight: 600; letter-spacing: -0.035em;
+  font-size: clamp(2.8rem, 9vw, 6rem); line-height: 0.94; margin-bottom: 22px;
+}
+.g-hero__title .grad {
+  background: linear-gradient(96deg, #fff 0%, var(--accent) 38%, var(--cyan) 60%, #9aa0b5 100%);
+  background-size: 220% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shimmer 7s linear infinite;
+}
+.g-hero__sub {
+  font-family: "JetBrains Mono", monospace; font-size: clamp(0.95rem, 2vw, 1.18rem);
+  display: flex; align-items: center; gap: 8px; color: var(--ink); margin-bottom: 20px;
+}
+.g-hero__sub .prompt { color: var(--cyan); }
+.g-hero__lead {
+  font-size: clamp(1rem, 1.5vw, 1.15rem); color: var(--muted);
+  max-width: 640px; font-weight: 300; margin-bottom: 34px;
+}
+.g-hero__lead .hl { color: var(--ink); font-weight: 500; }
+.g-hero__actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* ---------- Sub-nav: keep portfolio nav links but allow current-page state ---------- */
+.nav__links a.is-here { color: var(--ink); }
+.nav__links a.is-here::after { width: 100%; }
+
+/* ---------- Breadcrumb / back link (subpages) ---------- */
+.crumb {
+  max-width: var(--max); margin: 0 auto; padding: 130px clamp(20px, 5vw, 56px) 0;
+  display: flex; align-items: center; gap: 10px;
+  font-family: "JetBrains Mono", monospace; font-size: 0.78rem; color: var(--dim);
+}
+.crumb a { color: var(--accent-2); transition: color 0.25s; }
+.crumb a:hover { color: var(--ink); }
+.crumb__sep { color: var(--faint); }
+
+/* ---------- Generic GLASS card (mirrors portfolio card system) ---------- */
+.g-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012));
+  background-color: var(--card-bg);
+  border: 1px solid var(--line); border-radius: 18px; position: relative; overflow: hidden;
+  padding: 30px 32px; transition: transform 0.3s var(--ease), border-color 0.3s;
+}
+.g-card::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); z-index: 3;
+}
+.g-card:hover { transform: translateY(-3px); border-color: rgba(174,188,255,0.3); }
+.g-card h3 {
+  font-family: "Space Grotesk", sans-serif; font-size: 1.15rem; font-weight: 500; margin-bottom: 12px;
+}
+.g-card p { color: var(--muted); font-weight: 300; font-size: 0.98rem; }
+.g-card p + p { margin-top: 14px; }
+
+/* ---------- About / mission prose blocks ---------- */
+.prose { max-width: 760px; }
+.prose p { color: var(--muted); font-weight: 300; font-size: 1.06rem; margin-bottom: 18px; }
+.prose strong { color: var(--ink); font-weight: 500; }
+
+/* mission statement — pulled-out quote feel */
+.statement {
+  border-left: 2px solid rgba(174,188,255,0.5);
+  padding: 6px 0 6px 26px; margin: 4px 0 8px;
+}
+.statement p {
+  font-family: "Space Grotesk", sans-serif; font-weight: 500;
+  font-size: clamp(1.25rem, 2.6vw, 1.7rem); line-height: 1.4; color: var(--ink);
+}
+
+/* ---------- UN SDG + NAE blocks (two-up) ---------- */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.pillblock { padding: 32px; }
+.pillblock h3 {
+  font-family: "Space Grotesk", sans-serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 6px;
+}
+.pillblock__tag {
+  font-family: "JetBrains Mono", monospace; font-size: 0.72rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent-2); margin-bottom: 16px; display: block;
+}
+.pillblock p { color: var(--muted); font-weight: 300; margin-bottom: 16px; }
+.taglist { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.taglist li {
+  font-size: 0.8rem; color: var(--muted); padding: 7px 13px; border-radius: 8px;
+  background: rgba(255,255,255,0.025); border: 1px solid var(--line-soft);
+  transition: color 0.25s, border-color 0.25s, background-color 0.25s;
+}
+.taglist li:hover { color: var(--ink); border-color: rgba(174,188,255,0.45); background-color: rgba(255,255,255,0.06); }
+
+/* ---------- Five Windows grid ---------- */
+.windows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+a.window {
+  display: flex; flex-direction: column; gap: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012));
+  background-color: var(--card-bg);
+  border: 1px solid var(--line); border-radius: 18px; position: relative; overflow: hidden;
+  padding: 30px 28px; transition: transform 0.3s var(--ease), border-color 0.3s, box-shadow 0.3s;
+}
+a.window::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); z-index: 3;
+}
+a.window:hover { transform: translateY(-5px); border-color: rgba(174,188,255,0.4); box-shadow: 0 24px 50px -28px rgba(150,170,255,0.5); }
+.window__num {
+  font-family: "JetBrains Mono", monospace; font-size: 0.74rem; color: var(--accent-2); margin-bottom: 18px;
+}
+.window__title {
+  font-family: "Space Grotesk", sans-serif; font-size: 1.18rem; font-weight: 600; line-height: 1.15; margin-bottom: 10px;
+}
+.window__desc { color: var(--muted); font-weight: 300; font-size: 0.94rem; flex: 1; }
+.window__go {
+  margin-top: 20px; display: inline-flex; align-items: center; gap: 8px;
+  font-family: "JetBrains Mono", monospace; font-size: 0.78rem; color: var(--accent);
+}
+.window__go .arrow { transition: transform 0.3s var(--ease); }
+a.window:hover .window__go .arrow { transform: translateX(5px); }
+
+/* ---------- Subpage: facet sections ---------- */
+.facet { margin-top: 26px; }
+.facet__label {
+  font-family: "JetBrains Mono", monospace; font-size: 0.74rem; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--dim); margin-bottom: 16px;
+}
+.bullets { list-style: none; max-width: 760px; }
+.bullets li {
+  position: relative; padding-left: 24px; color: var(--muted);
+  font-size: 1rem; margin-bottom: 13px; font-weight: 300;
+}
+.bullets li::before {
+  content: ""; position: absolute; left: 2px; top: 12px; width: 8px; height: 1px; background: var(--accent-2);
+}
+.bullets strong { color: var(--ink); font-weight: 500; }
+
+/* status chip for activities (planned vs done) */
+.chip-row { display: flex; flex-wrap: wrap; gap: 9px; }
+.statuschip {
+  font-family: "JetBrains Mono", monospace; font-size: 0.72rem;
+  padding: 6px 13px; border-radius: 999px; border: 1px solid var(--line);
+  color: var(--muted); background: rgba(255,255,255,0.025);
+}
+.statuschip--done { color: #5fe6a0; border-color: rgba(95,230,160,0.35); background: rgba(95,230,160,0.07); }
+.statuschip--plan { color: var(--cyan); border-color: rgba(121,232,255,0.3); background: rgba(121,232,255,0.06); }
+
+/* prev / next window pager */
+.pager { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+.pager a {
+  flex: 1; min-width: 200px; padding: 18px 22px; border-radius: 14px;
+  border: 1px solid var(--line); background: rgba(255,255,255,0.02);
+  transition: transform 0.25s var(--ease), border-color 0.25s, background 0.25s;
+}
+.pager a:hover { transform: translateY(-3px); border-color: rgba(174,188,255,0.4); background: rgba(255,255,255,0.05); }
+.pager small { font-family: "JetBrains Mono", monospace; font-size: 0.7rem; color: var(--dim); display: block; margin-bottom: 5px; }
+.pager span { font-family: "Space Grotesk", sans-serif; font-weight: 500; color: var(--ink); }
+.pager a.next { text-align: right; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 920px) {
+  .windows { grid-template-columns: repeat(2, 1fr); }
+  .duo { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .windows { grid-template-columns: 1fr; }
+}

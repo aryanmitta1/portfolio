@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Global Competency — Aryan Mitta's GLASS window: the required semester abroad and cross-cultural engineering experiences." />
+  <meta name="theme-color" content="#050505" />
+  <title>Global Competency — GLASS · Aryan Mitta</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="glass.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰️</text></svg>" />
+</head>
+<body>
+  <div class="stars stars--far" id="starsFar" aria-hidden="true"></div>
+  <div class="stars stars--mid" id="starsMid" aria-hidden="true"></div>
+  <div class="stars stars--near" id="starsNear" aria-hidden="true"></div>
+  <canvas id="starfield"></canvas>
+  <div class="planet" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"></div>
+
+  <div class="spotlight" id="spotlight" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="nav" id="nav">
+    <a href="../index.html" class="nav__brand">
+      <span class="nav__brand-mark">AM</span>
+      <span class="nav__brand-text">Aryan&nbsp;Mitta</span>
+    </a>
+    <nav class="nav__links" id="navLinks">
+      <a href="../index.html">Portfolio</a>
+      <a href="index.html">GLASS Home</a>
+      <a href="index.html#windows" class="nav__cta">The Five Windows</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav class="crumb" aria-label="Breadcrumb">
+    <a href="index.html">GLASS</a>
+    <span class="crumb__sep">/</span>
+    <span>Global Competency</span>
+  </nav>
+
+  <main id="top">
+    <section class="g-hero" style="padding-top:24px;">
+      <p class="g-hero__eyebrow"><span class="status-dot"></span> Window 04 of 05</p>
+      <h1 class="g-hero__title"><span class="grad">Global<br>Competency</span></h1>
+      <p class="g-hero__lead">
+        Engineering is a global discipline. Through the GLASS semester abroad and
+        cross-cultural experiences, I'm learning to work across borders — because the
+        challenges I care about don't stop at any one country's edge.
+      </p>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <article class="g-card reveal">
+        <h3>What GLASS means by this</h3>
+        <p>
+          Global Competency is the signature feature of GLASS: a
+          <strong>required semester abroad in the fall of sophomore year</strong>.
+          Scholars study within NYU's global network — its portal campuses and
+          30+ partner engineering institutions — gaining the cross-cultural perspective,
+          adaptability, and international experience that define a global engineering
+          leader.
+        </p>
+      </article>
+
+      <div class="facet reveal">
+        <p class="facet__label">My approach</p>
+        <ul class="bullets">
+          <li>Treat the semester abroad as a chance to study engineering inside a different culture of problem-solving.</li>
+          <li>Build relationships across the GLASS global network that outlast the semester.</li>
+          <li>Bring a global lens back to my aerospace work — space and climate systems are inherently international.</li>
+          <li>Develop the adaptability that comes from learning to operate somewhere unfamiliar.</li>
+        </ul>
+      </div>
+
+      <div class="facet reveal">
+        <p class="facet__label">Evidence &amp; experience</p>
+        <ul class="bullets">
+          <li><strong>GLASS semester abroad</strong> within NYU's global network — the program's required cornerstone experience.</li>
+          <li>Engagement with NYU's global engineering partners and portal campuses.</li>
+          <li>A perspective shaped by working on systems — satellites, navigation, climate sensing — that serve a global community.</li>
+        </ul>
+      </div>
+
+      <div class="facet reveal">
+        <p class="facet__label">Goals through GLASS</p>
+        <div class="chip-row">
+          <span class="statuschip statuschip--plan">Required semester abroad</span>
+          <span class="statuschip statuschip--plan">Cross-cultural engineering project</span>
+          <span class="statuschip statuschip--plan">International peer network</span>
+          <span class="statuschip statuschip--plan">Global perspective in senior design</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
+
+    <section class="section" style="padding-top:clamp(50px,7vw,90px);">
+      <div class="pager reveal">
+        <a class="prev" href="commitment-to-service.html"><small>← Previous window</small><span>Commitment to Service</span></a>
+        <a class="next" href="leadership-development.html"><small>Next window →</small><span>Leadership Development</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> Aryan Mitta</span>
+    <span class="footer__sep">·</span>
+    <span>GLASS · NYU Tandon</span>
+  </footer>
+
+  <script src="glass.js"></script>
+</body>
+</html>

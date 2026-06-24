@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Academic Excellence — Aryan Mitta's GLASS window: rigorous coursework, research, and the honors curriculum." />
+  <meta name="theme-color" content="#050505" />
+  <title>Academic Excellence — GLASS · Aryan Mitta</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="glass.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛰️</text></svg>" />
+</head>
+<body>
+  <div class="stars stars--far" id="starsFar" aria-hidden="true"></div>
+  <div class="stars stars--mid" id="starsMid" aria-hidden="true"></div>
+  <div class="stars stars--near" id="starsNear" aria-hidden="true"></div>
+  <canvas id="starfield"></canvas>
+  <div class="planet" aria-hidden="true"></div>
+  <div class="aurora" aria-hidden="true"></div>
+
+  <div class="spotlight" id="spotlight" aria-hidden="true"></div>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <header class="nav" id="nav">
+    <a href="../index.html" class="nav__brand">
+      <span class="nav__brand-mark">AM</span>
+      <span class="nav__brand-text">Aryan&nbsp;Mitta</span>
+    </a>
+    <nav class="nav__links" id="navLinks">
+      <a href="../index.html">Portfolio</a>
+      <a href="index.html">GLASS Home</a>
+      <a href="index.html#windows" class="nav__cta">The Five Windows</a>
+    </nav>
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav class="crumb" aria-label="Breadcrumb">
+    <a href="index.html">GLASS</a>
+    <span class="crumb__sep">/</span>
+    <span>Academic Excellence</span>
+  </nav>
+
+  <main id="top">
+    <section class="g-hero" style="padding-top:24px;">
+      <p class="g-hero__eyebrow"><span class="status-dot"></span> Window 02 of 05</p>
+      <h1 class="g-hero__title"><span class="grad">Academic<br>Excellence</span></h1>
+      <p class="g-hero__lead">
+        Mastering the fundamentals of electrical &amp; computer engineering — and
+        pushing past them through research, design, and the honors curriculum that GLASS
+        builds around its scholars.
+      </p>
+    </section>
+
+    <section class="section" style="padding-top:0;">
+      <article class="g-card reveal">
+        <h3>What GLASS means by this</h3>
+        <p>
+          Academic Excellence is the foundation of GLASS. Scholars pursue demanding
+          coursework, research, senior design, and thesis work, with priority for
+          nomination to <strong>NYU's Leadership Honors Course</strong> and access to
+          seminars on leadership, professional development, and project management.
+          Annual funding supports research, design, and innovation projects aligned with
+          institutional priorities.
+        </p>
+      </article>
+
+      <div class="facet reveal">
+        <p class="facet__label">My approach</p>
+        <ul class="bullets">
+          <li>Hold a strong GPA while taking the hardest, most relevant ECE coursework — not the safest path.</li>
+          <li>Connect classes to real systems: signals, control, embedded design, and machine learning all feed my aerospace work.</li>
+          <li>Treat research and design projects as the place where coursework becomes capability.</li>
+          <li>Use GLASS seminars and funding to go deeper than the standard curriculum allows.</li>
+        </ul>
+      </div>
+
+      <div class="facet reveal">
+        <p class="facet__label">Evidence &amp; coursework</p>
+        <ul class="bullets">
+          <li><strong>GPA 3.93</strong> — B.S. Electrical &amp; Computer Engineering, NYU Tandon.</li>
+          <li><strong>Tau Beta Pi</strong> — inducted into the national engineering honor society.</li>
+          <li>Core coursework: Embedded Systems Design, Signals &amp; Systems, Feedback Control, Machine Learning, Computer Architecture, PCB Design.</li>
+          <li>Applied ML &amp; CV research during the Kearfott internship (PyTorch, custom layers, Haversine loss).</li>
+        </ul>
+      </div>
+
+      <div class="facet reveal">
+        <p class="facet__label">Goals through GLASS</p>
+        <div class="chip-row">
+          <span class="statuschip statuschip--done">Tau Beta Pi induction</span>
+          <span class="statuschip statuschip--plan">Leadership Honors Course nomination</span>
+          <span class="statuschip statuschip--plan">Senior design in avionics / autonomy</span>
+          <span class="statuschip statuschip--plan">Funded research project</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
+
+    <section class="section" style="padding-top:clamp(50px,7vw,90px);">
+      <div class="pager reveal">
+        <a class="prev" href="professional-development.html"><small>← Previous window</small><span>Professional Development</span></a>
+        <a class="next" href="commitment-to-service.html"><small>Next window →</small><span>Commitment to Service</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year"></span> Aryan Mitta</span>
+    <span class="footer__sep">·</span>
+    <span>GLASS · NYU Tandon</span>
+  </footer>
+
+  <script src="glass.js"></script>
+</body>
+</html>
