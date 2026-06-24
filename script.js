@@ -21,14 +21,14 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     build();
   }
   function build() {
-    const n = Math.min(80, Math.floor((innerWidth * innerHeight) / 17000));
+    const n = Math.min(52, Math.floor((innerWidth * innerHeight) / 26000));
     nodes = Array.from({ length: n }, () => ({
       x: Math.random() * w, y: Math.random() * h,
       vx: (Math.random() - 0.5) * 0.18 * dpr,
       vy: (Math.random() - 0.5) * 0.18 * dpr,
       r: Math.random() * 1.3 + 0.6,
     }));
-    const d = Math.min(90, Math.floor((innerWidth * innerHeight) / 14000));
+    const d = Math.min(55, Math.floor((innerWidth * innerHeight) / 22000));
     dust = Array.from({ length: d }, () => ({
       x: Math.random() * w, y: Math.random() * h,
       r: Math.random() * 0.8 + 0.2,
@@ -117,12 +117,24 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   function start() { if (!rafId) { last = 0; rafId = requestAnimationFrame(draw); } }
   function stop()  { if (rafId) { cancelAnimationFrame(rafId); rafId = 0; } }
 
+  // Only run while the hero is on screen AND the tab is visible — the
+  // constellation lives in the hero, so there's no reason to animate a
+  // full-screen canvas while the user reads the rest of the page.
+  let heroOnScreen = true;
+  function evaluate() { (heroOnScreen && !document.hidden) ? start() : stop(); }
+
   addEventListener("resize", resize, { passive: true });
   if (!COARSE) addEventListener("mousemove", (e) => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
   addEventListener("mouseout", () => { mouse.x = -9999; mouse.y = -9999; });
-  document.addEventListener("visibilitychange", () => { document.hidden ? stop() : start(); });
-  resize(); start();
-  if (!REDUCED) setInterval(() => { if (!shooting && !document.hidden && Math.random() > 0.55) spawnShooting(); }, 5500);
+  document.addEventListener("visibilitychange", evaluate);
+
+  const heroEl = document.getElementById("hero");
+  if (heroEl && "IntersectionObserver" in window) {
+    new IntersectionObserver((e) => { heroOnScreen = e[0].isIntersecting; evaluate(); }, { threshold: 0 }).observe(heroEl);
+  }
+
+  resize(); evaluate();
+  if (!REDUCED) setInterval(() => { if (!shooting && heroOnScreen && !document.hidden && Math.random() > 0.55) spawnShooting(); }, 5500);
 })();
 
 /* ---------- Custom cursor + spotlight + planet parallax ---------- */
@@ -246,9 +258,9 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   nums.forEach((n) => io.observe(n));
 })();
 
-/* ---------- Freeze offscreen CSS animations (orbit, marquee) ---------- */
+/* ---------- Freeze offscreen CSS animations (hero, marquee) ---------- */
 (() => {
-  const targets = document.querySelectorAll(".hero__orbit, .marquee");
+  const targets = document.querySelectorAll(".hero, .marquee");
   if (!targets.length || !("IntersectionObserver" in window)) return;
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => e.target.classList.toggle("anim-paused", !e.isIntersecting));
@@ -276,43 +288,6 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     entries.forEach((e) => e.target.classList.toggle("is-in", e.isIntersecting));
   }, { threshold: 0 });
   dividers.forEach((d) => io.observe(d));
-})();
-
-/* ---------- Parallax star layers ---------- */
-(() => {
-  const layers = [
-    { el: document.getElementById("starsFar"),  cap: 130, divisor: 9000,  size: 1.0, speed: 0.10, alpha: 0.5 },
-    { el: document.getElementById("starsMid"),  cap: 90,  divisor: 15000, size: 1.5, speed: 0.26, alpha: 0.7 },
-    { el: document.getElementById("starsNear"), cap: 45,  divisor: 28000, size: 2.2, speed: 0.48, alpha: 0.95 },
-  ].filter((L) => L.el);
-
-  function gen() {
-    const w = Math.max(document.documentElement.clientWidth, 320);
-    const h = Math.max(document.documentElement.scrollHeight, innerHeight);
-    layers.forEach((L) => {
-      const count = Math.min(L.cap, Math.floor((w * h) / L.divisor));
-      const out = [];
-      for (let i = 0; i < count; i++) {
-        const x = Math.floor(Math.random() * w);
-        const y = Math.floor(Math.random() * h);
-        const spread = (Math.random() * L.size).toFixed(1);
-        out.push(`${x}px ${y}px 0 ${spread}px rgba(222,230,255,${L.alpha})`);
-      }
-      L.el.style.boxShadow = out.join(",");
-    });
-  }
-  gen();
-  let raf = 0;
-  addEventListener("scroll", () => {
-    if (raf) return;
-    raf = requestAnimationFrame(() => {
-      const y = window.scrollY;
-      layers.forEach((L) => { L.el.style.transform = `translate3d(0, ${(-y * L.speed).toFixed(1)}px, 0)`; });
-      raf = 0;
-    });
-  }, { passive: true });
-  let rt;
-  addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(gen, 300); }, { passive: true });
 })();
 
 /* ---------- Decrypt / scramble role line ---------- */
