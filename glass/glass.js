@@ -57,10 +57,10 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     const mouseDist = 200 * dpr;
     const mx = mouse.x * dpr, my = mouse.y * dpr;
 
+    ctx.fillStyle = "#fff";
     for (const s of dust) {
       s.tw += s.tws;
       ctx.globalAlpha = (0.4 + Math.sin(s.tw) * 0.4) * 0.5;
-      ctx.fillStyle = "#fff";
       ctx.beginPath(); ctx.arc(s.x, s.y, s.r * dpr, 0, 6.2832); ctx.fill();
     }
 
@@ -70,25 +70,29 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
       if (p.y < 0) p.y += h; else if (p.y > h) p.y -= h;
     }
 
+    // squared-distance compare; take sqrt only for in-range pairs (see note in
+    // the main portfolio script — avoids Math.hypot on every O(n²) pair).
+    const linkDistSq = linkDist * linkDist;
+    const mouseDistSq = mouseDist * mouseDist;
     ctx.lineWidth = 1 * dpr;
     for (let i = 0; i < nodes.length; i++) {
       const a = nodes[i];
       for (let j = i + 1; j < nodes.length; j++) {
         const b = nodes[j];
         const dx = a.x - b.x, dy = a.y - b.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < linkDist) {
-          ctx.globalAlpha = (1 - dist / linkDist) * 0.22;
+        const dSq = dx * dx + dy * dy;
+        if (dSq < linkDistSq) {
+          ctx.globalAlpha = (1 - Math.sqrt(dSq) / linkDist) * 0.22;
           ctx.strokeStyle = "#9fb0ff";
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
         }
       }
       const dmx = a.x - mx, dmy = a.y - my;
-      const dm = Math.hypot(dmx, dmy);
+      const dmSq = dmx * dmx + dmy * dmy;
       let near = false;
-      if (dm < mouseDist) {
+      if (dmSq < mouseDistSq) {
         near = true;
-        ctx.globalAlpha = (1 - dm / mouseDist) * 0.5;
+        ctx.globalAlpha = (1 - Math.sqrt(dmSq) / mouseDist) * 0.5;
         ctx.strokeStyle = "#aebcff";
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mx, my); ctx.stroke();
       }
@@ -179,13 +183,16 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   const cards = document.querySelectorAll(".g-card, .skill-card, .lead-card, .edu-card, .contact");
   cards.forEach((card) => {
     card.classList.add("glow-target");
+    // Cache rect on enter; a hovered card doesn't move, so reading layout every
+    // pointermove just forces needless reflow.
+    let rect = null;
+    card.addEventListener("pointerenter", () => { rect = card.getBoundingClientRect(); card.classList.add("is-glow"); });
     card.addEventListener("pointermove", (e) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty("--mx", (e.clientX - r.left) + "px");
-      card.style.setProperty("--my", (e.clientY - r.top) + "px");
+      if (!rect) rect = card.getBoundingClientRect();
+      card.style.setProperty("--mx", (e.clientX - rect.left) + "px");
+      card.style.setProperty("--my", (e.clientY - rect.top) + "px");
     });
-    card.addEventListener("pointerenter", () => card.classList.add("is-glow"));
-    card.addEventListener("pointerleave", () => card.classList.remove("is-glow"));
+    card.addEventListener("pointerleave", () => { card.classList.remove("is-glow"); rect = null; });
   });
 })();
 
@@ -195,18 +202,23 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   const toggle = document.getElementById("navToggle");
   const links = document.getElementById("navLinks");
   const progress = document.getElementById("scrollProgress");
+  // Scroll frame reads ONLY window.scrollY (no layout reads → no reflow).
+  // docH is cached off the scroll path; progress is a composited scaleX.
+  let docH = Math.max(1, document.documentElement.scrollHeight - innerHeight);
   let ticking = false;
-
   function update() {
+    ticking = false;
     const y = window.scrollY;
     if (nav) nav.classList.toggle("scrolled", y > 30);
-    if (progress) {
-      const docH = document.documentElement.scrollHeight - innerHeight;
-      progress.style.width = (docH > 0 ? (y / docH) * 100 : 0) + "%";
-    }
-    ticking = false;
+    if (progress) progress.style.transform = "scaleX(" + Math.min(1, y / docH) + ")";
   }
   addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  function remeasure() { docH = Math.max(1, document.documentElement.scrollHeight - innerHeight); update(); }
+  let rt;
+  addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(remeasure, 150); }, { passive: true });
+  addEventListener("load", remeasure);
+  // refresh docH when content-visibility sections settle (off the scroll path)
+  if ("ResizeObserver" in window) new ResizeObserver(remeasure).observe(document.body);
   update();
   if (toggle && links) {
     toggle.addEventListener("click", () => { links.classList.toggle("open"); toggle.classList.toggle("open"); });

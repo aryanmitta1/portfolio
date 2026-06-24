@@ -55,10 +55,10 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     const mx = mouse.x * dpr, my = mouse.y * dpr;
 
     // faint background dust
+    ctx.fillStyle = "#fff";
     for (const s of dust) {
       s.tw += s.tws;
       ctx.globalAlpha = (0.4 + Math.sin(s.tw) * 0.4) * 0.5;
-      ctx.fillStyle = "#fff";
       ctx.beginPath(); ctx.arc(s.x, s.y, s.r * dpr, 0, 6.2832); ctx.fill();
     }
 
@@ -69,27 +69,31 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
       if (p.y < 0) p.y += h; else if (p.y > h) p.y -= h;
     }
 
-    // links between nodes
+    // links between nodes — compare squared distances and only take the sqrt
+    // for pairs actually within range (the vast majority are not), avoiding a
+    // Math.hypot call on every O(n²) pair.
+    const linkDistSq = linkDist * linkDist;
+    const mouseDistSq = mouseDist * mouseDist;
     ctx.lineWidth = 1 * dpr;
     for (let i = 0; i < nodes.length; i++) {
       const a = nodes[i];
       for (let j = i + 1; j < nodes.length; j++) {
         const b = nodes[j];
         const dx = a.x - b.x, dy = a.y - b.y;
-        const dist = Math.hypot(dx, dy);
-        if (dist < linkDist) {
-          ctx.globalAlpha = (1 - dist / linkDist) * 0.22;
+        const dSq = dx * dx + dy * dy;
+        if (dSq < linkDistSq) {
+          ctx.globalAlpha = (1 - Math.sqrt(dSq) / linkDist) * 0.22;
           ctx.strokeStyle = "#9fb0ff";
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
         }
       }
       // link to cursor
       const dmx = a.x - mx, dmy = a.y - my;
-      const dm = Math.hypot(dmx, dmy);
+      const dmSq = dmx * dmx + dmy * dmy;
       let near = false;
-      if (dm < mouseDist) {
+      if (dmSq < mouseDistSq) {
         near = true;
-        ctx.globalAlpha = (1 - dm / mouseDist) * 0.5;
+        ctx.globalAlpha = (1 - Math.sqrt(dmSq) / mouseDist) * 0.5;
         ctx.strokeStyle = "#aebcff";
         ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mx, my); ctx.stroke();
       }
@@ -180,13 +184,17 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   const cards = document.querySelectorAll(".xp__card, .skill-card, .lead-card, .edu-card, .mission, .contact");
   cards.forEach((card) => {
     card.classList.add("glow-target");
+    // Cache the rect on enter and reuse it while hovering — a card doesn't move
+    // under the cursor, so reading getBoundingClientRect() every pointermove
+    // (which forces a synchronous layout) is pure waste.
+    let rect = null;
+    card.addEventListener("pointerenter", () => { rect = card.getBoundingClientRect(); card.classList.add("is-glow"); });
     card.addEventListener("pointermove", (e) => {
-      const r = card.getBoundingClientRect();
-      card.style.setProperty("--mx", (e.clientX - r.left) + "px");
-      card.style.setProperty("--my", (e.clientY - r.top) + "px");
+      if (!rect) rect = card.getBoundingClientRect();
+      card.style.setProperty("--mx", (e.clientX - rect.left) + "px");
+      card.style.setProperty("--my", (e.clientY - rect.top) + "px");
     });
-    card.addEventListener("pointerenter", () => card.classList.add("is-glow"));
-    card.addEventListener("pointerleave", () => card.classList.remove("is-glow"));
+    card.addEventListener("pointerleave", () => { card.classList.remove("is-glow"); rect = null; });
   });
 })();
 
@@ -197,25 +205,51 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   const links = document.getElementById("navLinks");
   const progress = document.getElementById("scrollProgress");
   const anchors = [...links.querySelectorAll("a")];
-  const sections = anchors
-    .map((a) => a.getAttribute("href"))
-    .filter((h) => h && h.startsWith("#"))
-    .map((h) => document.querySelector(h))
-    .filter(Boolean);
-  let ticking = false;
+  const sectionAnchors = anchors.filter((a) => (a.getAttribute("href") || "").startsWith("#"));
+  const sections = sectionAnchors.map((a) => document.querySelector(a.getAttribute("href"))).filter(Boolean);
 
+  // Progress bar + "scrolled" state: the scroll frame reads ONLY window.scrollY
+  // (never layout), so it can't force a reflow. docH is cached and refreshed
+  // off the scroll path. Progress is a composited scaleX, not a width change.
+  let docH = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+  let ticking = false;
   function update() {
+    ticking = false;
     const y = window.scrollY;
     nav.classList.toggle("scrolled", y > 30);
-    const docH = document.documentElement.scrollHeight - innerHeight;
-    progress.style.width = (docH > 0 ? (y / docH) * 100 : 0) + "%";
-    let current = sections[0];
-    for (const sec of sections) if (sec.getBoundingClientRect().top <= innerHeight * 0.35) current = sec;
-    anchors.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + (current && current.id)));
-    ticking = false;
+    if (progress) progress.style.transform = "scaleX(" + Math.min(1, y / docH) + ")";
   }
   addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  let rt;
+  function remeasure() { docH = Math.max(1, document.documentElement.scrollHeight - innerHeight); update(); }
+  addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(remeasure, 150); }, { passive: true });
+  addEventListener("load", remeasure);
+  // content-visibility sections settle to their real height after first paint,
+  // which changes total scroll height. A ResizeObserver refreshes docH off the
+  // scroll path (no per-frame layout read) so the progress bar stays accurate.
+  if ("ResizeObserver" in window) new ResizeObserver(remeasure).observe(document.body);
   update();
+
+  // Active section: IntersectionObserver with a thin trigger band at ~35% of
+  // the viewport height. Whichever section straddles that line wins. This runs
+  // off the main scroll thread — zero layout reads, no drift, no jank.
+  if (sections.length && "IntersectionObserver" in window) {
+    const visible = new Set();
+    const setActive = (el) => {
+      const href = "#" + el.id;
+      sectionAnchors.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === href));
+    };
+    const io = new IntersectionObserver((entries) => {
+      for (const e of entries) e.isIntersecting ? visible.add(e.target) : visible.delete(e.target);
+      // among sections crossing the band, choose the lowest one in document order
+      let best = null;
+      for (const s of sections) if (visible.has(s)) best = s;
+      if (best) setActive(best);
+    }, { rootMargin: "-35% 0px -65% 0px", threshold: 0 });
+    sections.forEach((s) => io.observe(s));
+    sectionAnchors[0].classList.add("active");
+  }
+
   toggle.addEventListener("click", () => { links.classList.toggle("open"); toggle.classList.toggle("open"); });
   links.addEventListener("click", (e) => { if (e.target.tagName === "A") { links.classList.remove("open"); toggle.classList.remove("open"); } });
 })();
