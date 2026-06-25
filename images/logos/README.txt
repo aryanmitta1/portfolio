@@ -1,10 +1,15 @@
-Drop official company logos here to self-host them (most reliable).
+Company logos are self-hosted here (most reliable — no CDN dependency).
 
-Expected filenames (referenced by index.html):
-  blue-origin.png      (or .svg — update src in index.html)
-  kearfott.png
-  soria-analytics.png
+Files referenced by index.html:
+  blue-origin.svg
+  soria-analytics.svg
+  kearfott.svg
 
-If a file is absent, the card falls back to the Clearbit logo CDN
-(blue-origin, kearfott), and finally to the built-in SVG icon.
-PNG with transparent background works best; ~256px square.
+These are clean vector marks that render crisply on the white logo chip.
+To use an official brand logo instead, drop a replacement at the same path
+(PNG with transparent background ~256px square, or SVG) and the card will
+pick it up automatically.
+
+If a file is absent or fails to load, the card falls back to the built-in
+periwinkle SVG icon (the old Clearbit logo CDN has been discontinued, so it
+is no longer used as a fallback).

@@ -10,7 +10,12 @@
       "Bash(git diff *)",
       "Read(//tmp/**)",
       "Read(//c/Users/amitta/.claude/**)",
-      "Read(//c/Users/amitta/**)"
+      "Read(//c/Users/amitta/**)",
+      "Bash(curl -sS -L -o blue-origin.png -w \"HTTP %{http_code} size=%{size_download}\\\\n\" \"https://logo.clearbit.com/blueorigin.com?size=256\")",
+      "Bash(curl -sS -L -o kearfott.png -w \"HTTP %{http_code} size=%{size_download}\\\\n\" \"https://logo.clearbit.com/kearfott.com?size=256\")",
+      "Bash(curl -sS -L -o soria-analytics.png -w \"HTTP %{http_code} size=%{size_download}\\\\n\" \"https://logo.clearbit.com/soriaanalytics.com?size=256\")",
+      "Bash(file *.png)",
+      "Bash(file *.png *.svg)"
     ]
   }
 }

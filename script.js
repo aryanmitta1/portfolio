@@ -181,7 +181,7 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
 /* ---------- Card cursor-spotlight glow ---------- */
 (() => {
   if (COARSE) return;
-  const cards = document.querySelectorAll(".xp__card, .skill-card, .lead-card, .edu-card, .mission, .contact");
+  const cards = document.querySelectorAll(".ccard, .skill-card, .edu-card, .contact");
   cards.forEach((card) => {
     card.classList.add("glow-target");
     // Cache the rect on enter and reuse it while hovering — a card doesn't move
@@ -510,10 +510,19 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     });
 
     let rAF;
-    window.addEventListener("resize", () => { cancelAnimationFrame(rAF); rAF = requestAnimationFrame(render); });
-    // recenter once fonts/layout settle
-    requestAnimationFrame(render);
-    setTimeout(render, 350);
+    const recenter = () => { cancelAnimationFrame(rAF); rAF = requestAnimationFrame(render); };
+    window.addEventListener("resize", recenter);
+    // The carousel's section uses content-visibility:auto, so while it's off
+    // screen its subtree isn't laid out and offsets read 0 — re-center every
+    // time it scrolls into view so the intended card is actually centered.
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) recenter();
+      }, { threshold: 0.1 }).observe(root);
+    }
+    // Re-center once web fonts settle (text reflow changes card width).
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(recenter);
+    recenter();
   });
 })();
 
