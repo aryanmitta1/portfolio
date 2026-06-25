@@ -302,15 +302,48 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   targets.forEach((t) => io.observe(t));
 })();
 
-/* ---------- Coursework constellation: draw lines in on view ---------- */
+/* ---------- Coursework constellation: draw lines + hover tooltip ---------- */
 (() => {
   const map = document.getElementById("starmap");
   if (!map) return;
-  if (!("IntersectionObserver" in window)) { map.classList.add("is-drawn"); return; }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => { if (e.isIntersecting) { map.classList.add("is-drawn"); io.unobserve(map); } });
-  }, { threshold: 0.3 });
-  io.observe(map);
+
+  // draw the connecting lines once the map scrolls into view
+  if (!("IntersectionObserver" in window)) { map.classList.add("is-drawn"); }
+  else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { map.classList.add("is-drawn"); io.unobserve(map); } });
+    }, { threshold: 0.3 });
+    io.observe(map);
+  }
+
+  // single shared tooltip, repositioned over whichever star is active
+  const tip = document.getElementById("starTip");
+  if (!tip) return;
+  const tName = tip.querySelector(".starmap__tip-name");
+  const tCourse = tip.querySelector(".starmap__tip-course");
+  const stars = map.querySelectorAll(".star");
+
+  function show(star) {
+    tName.textContent = star.getAttribute("data-name") || "";
+    tCourse.innerHTML = star.getAttribute("data-course") || "";
+    // place tip at the star's center (star uses --x / --y percentages)
+    const xv = star.style.getPropertyValue("--x");
+    const yv = star.style.getPropertyValue("--y");
+    tip.style.left = xv;
+    tip.style.top = yv;
+    // flip below the star when it sits near the top edge, else float above
+    const yNum = parseFloat(yv);
+    tip.classList.toggle("starmap__tip--below", yNum < 22);
+    tip.classList.add("is-on");
+  }
+  function hide() { tip.classList.remove("is-on"); }
+
+  stars.forEach((s) => {
+    s.addEventListener("mouseenter", () => show(s));
+    s.addEventListener("focus", () => show(s));
+    s.addEventListener("mouseleave", hide);
+    s.addEventListener("blur", hide);
+  });
 })();
 
 /* ---------- Section dividers: animate only while in view ---------- */
@@ -330,10 +363,10 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   if (!el || REDUCED) return;
   const titles = [
     "Avionics & Flight Software Engineer",
-    "Embedded C / RTOS Developer",
-    "ROS2 & Sensor Fusion (EKF) Engineer",
-    "PyTorch & Computer Vision Engineer",
-    "Hardware-in-the-Loop Test Engineer",
+    "Embedded Systems Engineer",
+    "Computer Vision & ML Engineer",
+    "Sensor Fusion & GNC Engineer",
+    "Full-Stack Modeling & Simulation",
   ];
   const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&_/<>*";
   let idx = 0, heroSeen = true;
@@ -429,59 +462,62 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   };
 })();
 
-/* ---------- On-campus roles carousel ---------- */
+/* ---------- Focused-card carousels (experience + on-campus) ---------- */
 (() => {
-  const root = document.getElementById("campusCarousel");
-  if (!root) return;
-  const viewport = root.querySelector(".carousel__viewport");
-  const track = document.getElementById("carouselTrack");
-  const cards = Array.from(track.children);
-  const dotsWrap = document.getElementById("carouselDots");
-  const prev = document.getElementById("carouselPrev");
-  const next = document.getElementById("carouselNext");
-  if (!cards.length) return;
+  const roots = document.querySelectorAll(".carousel");
+  if (!roots.length) return;
 
-  let idx = Math.min(1, cards.length - 1); // start on the middle card
+  roots.forEach((root) => {
+    const viewport = root.querySelector(".carousel__viewport");
+    const track = root.querySelector(".carousel__track");
+    const cards = Array.from(track.children);
+    const dotsWrap = root.querySelector(".carousel__dots");
+    const prev = root.querySelector(".carousel__arrow--prev");
+    const next = root.querySelector(".carousel__arrow--next");
+    if (!cards.length) return;
 
-  // build dots
-  cards.forEach((_, i) => {
-    const b = document.createElement("button");
-    b.className = "carousel__dot";
-    b.setAttribute("role", "tab");
-    b.setAttribute("aria-label", `Role ${i + 1} of ${cards.length}`);
-    b.addEventListener("click", () => { idx = i; render(); });
-    dotsWrap.appendChild(b);
+    const start = parseInt(root.getAttribute("data-start") || "0", 10);
+    let idx = Math.min(Math.max(0, start), cards.length - 1);
+
+    // build dots
+    cards.forEach((_, i) => {
+      const b = document.createElement("button");
+      b.className = "carousel__dot";
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-label", `Card ${i + 1} of ${cards.length}`);
+      b.addEventListener("click", () => { idx = i; render(); });
+      dotsWrap.appendChild(b);
+    });
+    const dots = Array.from(dotsWrap.children);
+
+    function render() {
+      const vpCenter = viewport.clientWidth / 2;
+      const card = cards[idx];
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      track.style.transform = `translateX(${vpCenter - cardCenter}px)`;
+      cards.forEach((c, i) => c.classList.toggle("is-active", i === idx));
+      dots.forEach((d, i) => d.classList.toggle("is-active", i === idx));
+    }
+
+    function go(delta) { idx = (idx + delta + cards.length) % cards.length; render(); }
+    prev.addEventListener("click", () => go(-1));
+    next.addEventListener("click", () => go(1));
+
+    // clicking a side card brings it to focus
+    cards.forEach((c, i) => c.addEventListener("click", () => { if (i !== idx) { idx = i; render(); } }));
+
+    // keyboard support when carousel is focused
+    root.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") { go(-1); e.preventDefault(); }
+      else if (e.key === "ArrowRight") { go(1); e.preventDefault(); }
+    });
+
+    let rAF;
+    window.addEventListener("resize", () => { cancelAnimationFrame(rAF); rAF = requestAnimationFrame(render); });
+    // recenter once fonts/layout settle
+    requestAnimationFrame(render);
+    setTimeout(render, 350);
   });
-  const dots = Array.from(dotsWrap.children);
-
-  function render() {
-    const vpCenter = viewport.clientWidth / 2;
-    const card = cards[idx];
-    const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-    track.style.transform = `translateX(${vpCenter - cardCenter}px)`;
-    cards.forEach((c, i) => c.classList.toggle("is-active", i === idx));
-    dots.forEach((d, i) => d.classList.toggle("is-active", i === idx));
-    prev.disabled = false; next.disabled = false;
-  }
-
-  function go(delta) { idx = (idx + delta + cards.length) % cards.length; render(); }
-  prev.addEventListener("click", () => go(-1));
-  next.addEventListener("click", () => go(1));
-
-  // clicking a side card brings it to focus
-  cards.forEach((c, i) => c.addEventListener("click", () => { if (i !== idx) { idx = i; render(); } }));
-
-  // keyboard support when carousel is in view
-  root.addEventListener("keydown", (e) => {
-    if (e.key === "ArrowLeft") { go(-1); e.preventDefault(); }
-    else if (e.key === "ArrowRight") { go(1); e.preventDefault(); }
-  });
-
-  let rAF;
-  window.addEventListener("resize", () => { cancelAnimationFrame(rAF); rAF = requestAnimationFrame(render); });
-  // recenter once fonts/layout settle
-  requestAnimationFrame(render);
-  setTimeout(render, 350);
 })();
 
 document.getElementById("year").textContent = new Date().getFullYear();

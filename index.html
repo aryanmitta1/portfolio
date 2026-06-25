@@ -43,7 +43,7 @@
     <nav class="nav__links" id="navLinks">
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
-      <a href="#campus">On Campus</a>
+      <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
       <a href="glass/index.html">GLASS</a>
@@ -87,7 +87,7 @@
         </h1>
         <p class="hero__decrypt reveal">
           <span class="hero__prompt">&gt;</span>
-          <span class="hero__type" id="decryptText">Avionics Software Engineer</span><span class="hero__caret">_</span>
+          <span class="hero__type" id="decryptText">Avionics &amp; Flight Software Engineer</span><span class="hero__caret">_</span>
         </p>
         <p class="hero__role reveal">
           Electrical &amp; Computer Engineering — NYU Tandon
@@ -193,6 +193,27 @@
           </ul>
         </div>
       </div>
+
+      <!-- MY STORY — placeholder copy, rewrite later -->
+      <div class="story reveal">
+        <div class="story__rail" aria-hidden="true"></div>
+        <div class="story__body">
+          <span class="story__eyebrow">My story</span>
+          <p class="story__lead">
+            I've always been the kid who took things apart just to see what was inside —
+            and somewhere between a soldering iron and a line of code, that curiosity
+            turned into a direction.
+          </p>
+          <p>
+            <em>[Placeholder — rewrite in your own voice.]</em> What pulls me toward
+            aerospace isn't just the hardware; it's the idea that something I help build
+            has to work the first time, far from anyone who can fix it. That pressure is
+            exactly what I find exciting. Outside of engineering I'm
+            <em>[hobbies / what you do for fun]</em>, and the thing that keeps me going is
+            <em>[your "why"]</em>.
+          </p>
+        </div>
+      </div>
     </section>
 
     <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
@@ -201,159 +222,82 @@
     <section class="section" id="experience">
       <div class="section__head reveal">
         <span class="section__index">02 — Experience</span>
-        <h2 class="section__title">Where I've worked.</h2>
+        <h2 class="section__title">Where I've interned.</h2>
+        <p class="section__lead reveal">Three engineering internships across aerospace, navigation, and software — each one shipping real, production-bound work.</p>
       </div>
 
-      <div class="timeline">
-        <article class="xp reveal">
-          <div class="xp__marker"><span></span></div>
-          <div class="xp__card">
-            <div class="xp__top">
-              <div>
-                <h3 class="xp__role">Avionics Software Engineering Intern</h3>
-                <p class="xp__company">Blue Origin</p>
-              </div>
-              <span class="xp__badge xp__badge--live">Current</span>
-            </div>
-            <p class="xp__desc">
-              Working on satellite brightness mitigation for the
-              <strong>Terawave</strong> constellation — modeling how bright each
-              spacecraft appears from the ground so the fleet stays friendly to
-              astronomers and dark skies.
-            </p>
-            <ul class="xp__bullets">
-              <li>Building a brightness model from GNC state, material &amp; optical properties, and BRDF sensor data.</li>
-              <li>Developing a full-stack app that predicts a satellite's apparent brightness anywhere on Earth.</li>
-              <li>Implementing the physics &amp; modeling pipeline primarily in MATLAB.</li>
-            </ul>
-            <div class="xp__stack">
-              <span>MATLAB</span><span>BRDF / Optics</span><span>GNC</span><span>Full-Stack App</span><span>Modeling</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="xp reveal">
-          <div class="xp__marker"><span></span></div>
-          <div class="xp__card">
-            <div class="xp__top">
-              <div>
-                <h3 class="xp__role">Aerospace / Systems Engineering Intern</h3>
-                <p class="xp__company">Kearfott Corporation — Guidance &amp; Navigation</p>
-              </div>
-            </div>
-            <p class="xp__desc">
-              Built machine-learning tooling for celestial / skyline navigation and
-              integrated a full sensor suite on an NVIDIA Jetson platform for field testing.
-            </p>
-            <ul class="xp__bullets">
-              <li>Developed CV &amp; ML navigation tooling in PyTorch (ResNet, custom layers, Haversine loss) — accurate to roughly ~1 mile.</li>
-              <li>Integrated camera, LiDAR, IMU, GNSS, and PPS timing hardware on a Jetson Orin Nano.</li>
-              <li>Built ROS2-based sensor publishing &amp; evaluation tools for real-world van tests.</li>
-              <li>Evaluated IMUs on drift, stability, and accuracy from field data.</li>
-            </ul>
-            <div class="xp__stack">
-              <span>PyTorch</span><span>ROS2 Humble</span><span>Jetson</span><span>LiDAR</span><span>IMU / GNSS</span><span>OpenCV</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="xp reveal">
-          <div class="xp__marker"><span></span></div>
-          <div class="xp__card">
-            <div class="xp__top">
-              <div>
-                <h3 class="xp__role">Software Engineering Intern</h3>
-                <p class="xp__company">Soria Analytics</p>
-              </div>
-            </div>
-            <p class="xp__desc">
-              Built data pipelines for a financial news &amp; research terminal —
-              ingesting, cleaning, ranking, and summarizing articles for analyst review.
-            </p>
-            <ul class="xp__bullets">
-              <li>Engineered RSS / OPML ingestion pipelines into a Postgres backend.</li>
-              <li>Implemented semantic filtering with Gemini embeddings &amp; cosine similarity.</li>
-              <li>Built reviewer logging &amp; ranking tools (logistic regression) to improve relevance over time.</li>
-            </ul>
-            <div class="xp__stack">
-              <span>Python</span><span>Postgres</span><span>Embeddings</span><span>SQL</span><span>LLMs</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
-
-    <!-- ON-CAMPUS ROLES (carousel) -->
-    <section class="section" id="campus">
-      <div class="section__head reveal">
-        <span class="section__index">03 — On Campus</span>
-        <h2 class="section__title">Building &amp; leading<br>at NYU.</h2>
-        <p class="section__lead reveal">Research, leadership, and teaching alongside the degree — the work I do between classes.</p>
-      </div>
-
-      <div class="carousel reveal" id="campusCarousel" aria-roledescription="carousel" aria-label="On-campus roles">
+      <div class="carousel reveal" id="xpCarousel" data-start="0" aria-roledescription="carousel" aria-label="Internships">
         <div class="carousel__viewport">
-          <div class="carousel__track" id="carouselTrack">
+          <div class="carousel__track">
 
             <article class="ccard" data-i="0">
               <div class="ccard__icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c2.5 2.5 4 6 4 10a8 8 0 0 1-8 0c0-4 1.5-7.5 4-10Z"/><circle cx="12" cy="9" r="1.6"/><path d="M8 14l-2.5 3.5L9 18M16 14l2.5 3.5L15 18"/></svg>
               </div>
-              <p class="ccard__period">FALL 2024 — PRESENT</p>
-              <h3 class="ccard__org">NYU Rogue Aerospace</h3>
-              <p class="ccard__role">Payload Electronics</p>
-              <p class="ccard__loc">NASA USLI · Brooklyn, NY</p>
+              <p class="ccard__period">SPRING 2026 — PRESENT</p>
+              <h3 class="ccard__org">Blue Origin</h3>
+              <p class="ccard__role">Avionics Software Engineering Intern</p>
               <div class="ccard__rule"></div>
-              <p class="ccard__team">STUDENT LAUNCH · PAYLOAD TEAM</p>
+              <p class="ccard__team">SATELLITE BRIGHTNESS · TERAWAVE</p>
               <p class="ccard__desc">
-                Lead the electronics side of a NASA Student Launch payload — designing the
-                telemetry chain and coordinating sensor-integration and design decisions
-                with the avionics team.
+                Working on satellite brightness mitigation for the <strong>Terawave</strong>
+                constellation — modeling how bright each spacecraft appears from the ground
+                so the fleet stays friendly to astronomers and dark skies.
               </p>
+              <ul class="ccard__bullets">
+                <li>Building a brightness model from GNC state, material &amp; optical properties, and BRDF sensor data.</li>
+                <li>Developing a full-stack app that predicts a satellite's apparent brightness anywhere on Earth.</li>
+                <li>Implementing the physics &amp; modeling pipeline primarily in MATLAB.</li>
+              </ul>
               <div class="ccard__chips">
-                <span>Telemetry</span><span>Sensors</span><span>APRS</span><span>Embedded</span>
+                <span>MATLAB</span><span>BRDF / Optics</span><span>GNC</span><span>Full-Stack App</span><span>Modeling</span>
               </div>
             </article>
 
             <article class="ccard" data-i="1">
               <div class="ccard__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2.1 5-5 2.1 2.1-5 5-2.1Z"/></svg>
               </div>
-              <p class="ccard__period">RESEARCH · PAST SEMESTER</p>
-              <h3 class="ccard__org">FAMS Lab</h3>
-              <p class="ccard__role">Computer Vision Research Assistant</p>
-              <p class="ccard__loc">NYU Tandon · Brooklyn, NY</p>
+              <p class="ccard__period">FALL 2025</p>
+              <h3 class="ccard__org">Soria Analytics</h3>
+              <p class="ccard__role">Software Engineering Intern</p>
               <div class="ccard__rule"></div>
-              <p class="ccard__team">FLEXIBLE AI-POWERED MECHATRONICS LAB</p>
+              <p class="ccard__team">NYU TANDON FUTURE LABS</p>
               <p class="ccard__desc">
-                Trained and evaluated computer-vision models for a mechatronics research
-                project — building and tuning the perception pipeline that lets the lab's
-                systems see and react to their environment.
+                Built data pipelines for a financial news &amp; research terminal —
+                ingesting, cleaning, ranking, and summarizing articles for analyst review.
               </p>
+              <ul class="ccard__bullets">
+                <li>Engineered RSS / OPML ingestion pipelines into a Postgres backend.</li>
+                <li>Implemented semantic filtering with Gemini embeddings &amp; cosine similarity.</li>
+                <li>Built reviewer logging &amp; ranking tools (logistic regression) to improve relevance over time.</li>
+              </ul>
               <div class="ccard__chips">
-                <span>PyTorch</span><span>OpenCV</span><span>CNNs</span><span>Model Eval</span>
+                <span>Python</span><span>Postgres</span><span>Embeddings</span><span>SQL</span><span>LLMs</span>
               </div>
             </article>
 
             <article class="ccard" data-i="2">
               <div class="ccard__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4-9-4Z"/><path d="M7 10v5c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5v-5"/><path d="M21 8v5"/></svg>
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>
               </div>
-              <p class="ccard__period">TEACHING · GENERAL ENGINEERING</p>
-              <h3 class="ccard__org">NYU Tandon</h3>
-              <p class="ccard__role">Teaching Assistant — EG-UY 1004</p>
-              <p class="ccard__loc">Brooklyn, NY</p>
+              <p class="ccard__period">SPRING 2025</p>
+              <h3 class="ccard__org">Kearfott Corporation</h3>
+              <p class="ccard__role">Aerospace / Systems Engineering Intern</p>
               <div class="ccard__rule"></div>
-              <p class="ccard__team">GENERAL ENGINEERING · COMMS &amp; INVENTORY LEAD</p>
+              <p class="ccard__team">GUIDANCE &amp; NAVIGATION</p>
               <p class="ccard__desc">
-                Support first-year engineers through hands-on design and prototyping as
-                Communications, Inventory &amp; Purchasing Leader — maintaining course
-                materials, managing lab kits, and running showcase events.
+                Built machine-learning tooling for celestial / skyline navigation and
+                integrated a full sensor suite on an NVIDIA Jetson platform for field testing.
               </p>
+              <ul class="ccard__bullets">
+                <li>Developed CV &amp; ML navigation tooling in PyTorch (ResNet, custom layers, Haversine loss) — accurate to roughly ~1 mile.</li>
+                <li>Integrated camera, LiDAR, IMU, GNSS, and PPS timing hardware on a Jetson Orin Nano.</li>
+                <li>Built ROS2-based sensor publishing &amp; evaluation tools for real-world van tests.</li>
+                <li>Evaluated IMUs on drift, stability, and accuracy from field data.</li>
+              </ul>
               <div class="ccard__chips">
-                <span>Mentorship</span><span>Prototyping</span><span>Design</span><span>Logistics</span>
+                <span>PyTorch</span><span>ROS2 Humble</span><span>Jetson</span><span>LiDAR</span><span>IMU / GNSS</span><span>OpenCV</span>
               </div>
             </article>
 
@@ -361,11 +305,135 @@
         </div>
 
         <div class="carousel__nav">
-          <button class="carousel__arrow" id="carouselPrev" aria-label="Previous role">
+          <button class="carousel__arrow carousel__arrow--prev" aria-label="Previous internship">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
           </button>
-          <div class="carousel__dots" id="carouselDots" role="tablist" aria-label="Select role"></div>
-          <button class="carousel__arrow" id="carouselNext" aria-label="Next role">
+          <div class="carousel__dots" role="tablist" aria-label="Select internship"></div>
+          <button class="carousel__arrow carousel__arrow--next" aria-label="Next internship">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
+
+    <!-- PROJECTS (carousel) -->
+    <section class="section" id="projects">
+      <div class="section__head reveal">
+        <span class="section__index">03 — Projects</span>
+        <h2 class="section__title">Things I've built.</h2>
+        <p class="section__lead reveal">Hardware, software, and the messy bits in between — projects I designed and shipped end to end.</p>
+      </div>
+
+      <div class="carousel reveal" id="projectsCarousel" data-start="2" aria-roledescription="carousel" aria-label="Projects">
+        <div class="carousel__viewport">
+          <div class="carousel__track">
+
+            <article class="ccard" data-i="0">
+              <div class="ccard__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="6" cy="18" r="2.4"/><circle cx="18" cy="18" r="2.4"/><path d="M8 7l8 10M16 7L8 17M8 6h8M6 8v8M18 8v8"/></svg>
+              </div>
+              <p class="ccard__period">SYSTEMS · NETWORKING</p>
+              <h3 class="ccard__org">P2P File Sharing System</h3>
+              <p class="ccard__role">Decentralized transfer over a custom protocol</p>
+              <div class="ccard__rule"></div>
+              <p class="ccard__team">SOCKETS · DISTRIBUTED</p>
+              <p class="ccard__desc">
+                A peer-to-peer file-sharing system that lets nodes discover each other and
+                exchange files directly — no central server, with chunked transfer and
+                integrity checks over a hand-rolled protocol.
+              </p>
+              <div class="ccard__chips">
+                <span>Sockets</span><span>TCP/IP</span><span>Concurrency</span><span>Hashing</span>
+              </div>
+            </article>
+
+            <article class="ccard" data-i="1">
+              <div class="ccard__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+              </div>
+              <p class="ccard__period">HARDWARE · PCB DESIGN</p>
+              <h3 class="ccard__org">Arduino-on-STM Board</h3>
+              <p class="ccard__role">Custom Arduino-compatible board from scratch</p>
+              <div class="ccard__rule"></div>
+              <p class="ccard__team">STM32 · SCHEMATIC → LAYOUT → BRING-UP</p>
+              <p class="ccard__desc">
+                Designed a custom PCB around an STM32 microcontroller — recreating
+                Arduino-style functionality from first principles, from schematic capture
+                and layout through fabrication and board bring-up.
+              </p>
+              <div class="ccard__chips">
+                <span>STM32</span><span>PCB Layout</span><span>Embedded C</span><span>Bring-Up</span>
+              </div>
+            </article>
+
+            <article class="ccard" data-i="2">
+              <div class="ccard__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.4"/><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M10.3 10.3 6.4 6.4M13.7 10.3l3.9-3.9M10.3 13.7l-3.9 3.9M13.7 13.7l3.9 3.9"/></svg>
+              </div>
+              <p class="ccard__period">HARDWARE · FLIGHT CONTROL</p>
+              <h3 class="ccard__org">Drone Controller PCB</h3>
+              <p class="ccard__role">STM-based flight controller driving ESCs</p>
+              <div class="ccard__rule"></div>
+              <p class="ccard__team">STM32 · ESC / PWM · IMU</p>
+              <p class="ccard__desc">
+                A custom drone flight-controller board built around an STM32 — generating
+                the PWM signals that drive the ESCs and motors, with sensor inputs and
+                power management designed onto a single board.
+              </p>
+              <div class="ccard__chips">
+                <span>STM32</span><span>ESC / PWM</span><span>PCB Design</span><span>IMU</span><span>Embedded C</span>
+              </div>
+            </article>
+
+            <article class="ccard" data-i="3">
+              <div class="ccard__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14V8a2 2 0 0 1 4 0M10 12V6.5a2 2 0 0 1 4 0V12M14 12V8a2 2 0 0 1 4 0v6a6 6 0 0 1-6 6h-1.5a5 5 0 0 1-3.9-1.9L4 15.5a1.6 1.6 0 0 1 2.4-2.1L8 15"/></svg>
+              </div>
+              <p class="ccard__period">ROBOTICS · COMPUTER VISION</p>
+              <h3 class="ccard__org">OpenCV Robotic Hand</h3>
+              <p class="ccard__role">Vision-controlled actuated hand</p>
+              <div class="ccard__rule"></div>
+              <p class="ccard__team">OPENCV · SERVOS · GESTURE TRACKING</p>
+              <p class="ccard__desc">
+                A robotic hand that mirrors a human hand in real time — using OpenCV to
+                track finger positions from a camera feed and drive the servos that move
+                each actuated joint.
+              </p>
+              <div class="ccard__chips">
+                <span>OpenCV</span><span>Python</span><span>Servos</span><span>Hand Tracking</span>
+              </div>
+            </article>
+
+            <article class="ccard" data-i="4">
+              <div class="ccard__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="3.2"/></svg>
+              </div>
+              <p class="ccard__period">AEROSPACE · ML / CV</p>
+              <h3 class="ccard__org">Celestial Navigation System</h3>
+              <p class="ccard__role">Position fixing from the sky &amp; skyline</p>
+              <div class="ccard__rule"></div>
+              <p class="ccard__team">PYTORCH · OPENCV · ASTROMETRY</p>
+              <p class="ccard__desc">
+                A vision-and-ML system that estimates geographic position from celestial
+                and skyline imagery — no GPS required — using a trained model to map what
+                the camera sees to a location on Earth.
+              </p>
+              <div class="ccard__chips">
+                <span>PyTorch</span><span>OpenCV</span><span>CNNs</span><span>Geolocation</span>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <div class="carousel__nav">
+          <button class="carousel__arrow carousel__arrow--prev" aria-label="Previous project">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="carousel__dots" role="tablist" aria-label="Select project"></div>
+          <button class="carousel__arrow carousel__arrow--next" aria-label="Next project">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
           </button>
         </div>
@@ -385,8 +453,9 @@
         <div class="skill-card reveal">
           <h3>Languages &amp; Scripting</h3>
           <div class="chips">
-            <span>Python</span><span>Embedded C</span><span>C++</span>
-            <span>MATLAB</span><span>SQL</span><span>Bash</span>
+            <span>Python</span><span>Embedded C</span><span>C++</span><span>Java</span>
+            <span>JavaScript</span><span>MATLAB</span><span>SQL</span>
+            <span>Verilog / VHDL</span><span>HTML / CSS</span><span>Bash</span>
           </div>
         </div>
         <div class="skill-card reveal">
@@ -431,15 +500,16 @@
 
     <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
 
-    <!-- EDUCATION + COURSEWORK + INVOLVEMENT -->
+    <!-- EDUCATION + ON-CAMPUS + INVOLVEMENT + COURSEWORK -->
     <section class="section" id="education">
       <div class="section__head reveal">
         <span class="section__index">05 — Background</span>
-        <h2 class="section__title">Education, courses &amp; involvement.</h2>
+        <h2 class="section__title">Education &amp; campus life.</h2>
       </div>
 
-      <div class="edu-grid">
-        <article class="edu-card reveal reveal--left">
+      <!-- 1. NYU education box -->
+      <div class="edu-grid edu-grid--solo">
+        <article class="edu-card reveal">
           <h3 class="edu-card__school">New York University</h3>
           <p class="edu-card__sub">Tandon School of Engineering</p>
           <p class="edu-card__degree">B.S. Electrical &amp; Computer Engineering</p>
@@ -455,123 +525,160 @@
             <span>Computer Architecture</span><span>Networking</span>
           </div>
         </article>
+      </div>
 
-        <div class="lead-stack reveal reveal--right">
-          <article class="lead-card reveal">
-            <h3>Vice President</h3>
-            <p class="lead-card__org">IEEE · NYU Tandon Chapter</p>
-            <p>Lead the student branch — running technical events, growing membership, and connecting students to industry.</p>
-          </article>
-          <article class="lead-card reveal">
-            <h3>Executive Board</h3>
-            <p class="lead-card__org">Theta Tau · Engineering Fraternity</p>
-            <p>Serve on the E-board of the professional engineering fraternity; previously Service Chair leading outreach.</p>
-          </article>
-          <article class="lead-card reveal">
-            <h3>Tau Beta Pi</h3>
-            <p class="lead-card__org">Engineering Honor Society</p>
-            <p>Inducted member of the national engineering honor society recognizing scholarship and character.</p>
-          </article>
+      <!-- 2. On-campus involvement (carousel) -->
+      <div class="edu-sub reveal">
+        <h3 class="edu-sub__title">On-campus involvement.</h3>
+        <p class="edu-sub__lead">Research, leadership, and teaching alongside the degree — the work I do between classes.</p>
+
+        <div class="carousel reveal" id="campusCarousel" data-start="1" aria-roledescription="carousel" aria-label="On-campus roles">
+          <div class="carousel__viewport">
+            <div class="carousel__track">
+
+              <article class="ccard" data-i="0">
+                <div class="ccard__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c2.5 2.5 4 6 4 10a8 8 0 0 1-8 0c0-4 1.5-7.5 4-10Z"/><circle cx="12" cy="9" r="1.6"/><path d="M8 14l-2.5 3.5L9 18M16 14l2.5 3.5L15 18"/></svg>
+                </div>
+                <p class="ccard__period">FALL 2024 — PRESENT</p>
+                <h3 class="ccard__org">NYU Rogue Aerospace</h3>
+                <p class="ccard__role">Payload Electronics</p>
+                <p class="ccard__loc">NASA USLI · Brooklyn, NY</p>
+                <div class="ccard__rule"></div>
+                <p class="ccard__team">STUDENT LAUNCH · PAYLOAD TEAM</p>
+                <p class="ccard__desc">
+                  Lead the electronics side of a NASA Student Launch payload — designing the
+                  telemetry chain and coordinating sensor-integration and design decisions
+                  with the avionics team.
+                </p>
+                <div class="ccard__chips">
+                  <span>Telemetry</span><span>Sensors</span><span>APRS</span><span>Embedded</span>
+                </div>
+              </article>
+
+              <article class="ccard" data-i="1">
+                <div class="ccard__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4-9-4Z"/><path d="M7 10v5c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5v-5"/><path d="M21 8v5"/></svg>
+                </div>
+                <p class="ccard__period">TEACHING · GENERAL ENGINEERING</p>
+                <h3 class="ccard__org">NYU Tandon</h3>
+                <p class="ccard__role">Teaching Assistant — EG-UY 1004</p>
+                <p class="ccard__loc">Brooklyn, NY</p>
+                <div class="ccard__rule"></div>
+                <p class="ccard__team">GENERAL ENGINEERING · COMMS &amp; INVENTORY LEAD</p>
+                <p class="ccard__desc">
+                  Support first-year engineers through hands-on design and prototyping as
+                  Communications, Inventory &amp; Purchasing Leader — maintaining course
+                  materials, managing lab kits, and running showcase events.
+                </p>
+                <div class="ccard__chips">
+                  <span>Mentorship</span><span>Prototyping</span><span>Design</span><span>Logistics</span>
+                </div>
+              </article>
+
+              <article class="ccard" data-i="2">
+                <div class="ccard__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>
+                </div>
+                <p class="ccard__period">RESEARCH · PAST SEMESTER</p>
+                <h3 class="ccard__org">FAMS Lab</h3>
+                <p class="ccard__role">Computer Vision Research Assistant</p>
+                <p class="ccard__loc">NYU Tandon · Brooklyn, NY</p>
+                <div class="ccard__rule"></div>
+                <p class="ccard__team">FLEXIBLE AI-POWERED MECHATRONICS LAB</p>
+                <p class="ccard__desc">
+                  Trained and evaluated computer-vision models for a mechatronics research
+                  project — building and tuning the perception pipeline that lets the lab's
+                  systems see and react to their environment.
+                </p>
+                <div class="ccard__chips">
+                  <span>PyTorch</span><span>OpenCV</span><span>CNNs</span><span>Model Eval</span>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <div class="carousel__nav">
+            <button class="carousel__arrow carousel__arrow--prev" aria-label="Previous role">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="carousel__dots" role="tablist" aria-label="Select role"></div>
+            <button class="carousel__arrow carousel__arrow--next" aria-label="Next role">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- Coursework: charted as Orion -->
+      <!-- 3. Extracurriculars, tagged by GLASS window -->
+      <div class="extra reveal" id="involvement">
+        <h3 class="extra__title">Extracurriculars &amp; Leadership</h3>
+        <ul class="extra__list">
+          <li><span class="extra__role">Leadership</span>Vice President · IEEE</li>
+          <li><span class="extra__role">Leadership</span>Exec Board · Theta Tau</li>
+          <li><span class="extra__role">Service</span>Service Chair · Theta Tau</li>
+          <li><span class="extra__role">Professional</span>SASE National Conference</li>
+          <li><span class="extra__role">Professional</span>CUSP Hackathon</li>
+          <li><span class="extra__role">Professional</span>Smart Cities Research · IEEE</li>
+          <li><span class="extra__role">Global</span>Study Abroad · Paris</li>
+          <li><span class="extra__role">Global</span>Korea Program</li>
+          <li><span class="extra__role">Service</span>FNPF Volunteer · Bali</li>
+        </ul>
+      </div>
+
+      <!-- 4. Coursework: charted as Orion -->
       <div class="edu-sub reveal" id="coursework">
         <h3 class="edu-sub__title">Relevant coursework — charted as Orion.</h3>
-        <p class="edu-sub__lead">Eleven courses mapped onto the Hunter: hardware grounding his <em>feet</em>, the computing core along his <em>belt</em>, signals &amp; control in his <em>shoulders</em>, machine learning in his <em>head</em>, and the software tools at his <em>sword</em>. Hover a star.</p>
+        <p class="edu-sub__lead">Eleven courses mapped onto the Hunter: hardware at his <em>feet</em>, the computing core along his <em>belt</em>, signals &amp; control in his <em>shoulders</em>, machine learning in his <em>head</em>, software tools at his <em>sword</em>. Hover a star to read it.</p>
 
         <div class="starmap reveal" id="starmap" aria-label="Coursework constellation — Orion">
           <svg class="starmap__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
             <!-- head to shoulders -->
-            <polyline points="50,11 35,29" />
-            <polyline points="50,11 65,27" />
+            <polyline points="50,9 33,27" />
+            <polyline points="50,9 67,25" />
             <!-- shoulders down to belt -->
-            <polyline points="35,29 44,51" />
-            <polyline points="65,27 56,53" />
+            <polyline points="33,27 42,50" />
+            <polyline points="67,25 60,52" />
             <!-- the belt -->
-            <polyline points="44,51 50,52" />
-            <polyline points="50,52 56,53" />
+            <polyline points="42,50 51,51" />
+            <polyline points="51,51 60,52" />
             <!-- belt down to feet -->
-            <polyline points="44,51 31,85" />
-            <polyline points="56,53 72,86" />
+            <polyline points="42,50 26,88" />
+            <polyline points="60,52 76,89" />
             <!-- the sword -->
-            <polyline points="50,52 46,63" />
-            <polyline points="46,63 45,70" />
-            <polyline points="45,70 44,77" />
+            <polyline points="51,51 50,64" />
+            <polyline points="50,64 49,73" />
+            <polyline points="49,73 48,82" />
           </svg>
 
           <!-- HEAD — frontier / the mind -->
-          <button class="star star--bright" style="--x:50%; --y:11%;" data-course="Machine Learning">
-            <span class="star__dot"></span>
-            <span class="star__label"><span class="star__name">Meissa · head</span>Machine Learning</span>
-          </button>
+          <button class="star star--bright" style="--x:50%; --y:9%;" data-name="Meissa · head" data-course="Machine Learning"><span class="star__dot"></span></button>
           <!-- SHOULDERS — analysis -->
-          <button class="star" style="--x:35%; --y:29%;" data-course="Signals &amp; Systems">
-            <span class="star__dot"></span>
-            <span class="star__label"><span class="star__name">Betelgeuse · shoulder</span>Signals &amp; Systems</span>
-          </button>
-          <button class="star" style="--x:65%; --y:27%;" data-course="Feedback Control">
-            <span class="star__dot"></span>
-            <span class="star__label"><span class="star__name">Bellatrix · shoulder</span>Feedback Control</span>
-          </button>
+          <button class="star" style="--x:33%; --y:27%;" data-name="Betelgeuse · shoulder" data-course="Signals &amp; Systems"><span class="star__dot"></span></button>
+          <button class="star" style="--x:67%; --y:25%;" data-name="Bellatrix · shoulder" data-course="Feedback Control"><span class="star__dot"></span></button>
           <!-- BELT — computing core -->
-          <button class="star" style="--x:44%; --y:51%;" data-course="Computer Architecture">
-            <span class="star__dot"></span>
-            <span class="star__label"><span class="star__name">Alnitak · belt</span>Computer Architecture</span>
-          </button>
-          <button class="star star--bright" style="--x:50%; --y:52%;" data-course="Embedded Systems Design">
-            <span class="star__dot"></span>
-            <span class="star__label"><span class="star__name">Alnilam · belt</span>Embedded Systems Design</span>
-          </button>
-          <button class="star" style="--x:56%; --y:53%;" data-course="Digital Logic &amp; State Machines">
-            <span class="star__dot"></span>
-            <span class="star__label"><span class="star__name">Mintaka · belt</span>Digital Logic &amp; State Machines</span>
-          </button>
+          <button class="star" style="--x:42%; --y:50%;" data-name="Alnitak · belt" data-course="Computer Architecture"><span class="star__dot"></span></button>
+          <button class="star star--bright" style="--x:51%; --y:51%;" data-name="Alnilam · belt" data-course="Embedded Systems Design"><span class="star__dot"></span></button>
+          <button class="star" style="--x:60%; --y:52%;" data-name="Mintaka · belt" data-course="Digital Logic &amp; State Machines"><span class="star__dot"></span></button>
           <!-- FEET — hardware foundations -->
-          <button class="star" style="--x:31%; --y:85%;" data-course="PCB Design">
-            <span class="star__dot"></span>
-            <span class="star__label"><span class="star__name">Saiph · foot</span>PCB Design</span>
-          </button>
-          <button class="star star--bright" style="--x:72%; --y:86%;" data-course="Electronics">
-            <span class="star__dot"></span>
-            <span class="star__label"><span class="star__name">Rigel · foot</span>Electronics</span>
-          </button>
+          <button class="star" style="--x:26%; --y:88%;" data-name="Saiph · foot" data-course="PCB Design"><span class="star__dot"></span></button>
+          <button class="star star--bright" style="--x:76%; --y:89%;" data-name="Rigel · foot" data-course="Electronics"><span class="star__dot"></span></button>
           <!-- SWORD — software tools -->
-          <button class="star" style="--x:46%; --y:63%;" data-course="Object-Oriented Programming">
-            <span class="star__dot"></span>
-            <span class="star__label"><span class="star__name">sword</span>Object-Oriented Programming</span>
-          </button>
-          <button class="star" style="--x:45%; --y:70%;" data-course="Data Structures &amp; Algorithms">
-            <span class="star__dot"></span>
-            <span class="star__label"><span class="star__name">sword</span>Data Structures &amp; Algorithms</span>
-          </button>
-          <button class="star" style="--x:44%; --y:77%;" data-course="Computer Networking">
-            <span class="star__dot"></span>
-            <span class="star__label"><span class="star__name">sword</span>Computer Networking</span>
-          </button>
+          <button class="star" style="--x:50%; --y:64%;" data-name="sword" data-course="Object-Oriented Programming"><span class="star__dot"></span></button>
+          <button class="star" style="--x:49%; --y:73%;" data-name="sword" data-course="Data Structures &amp; Algorithms"><span class="star__dot"></span></button>
+          <button class="star" style="--x:48%; --y:82%;" data-name="sword" data-course="Computer Networking"><span class="star__dot"></span></button>
+
+          <!-- single shared tooltip, positioned by JS -->
+          <div class="starmap__tip" id="starTip" aria-hidden="true"><span class="starmap__tip-name"></span><span class="starmap__tip-course"></span></div>
         </div>
 
-        <ul class="starmap__list" aria-hidden="false">
-          <li>Machine Learning</li><li>Signals &amp; Systems</li><li>Feedback Control</li>
-          <li>Computer Architecture</li><li>Embedded Systems Design</li><li>Digital Logic &amp; State Machines</li>
-          <li>PCB Design</li><li>Electronics</li><li>Object-Oriented Programming</li>
-          <li>Data Structures &amp; Algorithms</li><li>Computer Networking</li>
-        </ul>
-      </div>
-
-      <!-- Involvement, tagged by GLASS window -->
-      <div class="extra reveal" id="involvement">
-        <h3 class="extra__title">Involvement &amp; Leadership</h3>
-        <ul class="extra__list">
-          <li><span class="extra__role">Leadership</span>Exec Board · Theta Tau</li>
-          <li><span class="extra__role">Academic</span>Teaching Assistant · EG-UY 1004</li>
-          <li><span class="extra__role">Professional</span>SASE National Conference</li>
-          <li><span class="extra__role">Service</span>Service Chair · Theta Tau</li>
-          <li><span class="extra__role">Professional</span>CUSP Hackathon</li>
-          <li><span class="extra__role">Global</span>Study Abroad · Paris</li>
-          <li><span class="extra__role">Professional</span>Smart Cities Research · IEEE</li>
-          <li><span class="extra__role">Service</span>FNPF Volunteer · Bali</li>
-          <li><span class="extra__role">Global</span>Korea Program</li>
+        <ul class="starmap__legend" aria-label="Course list">
+          <li><b>Head</b> · Machine Learning</li>
+          <li><b>Shoulders</b> · Signals &amp; Systems, Feedback Control</li>
+          <li><b>Belt</b> · Computer Architecture, Embedded Systems Design, Digital Logic &amp; State Machines</li>
+          <li><b>Feet</b> · PCB Design, Electronics</li>
+          <li><b>Sword</b> · OOP, Data Structures &amp; Algorithms, Computer Networking</li>
         </ul>
       </div>
     </section>
