@@ -184,15 +184,16 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   cards.forEach((card) => {
     card.classList.add("glow-target");
     // Cache rect on enter; a hovered card doesn't move, so reading layout every
-    // pointermove just forces needless reflow.
-    let rect = null;
+    // pointermove just forces needless reflow. Coalesce moves to one write/frame.
+    let rect = null, raf = 0, mx = 0, my = 0;
+    const write = () => { raf = 0; card.style.setProperty("--mx", mx + "px"); card.style.setProperty("--my", my + "px"); };
     card.addEventListener("pointerenter", () => { rect = card.getBoundingClientRect(); card.classList.add("is-glow"); });
     card.addEventListener("pointermove", (e) => {
       if (!rect) rect = card.getBoundingClientRect();
-      card.style.setProperty("--mx", (e.clientX - rect.left) + "px");
-      card.style.setProperty("--my", (e.clientY - rect.top) + "px");
+      mx = e.clientX - rect.left; my = e.clientY - rect.top;
+      if (!raf) raf = requestAnimationFrame(write);
     });
-    card.addEventListener("pointerleave", () => { card.classList.remove("is-glow"); rect = null; });
+    card.addEventListener("pointerleave", () => { if (raf) { cancelAnimationFrame(raf); raf = 0; } card.classList.remove("is-glow"); rect = null; });
   });
 })();
 
@@ -276,57 +277,94 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   const closeBtn = document.getElementById("lbClose");
   const prevBtn = document.getElementById("lbPrev");
   const nextBtn = document.getElementById("lbNext");
+  const stage = box.querySelector(".lightbox__stage");
+  if (!imgEl || !capEl || !countEl || !closeBtn || !prevBtn || !nextBtn || !stage) return;
   let idx = -1;
+  let opener = null; // element to restore focus to on close
 
   function show(i) {
     idx = (i + figures.length) % figures.length;
     const fig = figures[idx];
-    const src = fig.querySelector("img").getAttribute("src");
-    imgEl.src = src;
-    imgEl.alt = fig.querySelector("img").alt || "";
+    const img = fig.querySelector("img");
+    // Hide the stale frame until the new source has decoded, so the caption /
+    // counter never describe a photo that isn't on screen yet.
+    imgEl.classList.remove("is-loaded");
+    imgEl.onload = () => imgEl.classList.add("is-loaded");
+    imgEl.src = img.getAttribute("src");
+    imgEl.alt = img.alt || "";
+    // Cached / same-src reassignment may not fire onload — reveal immediately.
+    if (imgEl.complete) imgEl.classList.add("is-loaded");
     capEl.textContent = fig.getAttribute("data-cap") || "";
     countEl.textContent = (idx + 1) + " / " + figures.length;
   }
-  function open(i) {
+  function open(i, trigger) {
+    opener = trigger || null;
     show(i);
     box.classList.add("is-open");
     box.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    lockScroll();
+    closeBtn.focus();
   }
   function close() {
     box.classList.remove("is-open");
     box.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
+    unlockScroll();
     idx = -1;
+    if (opener && typeof opener.focus === "function") opener.focus();
+    opener = null;
+  }
+
+  // Reserve the scrollbar's width as padding while scroll is locked, so removing
+  // the scrollbar doesn't shift the fixed nav / page content sideways.
+  function lockScroll() {
+    const sw = window.innerWidth - document.documentElement.clientWidth;
+    if (sw > 0) document.body.style.paddingRight = sw + "px";
+    document.body.style.overflow = "hidden";
+  }
+  function unlockScroll() {
+    document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
   }
 
   figures.forEach((fig, i) => {
-    fig.addEventListener("click", () => open(i));
+    fig.addEventListener("click", () => open(i, fig));
     fig.setAttribute("tabindex", "0");
     fig.setAttribute("role", "button");
     fig.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(i); }
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(i, fig); }
     });
   });
 
   closeBtn.addEventListener("click", close);
-  prevBtn.addEventListener("click", (e) => { e.stopPropagation(); show(idx - 1); });
-  nextBtn.addEventListener("click", (e) => { e.stopPropagation(); show(idx + 1); });
+  prevBtn.addEventListener("click", () => show(idx - 1));
+  nextBtn.addEventListener("click", () => show(idx + 1));
   box.addEventListener("click", (e) => { if (e.target === box) close(); });
 
   addEventListener("keydown", (e) => {
     if (!box.classList.contains("is-open")) return;
-    if (e.key === "Escape") close();
-    else if (e.key === "ArrowLeft") show(idx - 1);
-    else if (e.key === "ArrowRight") show(idx + 1);
+    if (e.key === "Escape") { close(); return; }
+    if (e.key === "ArrowLeft") { show(idx - 1); return; }
+    if (e.key === "ArrowRight") { show(idx + 1); return; }
+    // Trap Tab within the dialog's focusable controls.
+    if (e.key === "Tab") {
+      const focusable = [prevBtn, nextBtn, closeBtn];
+      const first = focusable[0], last = focusable[focusable.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+      else if (!focusable.includes(active)) { e.preventDefault(); first.focus(); }
+    }
   });
 
-  // swipe on touch
-  let sx = 0;
-  box.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true });
-  box.addEventListener("touchend", (e) => {
+  // Swipe on touch — bound to the image stage only, so taps on the close / nav
+  // buttons (direct children of .lightbox) don't get read as swipes.
+  let sx = 0, sy = 0;
+  stage.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  stage.addEventListener("touchend", (e) => {
     const dx = e.changedTouches[0].clientX - sx;
-    if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+    const dy = e.changedTouches[0].clientY - sy;
+    // require a mostly-horizontal gesture so vertical scrolls/taps don't navigate
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) show(idx + (dx < 0 ? 1 : -1));
   }, { passive: true });
 })();
 

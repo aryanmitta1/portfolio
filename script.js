@@ -187,14 +187,18 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     // Cache the rect on enter and reuse it while hovering — a card doesn't move
     // under the cursor, so reading getBoundingClientRect() every pointermove
     // (which forces a synchronous layout) is pure waste.
-    let rect = null;
+    // Coalesce moves to one write per frame: the ::after glow only repaints
+    // once per composited frame anyway, so setting --mx/--my on every event
+    // (60–120Hz) is wasted style invalidation.
+    let rect = null, raf = 0, mx = 0, my = 0;
+    const write = () => { raf = 0; card.style.setProperty("--mx", mx + "px"); card.style.setProperty("--my", my + "px"); };
     card.addEventListener("pointerenter", () => { rect = card.getBoundingClientRect(); card.classList.add("is-glow"); });
     card.addEventListener("pointermove", (e) => {
       if (!rect) rect = card.getBoundingClientRect();
-      card.style.setProperty("--mx", (e.clientX - rect.left) + "px");
-      card.style.setProperty("--my", (e.clientY - rect.top) + "px");
+      mx = e.clientX - rect.left; my = e.clientY - rect.top;
+      if (!raf) raf = requestAnimationFrame(write);
     });
-    card.addEventListener("pointerleave", () => { card.classList.remove("is-glow"); rect = null; });
+    card.addEventListener("pointerleave", () => { if (raf) { cancelAnimationFrame(raf); raf = 0; } card.classList.remove("is-glow"); rect = null; });
   });
 })();
 
@@ -373,6 +377,8 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     new IntersectionObserver((e) => { heroSeen = e[0].isIntersecting; }, { threshold: 0.05 }).observe(hero);
   }
 
+  const STEP = 1000 / 60;   // logical frame length the effect was tuned at
+  const RENDER = 1000 / 30; // but only touch the DOM ~30×/sec, not per rAF
   function scrambleTo(text) {
     return new Promise((resolve) => {
       const from = el.textContent;
@@ -382,20 +388,38 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
         q.push({ a: from[i] || "", b: text[i] || "", s: Math.floor(Math.random() * 16), e: 0, c: "" });
         q[i].e = q[i].s + 10 + Math.floor(Math.random() * 16);
       }
-      let frame = 0;
-      (function tick() {
-        let out = "", done = 0;
-        for (const it of q) {
-          if (frame >= it.e) { done++; out += it.b; }
-          else if (frame >= it.s) {
+      // Build the per-character cells ONCE for this transition; each frame we
+      // then only mutate textContent / toggle the class — no innerHTML reparse,
+      // no node churn. `frame` is derived from the rAF timestamp so the effect
+      // keeps the same duration regardless of the display's refresh rate.
+      el.textContent = "";
+      const cells = q.map(() => el.appendChild(document.createElement("span")));
+      let startT = -1, lastT = -1e9;
+      function tick(now) {
+        if (startT < 0) startT = now;
+        if (now - lastT < RENDER) { requestAnimationFrame(tick); return; }
+        lastT = now;
+        const frame = ((now - startT) / STEP) | 0;
+        let done = 0;
+        for (let i = 0; i < q.length; i++) {
+          const it = q[i], cell = cells[i];
+          if (frame >= it.e) {
+            done++;
+            if (cell.className) cell.className = "";
+            if (cell.textContent !== it.b) cell.textContent = it.b;
+          } else if (frame >= it.s) {
             if (!it.c || Math.random() < 0.28) it.c = charset[(Math.random() * charset.length) | 0];
-            out += `<span class="scramble">${it.c}</span>`;
-          } else out += it.a;
+            if (cell.className !== "scramble") cell.className = "scramble";
+            cell.textContent = it.c;
+          } else if (cell.textContent !== it.a) {
+            cell.className = "";
+            cell.textContent = it.a;
+          }
         }
-        el.innerHTML = out;
         if (done === q.length) { resolve(); return; }
-        frame++; requestAnimationFrame(tick);
-      })();
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     });
   }
   async function loop() {
