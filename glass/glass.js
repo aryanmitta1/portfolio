@@ -263,6 +263,73 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   dividers.forEach((d) => io.observe(d));
 })();
 
+/* ---------- Gallery lightbox ---------- */
+(() => {
+  const grid = document.getElementById("gallery-grid");
+  const box = document.getElementById("lightbox");
+  if (!grid || !box) return;
+
+  const figures = Array.from(grid.querySelectorAll(".frame"));
+  const imgEl = document.getElementById("lbImg");
+  const capEl = document.getElementById("lbCap");
+  const countEl = document.getElementById("lbCount");
+  const closeBtn = document.getElementById("lbClose");
+  const prevBtn = document.getElementById("lbPrev");
+  const nextBtn = document.getElementById("lbNext");
+  let idx = -1;
+
+  function show(i) {
+    idx = (i + figures.length) % figures.length;
+    const fig = figures[idx];
+    const src = fig.querySelector("img").getAttribute("src");
+    imgEl.src = src;
+    imgEl.alt = fig.querySelector("img").alt || "";
+    capEl.textContent = fig.getAttribute("data-cap") || "";
+    countEl.textContent = (idx + 1) + " / " + figures.length;
+  }
+  function open(i) {
+    show(i);
+    box.classList.add("is-open");
+    box.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+  function close() {
+    box.classList.remove("is-open");
+    box.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    idx = -1;
+  }
+
+  figures.forEach((fig, i) => {
+    fig.addEventListener("click", () => open(i));
+    fig.setAttribute("tabindex", "0");
+    fig.setAttribute("role", "button");
+    fig.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(i); }
+    });
+  });
+
+  closeBtn.addEventListener("click", close);
+  prevBtn.addEventListener("click", (e) => { e.stopPropagation(); show(idx - 1); });
+  nextBtn.addEventListener("click", (e) => { e.stopPropagation(); show(idx + 1); });
+  box.addEventListener("click", (e) => { if (e.target === box) close(); });
+
+  addEventListener("keydown", (e) => {
+    if (!box.classList.contains("is-open")) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowLeft") show(idx - 1);
+    else if (e.key === "ArrowRight") show(idx + 1);
+  });
+
+  // swipe on touch
+  let sx = 0;
+  box.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true });
+  box.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+})();
+
 /* ---------- Footer year ---------- */
 (() => {
   const y = document.getElementById("year");

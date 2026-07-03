@@ -38,6 +38,7 @@
       <a href="#about">About GLASS</a>
       <a href="#mission">Mission</a>
       <a href="#impact">Global Impact</a>
+      <a href="#gallery">Gallery</a>
       <a href="#windows" class="nav__cta">The Five Windows</a>
     </nav>
     <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
@@ -249,6 +250,59 @@
 
     <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
 
+    <!-- GALLERY: THE COHORT IN FRAME -->
+    <section class="section" id="gallery">
+      <div class="section__head reveal">
+        <span class="section__index">05 — In the Field</span>
+        <h2 class="section__title">The cohort, in frame.</h2>
+        <p class="section__lead reveal">Moments from the five windows — service abroad, professional travel, the lab bench, and the people I do it all with. Tap any frame to open it.</p>
+      </div>
+
+      <div class="gallery" id="gallery-grid">
+        <figure class="frame reveal" data-cap="Cohort 5, together — the people behind every window." data-tag="Cohort">
+          <img src="../images/glass-gallery/cohort-selfie.jpg" alt="Aryan with the GLASS Cohort 5 group" loading="lazy" decoding="async" width="1280" height="960" />
+          <figcaption><span class="frame__tag">Cohort</span><span class="frame__cap">Cohort 5, together</span></figcaption>
+        </figure>
+
+        <figure class="frame reveal" data-cap="Teaching in a classroom in Indonesia during the GLASS semester abroad." data-tag="Global · Service">
+          <img src="../images/glass-gallery/indonesia-classroom.jpg" alt="Aryan and cohort members with students in an Indonesian classroom" loading="lazy" decoding="async" width="1280" height="960" />
+          <figcaption><span class="frame__tag">Global · Service</span><span class="frame__cap">Teaching abroad, Indonesia</span></figcaption>
+        </figure>
+
+        <figure class="frame reveal" data-cap="Business formal in DUMBO, Brooklyn — the Manhattan Bridge behind us." data-tag="Professional">
+          <img src="../images/glass-gallery/portrait-formal.jpg" alt="Cohort in business formal in DUMBO with the Manhattan Bridge" loading="lazy" decoding="async" width="1600" height="1067" />
+          <figcaption><span class="frame__tag">Professional</span><span class="frame__cap">Business formal in DUMBO</span></figcaption>
+        </figure>
+
+        <figure class="frame reveal" data-cap="Representing at the SASE National Convention." data-tag="Professional">
+          <img src="../images/glass-gallery/sase-convention.jpg" alt="Group at the SASE National Convention letters" loading="lazy" decoding="async" width="900" height="1600" />
+          <figcaption><span class="frame__tag">Professional</span><span class="frame__cap">SASE National Convention</span></figcaption>
+        </figure>
+
+        <figure class="frame reveal" data-cap="Exploring history abroad with the cohort during the required semester away." data-tag="Global">
+          <img src="../images/glass-gallery/abroad-scene.jpg" alt="Cohort abroad in front of a historic locomotive" loading="lazy" decoding="async" width="1600" height="1200" />
+          <figcaption><span class="frame__tag">Global</span><span class="frame__cap">Semester abroad</span></figcaption>
+        </figure>
+
+        <figure class="frame reveal" data-cap="Out in the city, volunteering — service woven into the everyday." data-tag="Service">
+          <img src="../images/glass-gallery/service-rescue-dog.jpg" alt="Volunteering on the street with a rescue dog" loading="lazy" decoding="async" width="738" height="738" />
+          <figcaption><span class="frame__tag">Service</span><span class="frame__cap">Giving back, in the city</span></figcaption>
+        </figure>
+
+        <figure class="frame reveal" data-cap="With the cohort, dressed to represent." data-tag="Professional">
+          <img src="../images/glass-gallery/professional-trio.jpg" alt="Three cohort members in business casual" loading="lazy" decoding="async" width="600" height="903" />
+          <figcaption><span class="frame__tag">Professional</span><span class="frame__cap">Suited up</span></figcaption>
+        </figure>
+
+        <figure class="frame reveal" data-cap="At the bench — soldering and building electronics in the lab." data-tag="Academic">
+          <img src="../images/glass-gallery/lab-electronics.jpg" alt="Working on electronics at a lab bench" loading="lazy" decoding="async" width="596" height="914" />
+          <figcaption><span class="frame__tag">Academic</span><span class="frame__cap">At the bench</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <div class="divider" aria-hidden="true"><span class="divider__beam"></span></div>
+
     <!-- CONTACT -->
     <section class="section section--contact" id="contact">
       <div class="contact reveal">
@@ -271,6 +325,17 @@
     <span class="footer__sep">·</span>
     <span>GLASS · NYU Tandon</span>
   </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lightbox__close" id="lbClose" aria-label="Close">&times;</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Previous">&#8249;</button>
+    <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Next">&#8250;</button>
+    <figure class="lightbox__stage">
+      <img class="lightbox__img" id="lbImg" src="" alt="" />
+      <figcaption class="lightbox__cap"><span id="lbCap"></span><span class="lightbox__count" id="lbCount"></span></figcaption>
+    </figure>
+  </div>
 
   <script src="glass.js"></script>
 </body>
