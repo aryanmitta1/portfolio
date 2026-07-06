@@ -18,7 +18,8 @@
       "Bash(file *.png *.svg)",
       "Bash(python *)",
       "Bash(echo \"exit: $?\")",
-      "Bash(node --check glass/glass.js)"
+      "Bash(node --check glass/glass.js)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }
