@@ -15,7 +15,10 @@
       "Bash(curl -sS -L -o kearfott.png -w \"HTTP %{http_code} size=%{size_download}\\\\n\" \"https://logo.clearbit.com/kearfott.com?size=256\")",
       "Bash(curl -sS -L -o soria-analytics.png -w \"HTTP %{http_code} size=%{size_download}\\\\n\" \"https://logo.clearbit.com/soriaanalytics.com?size=256\")",
       "Bash(file *.png)",
-      "Bash(file *.png *.svg)"
+      "Bash(file *.png *.svg)",
+      "Bash(python *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(node --check glass/glass.js)"
     ]
   }
 }
