@@ -29,7 +29,8 @@
       "Bash(xxd)",
       "Bash(gh repo *)",
       "WebFetch(domain:api.github.com)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(git fetch *)"
     ]
   }
 }

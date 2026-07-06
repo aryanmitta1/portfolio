@@ -48,7 +48,7 @@
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
-      <a href="glass/index.html">GLASS</a>
+      <a href="glass/index.html" class="nav__glass">GLASS</a>
       <a href="#contact" class="nav__cta">Contact</a>
     </nav>
     <button class="nav__toggle" id="navToggle" aria-label="Toggle menu">
@@ -371,12 +371,14 @@
               <p class="ccard__team">PYTORCH · OPENCV · ASTROMETRY</p>
               <p class="ccard__desc">
                 A vision and ML system that estimates geographic position from celestial
-                and skyline imagery, with no GPS required. A convolutional model learns to
-                map what the camera sees, star fields and horizon features, to a location
-                on Earth. I handled the data pipeline, model architecture, and a custom
-                loss that penalizes error in real-world distance, getting fixes accurate
-                to roughly a mile.
+                and skyline imagery, with no GPS required.
               </p>
+              <ul class="ccard__bullets">
+                <li>Trained a convolutional model to map star fields and horizon features to a location on Earth.</li>
+                <li>Built the full data pipeline, from image capture through preprocessing and labeling.</li>
+                <li>Wrote a custom loss that penalizes error in real-world distance rather than raw pixels.</li>
+                <li>Reached fixes accurate to roughly a mile.</li>
+              </ul>
               <div class="ccard__chips">
                 <span>PyTorch</span><span>OpenCV</span><span>CNNs</span><span>Geolocation</span>
               </div>
@@ -392,12 +394,15 @@
               <div class="ccard__rule"></div>
               <p class="ccard__team">STM32 · ESC / PWM · IMU</p>
               <p class="ccard__desc">
-                A custom drone flight-controller board built around an STM32. The board
-                generates the PWM signals that drive the ESCs and motors, reads an
-                onboard IMU for attitude, and handles its own power regulation, all
-                designed onto a single PCB. I took it from schematic through layout and
-                firmware, writing the low-level control loop in embedded C.
+                A custom drone flight-controller board built around an STM32, taken from
+                schematic through layout and firmware.
               </p>
+              <ul class="ccard__bullets">
+                <li>Generated the PWM signals that drive the ESCs and motors from the microcontroller.</li>
+                <li>Read an onboard IMU for attitude and fed it into the control loop.</li>
+                <li>Designed power regulation and all peripherals onto a single PCB.</li>
+                <li>Wrote the low-level control loop and drivers in embedded C.</li>
+              </ul>
               <div class="ccard__chips">
                 <span>STM32</span><span>ESC / PWM</span><span>PCB Design</span><span>IMU</span><span>Embedded C</span>
               </div>
@@ -413,12 +418,15 @@
               <div class="ccard__rule"></div>
               <p class="ccard__team">STM32 · SCHEMATIC → LAYOUT → BRING-UP</p>
               <p class="ccard__desc">
-                Designed a custom PCB around an STM32 microcontroller, recreating
-                Arduino-style functionality from first principles rather than using an
-                off-the-shelf board. The project ran end to end: schematic capture,
-                component selection, board layout, ordering the fabricated PCB, then
-                soldering and bringing it up and flashing firmware to confirm it worked.
+                A custom PCB built around an STM32, recreating Arduino-style functionality
+                from first principles instead of using an off-the-shelf board.
               </p>
+              <ul class="ccard__bullets">
+                <li>Captured the schematic and selected components from the microcontroller up.</li>
+                <li>Laid out the board and sent it out for fabrication.</li>
+                <li>Soldered and brought up the board, then flashed firmware to confirm it worked.</li>
+                <li>Debugged hardware and firmware together to get a clean bring-up.</li>
+              </ul>
               <div class="ccard__chips">
                 <span>STM32</span><span>PCB Layout</span><span>Embedded C</span><span>Bring-Up</span>
               </div>
@@ -434,12 +442,14 @@
               <div class="ccard__rule"></div>
               <p class="ccard__team">OPENCV · SERVOS · GESTURE TRACKING</p>
               <p class="ccard__desc">
-                A robotic hand that mirrors a human hand in real time. OpenCV tracks
-                finger positions from a live camera feed, and that pose maps to servo
-                angles that move each actuated joint on the hand. I built the vision
-                pipeline, the hand-tracking logic, and the servo control that turns
-                what the camera sees into motion with minimal lag.
+                A robotic hand that mirrors a human hand in real time from a live camera feed.
               </p>
+              <ul class="ccard__bullets">
+                <li>Tracked finger positions from the camera with OpenCV.</li>
+                <li>Mapped the detected hand pose to servo angles for each actuated joint.</li>
+                <li>Built the servo control that turns tracking into motion with minimal lag.</li>
+                <li>Tuned the pipeline for smooth, responsive mirroring in real time.</li>
+              </ul>
               <div class="ccard__chips">
                 <span>OpenCV</span><span>Python</span><span>Servos</span><span>Hand Tracking</span>
               </div>
@@ -456,12 +466,14 @@
               <p class="ccard__team">SOCKETS · DISTRIBUTED</p>
               <p class="ccard__desc">
                 A peer-to-peer file-sharing system where nodes discover each other and
-                exchange files directly, with no central server in the middle. Files are
-                split into chunks, transferred in parallel, and verified with hash checks
-                so a corrupted or dropped piece can be re-requested. I designed the
-                message protocol and the concurrent socket handling that keeps multiple
-                transfers running at once.
+                exchange files directly, with no central server in the middle.
               </p>
+              <ul class="ccard__bullets">
+                <li>Designed a custom message protocol for peer discovery and transfer.</li>
+                <li>Split files into chunks and transferred them in parallel across peers.</li>
+                <li>Verified each chunk with hash checks so dropped or corrupted pieces get re-requested.</li>
+                <li>Built the concurrent socket handling that keeps multiple transfers running at once.</li>
+              </ul>
               <div class="ccard__chips">
                 <span>Sockets</span><span>TCP/IP</span><span>Concurrency</span><span>Hashing</span>
               </div>
@@ -675,6 +687,9 @@
           <li><span class="extra__role">Study Abroad</span>NYU Paris</li>
           <li><span class="extra__role">Study Abroad</span>Hanyang University</li>
           <li><span class="extra__role">Wildlife Conservation Volunteer</span>FNPF - Bali, Indonesia</li>
+          <li><span class="extra__role">Member</span>NYU Indian Cultural Club</li>
+          <li><span class="extra__role">Member</span>Space Exploration Society</li>
+          <li><span class="extra__role">Member</span>Chess Club</li>
         </ul>
       </div>
 
