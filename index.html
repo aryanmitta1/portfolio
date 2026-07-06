@@ -225,7 +225,7 @@
                      onerror="this.closest('.ccard__icon').classList.add('no-logo')">
                 <svg class="ccard__icon-svg" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c2.5 2.5 4 6 4 10a8 8 0 0 1-8 0c0-4 1.5-7.5 4-10Z"/><circle cx="12" cy="9" r="1.6"/><path d="M8 14l-2.5 3.5L9 18M16 14l2.5 3.5L15 18"/></svg>
               </div>
-              <p class="ccard__period">SPRING 2026 – PRESENT</p>
+              <p class="ccard__period">SUMMER 2026</p>
               <h3 class="ccard__org">Blue Origin</h3>
               <p class="ccard__role">Avionics Software Engineering Intern</p>
               <div class="ccard__rule"></div>
@@ -236,12 +236,13 @@
                 so the constellation stays as unobtrusive as possible for astronomers and the night sky.
               </p>
               <ul class="ccard__bullets">
-                <li>Building a brightness model from GNC state, material &amp; optical properties, and BRDF sensor data.</li>
-                <li>Developing a full-stack app that predicts a satellite's apparent brightness anywhere on Earth.</li>
-                <li>Implementing the physics &amp; modeling pipeline primarily in MATLAB.</li>
+                <li>Built a physics model that predicts a satellite's apparent brightness from GNC state, material and optical properties, and BRDF data.</li>
+                <li>Implemented the brightness and modeling pipeline in MATLAB as the source of truth for the numbers.</li>
+                <li>Developed a full-stack tool with an interactive 3D viewport that visualizes brightness anywhere on Earth, wired to the MATLAB engine through a Python backend.</li>
+                <li>Wrote validation and cross-check scripts to confirm the model against analytic and energy-conservation references.</li>
               </ul>
               <div class="ccard__chips">
-                <span>MATLAB</span><span>BRDF / Optics</span><span>GNC</span><span>Full-Stack App</span><span>Modeling</span>
+                <span>MATLAB</span><span>BRDF / Optics</span><span>GNC</span><span>Three.js</span><span>Python / Flask</span>
               </div>
             </article>
 
@@ -276,23 +277,25 @@
                      onerror="this.closest('.ccard__icon').classList.add('no-logo')">
                 <svg class="ccard__icon-svg" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>
               </div>
-              <p class="ccard__period">SPRING 2025</p>
+              <p class="ccard__period">SUMMER 2025</p>
               <h3 class="ccard__org">Kearfott Corporation</h3>
               <p class="ccard__role">Aerospace / Systems Engineering Intern</p>
               <div class="ccard__rule"></div>
               <p class="ccard__team">GUIDANCE &amp; NAVIGATION</p>
               <p class="ccard__desc">
-                Built machine-learning tooling for celestial / skyline navigation and
+                Built machine-learning tooling for celestial and skyline navigation and
                 integrated a full sensor suite on an NVIDIA Jetson platform for field testing.
               </p>
               <ul class="ccard__bullets">
-                <li>Developed CV &amp; ML navigation tooling in PyTorch (ResNet, custom layers, Haversine loss), accurate to roughly ~1 mile.</li>
-                <li>Integrated camera, LiDAR, IMU, GNSS, and PPS timing hardware on a Jetson Orin Nano.</li>
-                <li>Built ROS2-based sensor publishing &amp; evaluation tools for real-world van tests.</li>
-                <li>Evaluated IMUs on drift, stability, and accuracy from field data.</li>
+                <li>Designed an ML celestial navigation system in PyTorch, reaching under a mile of positional accuracy through star recognition.</li>
+                <li>Built an automated framework to compare sensors and iterate cleanly across localization methods.</li>
+                <li>Integrated an AHRS and camera in real time over ROS2, applying sensor fusion and ORB-SLAM for position estimation.</li>
+                <li>Ran high-precision time synchronization, consistently holding under 100ns accuracy with an atomic clock.</li>
+                <li>Designed custom PCBs and simulated power-delivery circuits in LTspice.</li>
+                <li>Captured over a million synchronized IMU, GPS, and camera readings per session on van-based sensor runs, then evaluated IMUs on drift, stability, and accuracy to pick the final sensor.</li>
               </ul>
               <div class="ccard__chips">
-                <span>PyTorch</span><span>ROS2 Humble</span><span>Jetson</span><span>LiDAR</span><span>IMU / GNSS</span><span>OpenCV</span>
+                <span>PyTorch</span><span>ROS2 Humble</span><span>ORB-SLAM</span><span>Sensor Fusion</span><span>LTspice</span><span>AHRS · IMU / GNSS</span><span>PCB Design</span>
               </div>
             </article>
 
@@ -374,13 +377,14 @@
                 and skyline imagery, with no GPS required.
               </p>
               <ul class="ccard__bullets">
-                <li>Trained a convolutional model to map star fields and horizon features to a location on Earth.</li>
-                <li>Built the full data pipeline, from image capture through preprocessing and labeling.</li>
-                <li>Wrote a custom loss that penalizes error in real-world distance rather than raw pixels.</li>
+                <li>Generated a large training set of 100k sky images in Stellarium, spanning many locations and times.</li>
+                <li>Trained a 1D convolutional neural network on the identified star data to regress a position on Earth.</li>
+                <li>Used Haversine loss so the network optimizes for real-world great-circle distance rather than raw coordinate error.</li>
+                <li>After star identification, computed the final fix in MATLAB using spherical trigonometry.</li>
                 <li>Reached fixes accurate to roughly a mile.</li>
               </ul>
               <div class="ccard__chips">
-                <span>PyTorch</span><span>OpenCV</span><span>CNNs</span><span>Geolocation</span>
+                <span>PyTorch</span><span>1D CNN</span><span>Stellarium</span><span>MATLAB</span><span>Haversine Loss</span><span>Geolocation</span>
               </div>
             </article>
 
@@ -445,13 +449,13 @@
                 A robotic hand that mirrors a human hand in real time from a live camera feed.
               </p>
               <ul class="ccard__bullets">
-                <li>Tracked finger positions from the camera with OpenCV.</li>
-                <li>Mapped the detected hand pose to servo angles for each actuated joint.</li>
-                <li>Built the servo control that turns tracking into motion with minimal lag.</li>
-                <li>Tuned the pipeline for smooth, responsive mirroring in real time.</li>
+                <li>Recognized contracted and extended fingers with OpenCV at around 98% accuracy per finger.</li>
+                <li>Used contour detection to calculate the angles between fingers and read the gesture.</li>
+                <li>Mapped the detected hand pose to servo angles that drive each actuated joint with minimal lag.</li>
+                <li>Modeled the hand in SolidWorks and 3D printed it on a Prusa for clean part articulation.</li>
               </ul>
               <div class="ccard__chips">
-                <span>OpenCV</span><span>Python</span><span>Servos</span><span>Hand Tracking</span>
+                <span>OpenCV</span><span>Python</span><span>Arduino</span><span>Servos</span><span>SolidWorks</span>
               </div>
             </article>
 
@@ -469,13 +473,13 @@
                 exchange files directly, with no central server in the middle.
               </p>
               <ul class="ccard__bullets">
-                <li>Designed a custom message protocol for peer discovery and transfer.</li>
-                <li>Split files into chunks and transferred them in parallel across peers.</li>
-                <li>Verified each chunk with hash checks so dropped or corrupted pieces get re-requested.</li>
-                <li>Built the concurrent socket handling that keeps multiple transfers running at once.</li>
+                <li>Combined centralized coordination with peer-to-peer chunk transfer, so a tracker registers which peer holds each chunk while transfers flow directly between nodes.</li>
+                <li>Built a distributor that splits a file into chunks and spreads them across peers with round-robin load balancing.</li>
+                <li>Exposed REST APIs over Flask for peers to register, upload, and retrieve chunks, scaling to 100+ nodes.</li>
+                <li>Hashed chunks with SHA-256 for integrity and added AES-256 encryption to guard transfers against interception and tampering.</li>
               </ul>
               <div class="ccard__chips">
-                <span>Sockets</span><span>TCP/IP</span><span>Concurrency</span><span>Hashing</span>
+                <span>Python</span><span>Flask</span><span>REST APIs</span><span>AES-256</span><span>SHA-256</span><span>Distributed Systems</span>
               </div>
               <a class="ccard__repo" href="https://github.com/aryanmitta1/cnproject" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.71.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
@@ -604,17 +608,22 @@
                 </div>
                 <p class="ccard__period">FALL 2024 – PRESENT</p>
                 <h3 class="ccard__org">NYU Rogue Aerospace</h3>
-                <p class="ccard__role">Payload Electronics</p>
-                <p class="ccard__loc">NASA USLI · Brooklyn, NY</p>
+                <p class="ccard__role">Lead Avionics Systems Engineer</p>
+                <p class="ccard__loc">NASA USLI · FAR/OUT · Brooklyn, NY</p>
                 <div class="ccard__rule"></div>
-                <p class="ccard__team">STUDENT LAUNCH · PAYLOAD TEAM</p>
+                <p class="ccard__team">STUDENT LAUNCH · AVIONICS TEAM</p>
                 <p class="ccard__desc">
-                  Lead the electronics side of a NASA Student Launch payload, designing the
-                  telemetry chain and coordinating sensor integration and design decisions
-                  with the avionics team.
+                  Lead the avionics side of the rocketry team, which has competed in
+                  NASA USLI and now also flies in the FAR/OUT competition.
                 </p>
+                <ul class="ccard__bullets">
+                  <li>Devised an RF transmission system to relay rocket telemetry, reaching roughly 3 km of range at 95% packet success.</li>
+                  <li>Customized PCBs and schematics in Altium for GPS, data-collection sensors, and RF components.</li>
+                  <li>Engineered a MOSFET-based ignition system with remote triggering to initiate motor launches.</li>
+                  <li>Prepared technical presentations for NASA reviewers detailing the system design for launch approval.</li>
+                </ul>
                 <div class="ccard__chips">
-                  <span>Telemetry</span><span>Sensors</span><span>APRS</span><span>Embedded</span>
+                  <span>RF / Telemetry</span><span>Altium PCB</span><span>APRS</span><span>MOSFET Ignition</span><span>Embedded</span>
                 </div>
               </article>
 
@@ -632,11 +641,15 @@
                 <p class="ccard__team">GENERAL ENGINEERING · LABS</p>
                 <p class="ccard__desc">
                   Support first-year engineers through hands-on design and prototyping,
-                  and helped develop curriculum for the course labs alongside maintaining
-                  course materials and lab kits.
+                  and helped develop curriculum for the course labs.
                 </p>
+                <ul class="ccard__bullets">
+                  <li>Ran experiments for 400+ students per semester on circuits, CAD, and core engineering concepts.</li>
+                  <li>Assessed technical writing and presentation skills with weekly grading and feedback.</li>
+                  <li>Mentored students on hands-on projects using Arduino, Raspberry Pi, Python / C++, and SolidWorks.</li>
+                </ul>
                 <div class="ccard__chips">
-                  <span>Mentorship</span><span>Curriculum Design</span><span>Prototyping</span><span>Labs</span>
+                  <span>Mentorship</span><span>Curriculum Design</span><span>Circuits &amp; CAD</span><span>Labs</span>
                 </div>
               </article>
 
@@ -646,19 +659,23 @@
                        onerror="this.closest('.ccard__icon').classList.add('no-logo')">
                   <svg class="ccard__icon-svg" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>
                 </div>
-                <p class="ccard__period">RESEARCH · PAST SEMESTER</p>
+                <p class="ccard__period">SUMMER 2024</p>
                 <h3 class="ccard__org">FAMS Lab</h3>
                 <p class="ccard__role">Computer Vision Research Assistant</p>
                 <p class="ccard__loc">NYU Tandon · Brooklyn, NY</p>
                 <div class="ccard__rule"></div>
                 <p class="ccard__team">FLEXIBLE AI-POWERED MECHATRONICS LAB</p>
                 <p class="ccard__desc">
-                  Built computer vision models to detect kidney tumors in medical imaging.
-                  Evaluated YOLO detection models and trained additional models in PyTorch
-                  and TensorFlow to push detection accuracy higher.
+                  Built computer vision models to detect kidney disease progression
+                  in medical imaging.
                 </p>
+                <ul class="ccard__bullets">
+                  <li>Enhanced the detection software on image datasets used to flag kidney disease progression.</li>
+                  <li>Built and trained models with PyTorch and TensorFlow, cutting inference time by roughly 75% with image pre-processing.</li>
+                  <li>Compared tumor-detection performance across pre-built models including YOLOv1 to YOLOv8, SVM, and ResNet.</li>
+                </ul>
                 <div class="ccard__chips">
-                  <span>PyTorch</span><span>TensorFlow</span><span>YOLO</span><span>Medical Imaging</span>
+                  <span>PyTorch</span><span>TensorFlow</span><span>YOLO</span><span>ResNet</span><span>Medical Imaging</span>
                 </div>
               </article>
 
@@ -682,7 +699,7 @@
         <h3 class="extra__title">Extracurriculars &amp; Leadership</h3>
         <ul class="extra__list">
           <li><span class="extra__role">Vice President</span>IEEE NYU Chapter</li>
-          <li><span class="extra__role">Secretary</span>Theta Tau</li>
+          <li><span class="extra__role">Secretary</span>NYU Theta Tau</li>
           <li><span class="extra__role">Member</span>Society of Asian Scientists and Engineers</li>
           <li><span class="extra__role">Study Abroad</span>NYU Paris</li>
           <li><span class="extra__role">Study Abroad</span>Hanyang University</li>
