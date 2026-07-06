@@ -498,10 +498,6 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     if (!cards.length) return;
 
     const start = parseInt(root.getAttribute("data-start") || "0", 10);
-    const alignLeft = root.getAttribute("data-align") === "left";
-    // When left-aligning, sit the active card a little in from the edge so its
-    // glow + accent ring aren't clipped by the viewport's overflow:hidden.
-    const EDGE_INSET = 24;
     let idx = Math.min(Math.max(0, start), cards.length - 1);
 
     // build dots
@@ -516,17 +512,10 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
     const dots = Array.from(dotsWrap.children);
 
     function render() {
+      const vpCenter = viewport.clientWidth / 2;
       const card = cards[idx];
-      let offset;
-      if (alignLeft) {
-        // Left-align the active card, inset from the viewport's left edge.
-        offset = EDGE_INSET - card.offsetLeft;
-      } else {
-        const vpCenter = viewport.clientWidth / 2;
-        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-        offset = vpCenter - cardCenter;
-      }
-      track.style.transform = `translateX(${offset}px)`;
+      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+      track.style.transform = `translateX(${vpCenter - cardCenter}px)`;
       cards.forEach((c, i) => c.classList.toggle("is-active", i === idx));
       dots.forEach((d, i) => d.classList.toggle("is-active", i === idx));
     }

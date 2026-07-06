@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Aryan Mitta — Electrical & Computer Engineering student at NYU Tandon. Avionics, embedded software, and aerospace systems." />
+  <meta name="description" content="Aryan Mitta · Electrical & Computer Engineering student at NYU Tandon. Avionics, embedded software, and aerospace systems." />
   <meta name="theme-color" content="#050505" />
   <title>Aryan Mitta Portfolio</title>
 
@@ -37,7 +37,9 @@
   <!-- Navigation -->
   <header class="nav" id="nav">
     <a href="#top" class="nav__brand">
-      <span class="nav__brand-mark">AM</span>
+      <span class="nav__brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="3.2" fill="currentColor" stroke="none"/><ellipse cx="12" cy="12" rx="9" ry="4.2" transform="rotate(-32 12 12)"/><circle cx="4.7" cy="15.2" r="1.3" fill="currentColor" stroke="none"/></svg>
+      </span>
       <span class="nav__brand-text">Aryan&nbsp;Mitta</span>
     </a>
     <nav class="nav__links" id="navLinks">
@@ -90,11 +92,11 @@
           <span class="hero__type" id="decryptText">Avionics Software Engineer</span><span class="hero__caret">_</span>
         </p>
         <p class="hero__role reveal">
-          Electrical &amp; Computer Engineering — NYU Tandon
+          Electrical &amp; Computer Engineering, NYU Tandon
         </p>
         <p class="hero__tagline reveal">
-          I build <span class="hl">software</span> and <span class="hl">test systems</span> for aerospace
-          and embedded hardware — flight software, sensor pipelines, and the
+          I build <span class="hl">software</span> and <span class="hl">flight systems</span> for aerospace
+          and embedded hardware: flight software, sensor pipelines, and the
           electronics they run on.
         </p>
         <div class="hero__actions reveal">
@@ -158,7 +160,7 @@
     <!-- ABOUT -->
     <section class="section" id="about">
       <div class="section__head reveal">
-        <span class="section__index">01 — About</span>
+        <span class="section__index">01 · About</span>
         <h2 class="section__title">Between software,<br>hardware &amp; flight.</h2>
       </div>
       <div class="about">
@@ -179,14 +181,14 @@
             <p>
               I'm an Electrical &amp; Computer Engineering student at
               <strong>NYU Tandon</strong>. I like working where
-              <strong>software meets hardware</strong> — on the avionics, sensors,
+              <strong>software meets hardware</strong>, on the avionics, sensors,
               and systems that go into rockets, satellites, and autonomous platforms.
             </p>
             <p>
               So far that's meant Python automation, embedded systems, ROS2,
-              computer vision, telemetry processing, and electrical test
-              engineering, across three internships and a set of hardware projects.
-              I care most about the parts where the firmware and the physics have to agree.
+              computer vision, and telemetry processing, across three internships
+              and a set of hardware projects. I care most about the parts where the
+              firmware and the physics have to agree.
             </p>
           </div>
           <ul class="about__tags">
@@ -195,7 +197,7 @@
             <li>Avionics</li>
             <li>Robotics</li>
             <li>Sensor Fusion</li>
-            <li>Test Automation</li>
+            <li>Computer Vision</li>
             <li>Telemetry</li>
             <li>HW / SW Integration</li>
           </ul>
@@ -208,12 +210,12 @@
     <!-- EXPERIENCE -->
     <section class="section" id="experience">
       <div class="section__head reveal">
-        <span class="section__index">02 — Experience</span>
-        <h2 class="section__title">Where I've interned.</h2>
+        <span class="section__index">02 · Experience</span>
+        <h2 class="section__title">Internship Experience</h2>
         <p class="section__lead reveal">Three internships so far, in aerospace, navigation, and software. On each one I got to work on something real that made it into production.</p>
       </div>
 
-      <div class="carousel reveal" id="xpCarousel" data-start="0" data-align="left" aria-roledescription="carousel" aria-label="Internships">
+      <div class="carousel reveal" id="xpCarousel" data-start="0" aria-roledescription="carousel" aria-label="Internships">
         <div class="carousel__viewport">
           <div class="carousel__track">
 
@@ -223,14 +225,14 @@
                      onerror="this.closest('.ccard__icon').classList.add('no-logo')">
                 <svg class="ccard__icon-svg" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c2.5 2.5 4 6 4 10a8 8 0 0 1-8 0c0-4 1.5-7.5 4-10Z"/><circle cx="12" cy="9" r="1.6"/><path d="M8 14l-2.5 3.5L9 18M16 14l2.5 3.5L15 18"/></svg>
               </div>
-              <p class="ccard__period">SPRING 2026 — PRESENT</p>
+              <p class="ccard__period">SPRING 2026 – PRESENT</p>
               <h3 class="ccard__org">Blue Origin</h3>
               <p class="ccard__role">Avionics Software Engineering Intern</p>
               <div class="ccard__rule"></div>
               <p class="ccard__team">SATELLITE BRIGHTNESS · TERAWAVE</p>
               <p class="ccard__desc">
                 Working on satellite brightness mitigation for the <strong>Terawave</strong>
-                constellation — modeling how bright each spacecraft appears from the ground
+                constellation, modeling how bright each spacecraft appears from the ground
                 so the constellation stays as unobtrusive as possible for astronomers and the night sky.
               </p>
               <ul class="ccard__bullets">
@@ -255,7 +257,7 @@
               <div class="ccard__rule"></div>
               <p class="ccard__team">NYU TANDON FUTURE LABS</p>
               <p class="ccard__desc">
-                Built data pipelines for a financial news &amp; research terminal —
+                Built data pipelines for a financial news &amp; research terminal,
                 ingesting, cleaning, ranking, and summarizing articles for analyst review.
               </p>
               <ul class="ccard__bullets">
@@ -284,7 +286,7 @@
                 integrated a full sensor suite on an NVIDIA Jetson platform for field testing.
               </p>
               <ul class="ccard__bullets">
-                <li>Developed CV &amp; ML navigation tooling in PyTorch (ResNet, custom layers, Haversine loss) — accurate to roughly ~1 mile.</li>
+                <li>Developed CV &amp; ML navigation tooling in PyTorch (ResNet, custom layers, Haversine loss), accurate to roughly ~1 mile.</li>
                 <li>Integrated camera, LiDAR, IMU, GNSS, and PPS timing hardware on a Jetson Orin Nano.</li>
                 <li>Built ROS2-based sensor publishing &amp; evaluation tools for real-world van tests.</li>
                 <li>Evaluated IMUs on drift, stability, and accuracy from field data.</li>
@@ -314,29 +316,34 @@
     <!-- PROJECTS (carousel) -->
     <section class="section" id="projects">
       <div class="section__head reveal">
-        <span class="section__index">03 — Projects</span>
-        <h2 class="section__title">Things I've built.</h2>
-        <p class="section__lead reveal">A mix of hardware and software projects I designed and built end to end, mostly on my own time.</p>
+        <span class="section__index">03 · Projects</span>
+        <h2 class="section__title">Projects</h2>
+        <p class="section__lead reveal">A mix of hardware and software projects I designed and built end to end.</p>
       </div>
 
-      <div class="carousel reveal" id="projectsCarousel" data-start="0" data-align="left" aria-roledescription="carousel" aria-label="Projects">
+      <div class="carousel reveal" id="projectsCarousel" data-start="0" aria-roledescription="carousel" aria-label="Projects">
         <div class="carousel__viewport">
           <div class="carousel__track">
 
             <article class="ccard" data-i="0">
-              <div class="ccard__icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15a4 4 0 0 1 4 4M5 11a8 8 0 0 1 8 8M5 7a12 12 0 0 1 12 12"/><circle cx="5.5" cy="18.5" r="1.4" fill="currentColor" stroke="none"/></svg>
+              <div class="ccard__icon ccard__icon--brand" aria-hidden="true">
+                <img class="ccard__logo" src="images/logos/rogue-aerospace.jpg" alt="NYU Rogue Aerospace" loading="lazy"
+                     onerror="this.closest('.ccard__icon').classList.add('no-logo')">
+                <svg class="ccard__icon-svg" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15a4 4 0 0 1 4 4M5 11a8 8 0 0 1 8 8M5 7a12 12 0 0 1 12 12"/><circle cx="5.5" cy="18.5" r="1.4" fill="currentColor" stroke="none"/></svg>
               </div>
               <p class="ccard__period">AEROSPACE · NASA USLI</p>
               <h3 class="ccard__org">Rocket Payload Telemetry System</h3>
-              <p class="ccard__role">Payload Electronics Lead — live downlink to NASA</p>
+              <p class="ccard__role">Payload Electronics Lead, live downlink to NASA</p>
               <div class="ccard__rule"></div>
               <p class="ccard__team">NYU ROGUE AEROSPACE · 144–148 MHz VHF</p>
               <p class="ccard__desc">
                 Led payload electronics for a NASA University Student Launch Initiative
-                rocket — designing the full telemetry chain that transmitted live flight
-                data to NASA's ground receiver, plus a mission-control GUI to arm,
-                disarm, launch, and visualize the downlink in real time.
+                rocket, designing the full telemetry chain that transmitted live flight
+                data to NASA's ground receiver during flight. On the ground, the data
+                fed a mission-control GUI I built to arm, disarm, and launch the payload
+                and visualize the incoming downlink in real time. The work spanned
+                sensor selection, radio-link design, packet encoding, and the review
+                documentation NASA required before launch.
               </p>
               <ul class="ccard__bullets">
                 <li>Built the telemetry chain: Arduino + BMP390 + RTC → APRS over VHF radio.</li>
@@ -347,6 +354,10 @@
               <div class="ccard__chips">
                 <span>Arduino</span><span>APRS / AFSK</span><span>VHF Radio</span><span>BMP390</span><span>Python GUI</span>
               </div>
+              <a class="ccard__repo" href="https://github.com/aryanmitta1/Rogue-Launch-Control" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.71.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+                View on GitHub
+              </a>
             </article>
 
             <article class="ccard" data-i="1">
@@ -359,9 +370,12 @@
               <div class="ccard__rule"></div>
               <p class="ccard__team">PYTORCH · OPENCV · ASTROMETRY</p>
               <p class="ccard__desc">
-                A vision-and-ML system that estimates geographic position from celestial
-                and skyline imagery — no GPS required — using a trained model to map what
-                the camera sees to a location on Earth.
+                A vision and ML system that estimates geographic position from celestial
+                and skyline imagery, with no GPS required. A convolutional model learns to
+                map what the camera sees, star fields and horizon features, to a location
+                on Earth. I handled the data pipeline, model architecture, and a custom
+                loss that penalizes error in real-world distance, getting fixes accurate
+                to roughly a mile.
               </p>
               <div class="ccard__chips">
                 <span>PyTorch</span><span>OpenCV</span><span>CNNs</span><span>Geolocation</span>
@@ -378,9 +392,11 @@
               <div class="ccard__rule"></div>
               <p class="ccard__team">STM32 · ESC / PWM · IMU</p>
               <p class="ccard__desc">
-                A custom drone flight-controller board built around an STM32 — generating
-                the PWM signals that drive the ESCs and motors, with sensor inputs and
-                power management designed onto a single board.
+                A custom drone flight-controller board built around an STM32. The board
+                generates the PWM signals that drive the ESCs and motors, reads an
+                onboard IMU for attitude, and handles its own power regulation, all
+                designed onto a single PCB. I took it from schematic through layout and
+                firmware, writing the low-level control loop in embedded C.
               </p>
               <div class="ccard__chips">
                 <span>STM32</span><span>ESC / PWM</span><span>PCB Design</span><span>IMU</span><span>Embedded C</span>
@@ -397,9 +413,11 @@
               <div class="ccard__rule"></div>
               <p class="ccard__team">STM32 · SCHEMATIC → LAYOUT → BRING-UP</p>
               <p class="ccard__desc">
-                Designed a custom PCB around an STM32 microcontroller — recreating
-                Arduino-style functionality from first principles, from schematic capture
-                and layout through fabrication and board bring-up.
+                Designed a custom PCB around an STM32 microcontroller, recreating
+                Arduino-style functionality from first principles rather than using an
+                off-the-shelf board. The project ran end to end: schematic capture,
+                component selection, board layout, ordering the fabricated PCB, then
+                soldering and bringing it up and flashing firmware to confirm it worked.
               </p>
               <div class="ccard__chips">
                 <span>STM32</span><span>PCB Layout</span><span>Embedded C</span><span>Bring-Up</span>
@@ -416,9 +434,11 @@
               <div class="ccard__rule"></div>
               <p class="ccard__team">OPENCV · SERVOS · GESTURE TRACKING</p>
               <p class="ccard__desc">
-                A robotic hand that mirrors a human hand in real time — using OpenCV to
-                track finger positions from a camera feed and drive the servos that move
-                each actuated joint.
+                A robotic hand that mirrors a human hand in real time. OpenCV tracks
+                finger positions from a live camera feed, and that pose maps to servo
+                angles that move each actuated joint on the hand. I built the vision
+                pipeline, the hand-tracking logic, and the servo control that turns
+                what the camera sees into motion with minimal lag.
               </p>
               <div class="ccard__chips">
                 <span>OpenCV</span><span>Python</span><span>Servos</span><span>Hand Tracking</span>
@@ -435,13 +455,20 @@
               <div class="ccard__rule"></div>
               <p class="ccard__team">SOCKETS · DISTRIBUTED</p>
               <p class="ccard__desc">
-                A peer-to-peer file-sharing system that lets nodes discover each other and
-                exchange files directly — no central server, with chunked transfer and
-                integrity checks over a hand-rolled protocol.
+                A peer-to-peer file-sharing system where nodes discover each other and
+                exchange files directly, with no central server in the middle. Files are
+                split into chunks, transferred in parallel, and verified with hash checks
+                so a corrupted or dropped piece can be re-requested. I designed the
+                message protocol and the concurrent socket handling that keeps multiple
+                transfers running at once.
               </p>
               <div class="ccard__chips">
                 <span>Sockets</span><span>TCP/IP</span><span>Concurrency</span><span>Hashing</span>
               </div>
+              <a class="ccard__repo" href="https://github.com/aryanmitta1/cnproject" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.09.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.36 9.36 0 0 1 2.5-.34c.85 0 1.71.12 2.5.34 1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.48-.01 2.82 0 .27.18.59.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+                View on GitHub
+              </a>
             </article>
 
           </div>
@@ -464,7 +491,7 @@
     <!-- SKILLS -->
     <section class="section" id="skills">
       <div class="section__head reveal">
-        <span class="section__index">04 — Capabilities</span>
+        <span class="section__index">04 · Skills</span>
         <h2 class="section__title">Technical skills.</h2>
       </div>
 
@@ -481,23 +508,24 @@
           <h3>Flight &amp; Avionics Software</h3>
           <div class="chips">
             <span>Flight Software (C&amp;DH)</span><span>Telemetry &amp; Command</span>
-            <span>Hardware-in-the-Loop (HIL)</span><span>Fault Detection (FDIR)</span>
-            <span>Flight-Test Automation</span><span>Data Reduction</span>
+            <span>RF / Radio Links (VHF · APRS)</span><span>Sensor Integration</span>
+            <span>Fault Detection (FDIR)</span><span>Hardware-in-the-Loop (HIL)</span>
+            <span>GNC Modeling</span>
           </div>
         </div>
         <div class="skill-card reveal">
           <h3>Embedded &amp; Real-Time</h3>
           <div class="chips">
             <span>Bare-Metal C</span><span>RTOS / FreeRTOS</span><span>Device Drivers</span>
-            <span>UART / SPI / I²C / CAN</span><span>Interrupts &amp; DMA</span>
-            <span>Bootloaders &amp; Flashing</span>
+            <span>UART / SPI / I²C / CAN</span><span>Control Loops / PID</span>
+            <span>Interrupts &amp; DMA</span><span>Bootloaders &amp; Flashing</span>
           </div>
         </div>
         <div class="skill-card reveal">
           <h3>Robotics &amp; Sensor Fusion</h3>
           <div class="chips">
-            <span>ROS2 (Humble)</span><span>Kalman / EKF</span><span>LiDAR · IMU · GNSS</span>
-            <span>PPS Time-Sync</span><span>tf2 / rosbag</span><span>Real-Time Pipelines</span>
+            <span>ROS2 (Humble)</span><span>LiDAR · IMU · GNSS</span><span>Sensor Fusion</span>
+            <span>PPS Time-Sync</span><span>Jetson Integration</span><span>Real-Time Pipelines</span>
           </div>
         </div>
         <div class="skill-card reveal">
@@ -510,7 +538,7 @@
         <div class="skill-card reveal">
           <h3>Data, Infra &amp; Tooling</h3>
           <div class="chips">
-            <span>ETL Pipelines</span><span>Postgres / SQL</span><span>Vector / Semantic Search</span>
+            <span>Data Pipelines</span><span>Postgres / SQL</span><span>Vector / Semantic Search</span>
             <span>Docker</span><span>Linux</span><span>Git + CI/CD</span>
           </div>
         </div>
@@ -522,8 +550,8 @@
     <!-- EDUCATION + ON-CAMPUS + INVOLVEMENT + COURSEWORK -->
     <section class="section" id="education">
       <div class="section__head reveal">
-        <span class="section__index">05 — Background</span>
-        <h2 class="section__title">Education &amp; campus life.</h2>
+        <span class="section__index">05 · Education</span>
+        <h2 class="section__title">Education</h2>
       </div>
 
       <!-- 1. NYU education box -->
@@ -536,6 +564,7 @@
             <span>GPA 3.93</span>
             <span>GLASS Honors · Cohort 5</span>
             <span>Tau Beta Pi</span>
+            <span>Dean's List</span>
           </div>
           <h4>Focus Areas</h4>
           <div class="chips">
@@ -551,23 +580,25 @@
         <h3 class="edu-sub__title">On-campus involvement.</h3>
         <p class="edu-sub__lead">Research, leadership, and teaching I've taken on alongside the degree.</p>
 
-        <div class="carousel reveal" id="campusCarousel" data-start="1" aria-roledescription="carousel" aria-label="On-campus roles">
+        <div class="carousel reveal" id="campusCarousel" data-start="0" aria-roledescription="carousel" aria-label="On-campus roles">
           <div class="carousel__viewport">
             <div class="carousel__track">
 
               <article class="ccard" data-i="0">
-                <div class="ccard__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c2.5 2.5 4 6 4 10a8 8 0 0 1-8 0c0-4 1.5-7.5 4-10Z"/><circle cx="12" cy="9" r="1.6"/><path d="M8 14l-2.5 3.5L9 18M16 14l2.5 3.5L15 18"/></svg>
+                <div class="ccard__icon ccard__icon--brand" aria-hidden="true">
+                  <img class="ccard__logo" src="images/logos/rogue-aerospace.jpg" alt="NYU Rogue Aerospace" loading="lazy"
+                       onerror="this.closest('.ccard__icon').classList.add('no-logo')">
+                  <svg class="ccard__icon-svg" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c2.5 2.5 4 6 4 10a8 8 0 0 1-8 0c0-4 1.5-7.5 4-10Z"/><circle cx="12" cy="9" r="1.6"/><path d="M8 14l-2.5 3.5L9 18M16 14l2.5 3.5L15 18"/></svg>
                 </div>
-                <p class="ccard__period">FALL 2024 — PRESENT</p>
+                <p class="ccard__period">FALL 2024 – PRESENT</p>
                 <h3 class="ccard__org">NYU Rogue Aerospace</h3>
                 <p class="ccard__role">Payload Electronics</p>
                 <p class="ccard__loc">NASA USLI · Brooklyn, NY</p>
                 <div class="ccard__rule"></div>
                 <p class="ccard__team">STUDENT LAUNCH · PAYLOAD TEAM</p>
                 <p class="ccard__desc">
-                  Lead the electronics side of a NASA Student Launch payload — designing the
-                  telemetry chain and coordinating sensor-integration and design decisions
+                  Lead the electronics side of a NASA Student Launch payload, designing the
+                  telemetry chain and coordinating sensor integration and design decisions
                   with the avionics team.
                 </p>
                 <div class="ccard__chips">
@@ -576,28 +607,32 @@
               </article>
 
               <article class="ccard" data-i="1">
-                <div class="ccard__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4-9-4Z"/><path d="M7 10v5c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5v-5"/><path d="M21 8v5"/></svg>
+                <div class="ccard__icon ccard__icon--brand" aria-hidden="true">
+                  <img class="ccard__logo" src="images/logos/nyu.png" alt="NYU" loading="lazy"
+                       onerror="this.closest('.ccard__icon').classList.add('no-logo')">
+                  <svg class="ccard__icon-svg" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4-9-4Z"/><path d="M7 10v5c0 1.4 2.2 2.5 5 2.5s5-1.1 5-2.5v-5"/><path d="M21 8v5"/></svg>
                 </div>
                 <p class="ccard__period">TEACHING · GENERAL ENGINEERING</p>
                 <h3 class="ccard__org">NYU Tandon</h3>
-                <p class="ccard__role">Teaching Assistant — EG-UY 1004</p>
+                <p class="ccard__role">Teaching Assistant, EG-UY 1004</p>
                 <p class="ccard__loc">Brooklyn, NY</p>
                 <div class="ccard__rule"></div>
-                <p class="ccard__team">GENERAL ENGINEERING · COMMS &amp; INVENTORY LEAD</p>
+                <p class="ccard__team">GENERAL ENGINEERING · LABS</p>
                 <p class="ccard__desc">
-                  Support first-year engineers through hands-on design and prototyping as
-                  Communications, Inventory &amp; Purchasing Leader — maintaining course
-                  materials, managing lab kits, and running showcase events.
+                  Support first-year engineers through hands-on design and prototyping,
+                  and helped develop curriculum for the course labs alongside maintaining
+                  course materials and lab kits.
                 </p>
                 <div class="ccard__chips">
-                  <span>Mentorship</span><span>Prototyping</span><span>Design</span><span>Logistics</span>
+                  <span>Mentorship</span><span>Curriculum Design</span><span>Prototyping</span><span>Labs</span>
                 </div>
               </article>
 
               <article class="ccard" data-i="2">
-                <div class="ccard__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>
+                <div class="ccard__icon ccard__icon--brand" aria-hidden="true">
+                  <img class="ccard__logo" src="images/logos/fams.png" alt="FAMS Lab, NYU Tandon" loading="lazy"
+                       onerror="this.closest('.ccard__icon').classList.add('no-logo')">
+                  <svg class="ccard__icon-svg" viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z"/><circle cx="12" cy="12" r="2.6"/></svg>
                 </div>
                 <p class="ccard__period">RESEARCH · PAST SEMESTER</p>
                 <h3 class="ccard__org">FAMS Lab</h3>
@@ -606,12 +641,12 @@
                 <div class="ccard__rule"></div>
                 <p class="ccard__team">FLEXIBLE AI-POWERED MECHATRONICS LAB</p>
                 <p class="ccard__desc">
-                  Trained and evaluated computer-vision models for a mechatronics research
-                  project — building and tuning the perception pipeline that lets the lab's
-                  systems see and react to their environment.
+                  Built computer vision models to detect kidney tumors in medical imaging.
+                  Evaluated YOLO detection models and trained additional models in PyTorch
+                  and TensorFlow to push detection accuracy higher.
                 </p>
                 <div class="ccard__chips">
-                  <span>PyTorch</span><span>OpenCV</span><span>CNNs</span><span>Model Eval</span>
+                  <span>PyTorch</span><span>TensorFlow</span><span>YOLO</span><span>Medical Imaging</span>
                 </div>
               </article>
 
@@ -645,10 +680,10 @@
 
       <!-- 4. Coursework: charted as Orion -->
       <div class="edu-sub reveal" id="coursework">
-        <h3 class="edu-sub__title">Relevant coursework — charted as Orion.</h3>
-        <p class="edu-sub__lead">Eleven courses mapped onto the Hunter: hardware at his <em>feet</em>, the computing core along his <em>belt</em>, signals &amp; control in his <em>shoulders</em>, machine learning in his <em>head</em>, software tools at his <em>sword</em>. Hover a star to read it.</p>
+        <h3 class="edu-sub__title">Relevant coursework, mapped to Orion.</h3>
+        <p class="edu-sub__lead">Eleven courses arranged on the constellation by area: hardware at the <em>feet</em>, the computing core along the <em>belt</em>, signals &amp; control at the <em>shoulders</em>, machine learning at the <em>head</em>, and software fundamentals down the <em>sword</em>. Hover a star to read it.</p>
 
-        <div class="starmap reveal" id="starmap" aria-label="Coursework constellation — Orion">
+        <div class="starmap reveal" id="starmap" aria-label="Coursework constellation · Orion">
           <svg class="starmap__lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
             <!-- head to shoulders -->
             <polyline points="50,9 33,27" />
@@ -668,19 +703,19 @@
             <polyline points="49,73 48,82" />
           </svg>
 
-          <!-- HEAD — frontier / the mind -->
+          <!-- HEAD · frontier / the mind -->
           <button class="star star--bright" style="--x:50%; --y:9%;" data-name="Meissa · head" data-course="Machine Learning"><span class="star__dot"></span></button>
-          <!-- SHOULDERS — analysis -->
+          <!-- SHOULDERS · analysis -->
           <button class="star" style="--x:33%; --y:27%;" data-name="Betelgeuse · shoulder" data-course="Signals &amp; Systems"><span class="star__dot"></span></button>
           <button class="star" style="--x:67%; --y:25%;" data-name="Bellatrix · shoulder" data-course="Feedback Control"><span class="star__dot"></span></button>
-          <!-- BELT — computing core -->
+          <!-- BELT · computing core -->
           <button class="star" style="--x:42%; --y:50%;" data-name="Alnitak · belt" data-course="Computer Architecture"><span class="star__dot"></span></button>
           <button class="star star--bright" style="--x:51%; --y:51%;" data-name="Alnilam · belt" data-course="Embedded Systems Design"><span class="star__dot"></span></button>
           <button class="star" style="--x:60%; --y:52%;" data-name="Mintaka · belt" data-course="Digital Logic &amp; State Machines"><span class="star__dot"></span></button>
-          <!-- FEET — hardware foundations -->
+          <!-- FEET · hardware foundations -->
           <button class="star" style="--x:26%; --y:88%;" data-name="Saiph · foot" data-course="PCB Design"><span class="star__dot"></span></button>
           <button class="star star--bright" style="--x:76%; --y:89%;" data-name="Rigel · foot" data-course="Electronics"><span class="star__dot"></span></button>
-          <!-- SWORD — software tools -->
+          <!-- SWORD · software tools -->
           <button class="star" style="--x:50%; --y:64%;" data-name="42 Orionis · sword" data-course="Object-Oriented Programming"><span class="star__dot"></span></button>
           <button class="star" style="--x:49%; --y:73%;" data-name="Orion Nebula · sword" data-course="Data Structures &amp; Algorithms"><span class="star__dot"></span></button>
           <button class="star" style="--x:48%; --y:82%;" data-name="Hatysa · sword" data-course="Computer Networking"><span class="star__dot"></span></button>
@@ -708,7 +743,7 @@
         <h2 class="contact__title">Get in touch</h2>
         <p class="contact__text">
           I'm looking for roles in aerospace, avionics, embedded systems, and
-          test engineering. If you're working on something in that space, I'd
+          flight software. If you're working on something in that space, I'd
           like to hear about it.
         </p>
         <div class="contact__actions">

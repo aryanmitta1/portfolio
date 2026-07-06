@@ -21,7 +21,15 @@
       "Bash(node --check glass/glass.js)",
       "Bash(git commit -m ' *)",
       "WebFetch(domain:www.blueorigin.com)",
-      "Bash(node --check script.js)"
+      "Bash(node --check script.js)",
+      "Bash(cp \"/c/Users/amitta/OneDrive - Blue Origin, LLC/Desktop/new images/images.jpg\" rogue-aerospace.jpg)",
+      "Bash(cp \"/c/Users/amitta/OneDrive - Blue Origin, LLC/Desktop/new images/NYU-Logo.png\" nyu.png)",
+      "Bash(cp \"/c/Users/amitta/OneDrive - Blue Origin, LLC/Desktop/new images/Screenshot 2022-01-26 220515.png\" fams.png)",
+      "Bash(sort -t: -k2)",
+      "Bash(xxd)",
+      "Bash(gh repo *)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }
