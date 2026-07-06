@@ -19,7 +19,9 @@
       "Bash(python *)",
       "Bash(echo \"exit: $?\")",
       "Bash(node --check glass/glass.js)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "WebFetch(domain:www.blueorigin.com)",
+      "Bash(node --check script.js)"
     ]
   }
 }

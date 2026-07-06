@@ -186,43 +186,42 @@ a.window:hover .window__go .arrow { transform: translateX(5px); }
      composite 8 extra layers behind the fixed starfield. */
   transition: transform 0.4s var(--ease), border-color 0.3s, box-shadow 0.4s;
 }
+/* Accent glow that blooms up from the bottom on hover — no caption, just light. */
 .frame::after {
   content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, transparent 45%, rgba(3,4,10,0.78) 100%);
-  opacity: 0; transition: opacity 0.4s var(--ease); z-index: 1;
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(125% 85% at 50% 118%, rgba(174,188,255,0.30), transparent 68%);
+  opacity: 0; transition: opacity 0.45s var(--ease);
+}
+/* Diagonal light sweep that crosses the frame once on hover. */
+.frame::before {
+  content: "";
+  position: absolute; top: 0; left: -80%; width: 55%; height: 100%; z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,0.38), transparent);
+  transform: skewX(-18deg); opacity: 0;
 }
 .frame img {
   display: block; width: 100%; height: auto;
   transition: transform 0.6s var(--ease), filter 0.5s;
-  filter: saturate(0.92) brightness(0.94);
+  /* Rest a touch muted so the hover pop reads clearly. */
+  filter: saturate(0.72) brightness(0.82);
 }
 .frame:hover {
   transform: translateY(-4px);
-  border-color: rgba(174,188,255,0.4);
-  box-shadow: 0 26px 55px -30px rgba(150,170,255,0.55);
+  border-color: rgba(174,188,255,0.45);
+  box-shadow: 0 26px 55px -30px rgba(150,170,255,0.6);
 }
 .frame:hover::after { opacity: 1; }
-.frame:hover img { transform: scale(1.05); filter: saturate(1.05) brightness(1); }
-.frame figcaption {
-  position: absolute; left: 0; right: 0; bottom: 0;
-  padding: 16px 18px; z-index: 2;
-  display: flex; flex-direction: column; gap: 5px;
-  transform: translateY(8px); opacity: 0;
-  transition: transform 0.4s var(--ease), opacity 0.4s var(--ease);
+.frame:hover::before { animation: frame-sheen 0.9s var(--ease); }
+.frame:hover img { transform: scale(1.06); filter: saturate(1.1) brightness(1.04); }
+@keyframes frame-sheen {
+  0%   { left: -80%; opacity: 0; }
+  12%  { opacity: 1; }
+  100% { left: 135%; opacity: 0; }
 }
-.frame:hover figcaption { transform: translateY(0); opacity: 1; }
-.frame__tag {
-  align-self: flex-start;
-  font-family: "JetBrains Mono", monospace; font-size: 0.62rem; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--accent);
-  padding: 4px 9px; border-radius: 999px;
-  background: rgba(10,12,24,0.55); border: 1px solid rgba(174,188,255,0.35);
-  backdrop-filter: blur(4px);
-}
-.frame__cap {
-  font-family: "Space Grotesk", sans-serif; font-weight: 500; font-size: 0.98rem; color: #fff;
-  text-shadow: 0 1px 12px rgba(0,0,0,0.5);
+@media (prefers-reduced-motion: reduce) {
+  .frame:hover::before { animation: none; }
 }
 
 /* ---------- Lightbox ---------- */
@@ -286,7 +285,7 @@ a.window:hover .window__go .arrow { transform: translateX(5px); }
 @media (max-width: 600px) {
   .windows { grid-template-columns: 1fr; }
   .gallery { columns: 1; }
-  .frame figcaption { transform: translateY(0); opacity: 1; }
-  .frame::after { opacity: 1; }
+  /* On touch there's no hover, so show images at full color instead of muted. */
+  .frame img { filter: saturate(1) brightness(1); }
   .lightbox__nav { width: 42px; height: 42px; font-size: 1.6rem; }
 }
