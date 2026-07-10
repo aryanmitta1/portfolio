@@ -109,9 +109,9 @@
           Electrical &amp; Computer Engineering, NYU Tandon
         </p>
         <p class="hero__tagline reveal">
-          I build <span class="hl">software</span> and <span class="hl">flight systems</span> for aerospace
-          and embedded hardware: flight software, sensor pipelines, and the
-          electronics they run on.
+          I build <span class="hl">software</span> and <span class="hl">intelligent systems</span> bridging
+          the digital and physical worlds: avionics, embedded platforms, and
+          AI-driven engineering tools.
         </p>
         <div class="hero__actions reveal">
           <a href="#projects" class="btn btn--primary">View My Work<span class="btn__arrow">→</span></a>
@@ -144,7 +144,7 @@
     <!-- TECH MARQUEE -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
-        <span class="marquee__item">Avionics Software</span><span class="marquee__star">✦</span>
+        <span class="marquee__item">Verilog / FPGA</span><span class="marquee__star">✦</span>
         <span class="marquee__item">Embedded C / RTOS</span><span class="marquee__star">✦</span>
         <span class="marquee__item">Flight Software</span><span class="marquee__star">✦</span>
         <span class="marquee__item">Hardware-in-the-Loop</span><span class="marquee__star">✦</span>
@@ -155,8 +155,8 @@
         <span class="marquee__item">GNC</span><span class="marquee__star">✦</span>
         <span class="marquee__item">MATLAB</span><span class="marquee__star">✦</span>
         <span class="marquee__item">PCB Design</span><span class="marquee__star">✦</span>
-        <span class="marquee__item">Telemetry</span><span class="marquee__star">✦</span>
-        <span class="marquee__item">Avionics Software</span><span class="marquee__star">✦</span>
+        <span class="marquee__item">Altium</span><span class="marquee__star">✦</span>
+        <span class="marquee__item">Verilog / FPGA</span><span class="marquee__star">✦</span>
         <span class="marquee__item">Embedded C / RTOS</span><span class="marquee__star">✦</span>
         <span class="marquee__item">Flight Software</span><span class="marquee__star">✦</span>
         <span class="marquee__item">Hardware-in-the-Loop</span><span class="marquee__star">✦</span>
@@ -167,7 +167,7 @@
         <span class="marquee__item">GNC</span><span class="marquee__star">✦</span>
         <span class="marquee__item">MATLAB</span><span class="marquee__star">✦</span>
         <span class="marquee__item">PCB Design</span><span class="marquee__star">✦</span>
-        <span class="marquee__item">Telemetry</span><span class="marquee__star">✦</span>
+        <span class="marquee__item">Altium</span><span class="marquee__star">✦</span>
       </div>
     </div>
 
@@ -175,7 +175,7 @@
     <section class="section" id="about">
       <div class="section__head reveal">
         <span class="section__index">01 · About</span>
-        <h2 class="section__title">Between software,<br>hardware &amp; flight</h2>
+        <h2 class="section__title">About me</h2>
       </div>
       <div class="about">
         <div class="about__media reveal reveal--left">
@@ -193,16 +193,14 @@
         <div class="about__body reveal reveal--right">
           <div class="about__lead">
             <p>
-              I'm an Electrical &amp; Computer Engineering student at
-              <strong>NYU Tandon</strong>. I like working where
-              <strong>software meets hardware</strong>, on the avionics, sensors,
-              and systems that go into rockets, satellites, and autonomous platforms.
+              Hi! I'm a highly motivated Electrical &amp; Computer Engineering
+              honors student at <strong>NYU Tandon</strong>, experienced in
+              <strong>embedded programming</strong>, PCB design, full stack
+              development, and machine learning.
             </p>
             <p>
-              So far that's meant Python automation, embedded systems, ROS2,
-              computer vision, and telemetry processing, across three internships
-              and a set of hardware projects. I care most about the parts where the
-              firmware and the physics have to agree.
+              I like building where software meets hardware, and I'm aiming for
+              roles in <strong>space, robotics, or computer architecture</strong>.
             </p>
           </div>
           <ul class="about__tags">
@@ -250,10 +248,10 @@
                 so the constellation stays as unobtrusive as possible for astronomers and the night sky.
               </p>
               <ul class="ccard__bullets">
-                <li>Built a physics model that predicts a satellite's apparent brightness from GNC state, material and optical properties, and BRDF data.</li>
-                <li>Implemented the brightness and modeling pipeline in MATLAB as the source of truth for the numbers.</li>
-                <li>Developed a full-stack tool with an interactive 3D viewport that visualizes brightness anywhere on Earth, wired to the MATLAB engine through a Python backend.</li>
-                <li>Wrote validation and cross-check scripts to confirm the model against analytic and energy-conservation references.</li>
+                <li>Engineered a first-principles optical model that predicts a satellite's apparent magnitude from GNC state, surface material and optical properties, and measured BRDF data — giving the program a quantitative handle on how each spacecraft impacts the night sky.</li>
+                <li>Architected the end-to-end brightness pipeline in MATLAB and established it as the program's source of truth for constellation-wide brightness numbers.</li>
+                <li>Shipped a full-stack visualization tool with an interactive 3D viewport that renders predicted brightness at any point on Earth, driving the MATLAB engine live through a Python/Flask backend.</li>
+                <li>Validated the model to within analytic and energy-conservation references, building automated cross-check scripts to guarantee physical accuracy before results reached stakeholders.</li>
               </ul>
               <div class="ccard__chips">
                 <span>MATLAB</span><span>BRDF / Optics</span><span>GNC</span><span>Three.js</span><span>Python / Flask</span>
@@ -351,11 +349,11 @@
               </div>
               <p class="ccard__period">AEROSPACE · NASA USLI</p>
               <h3 class="ccard__org">Rocket Payload Telemetry System</h3>
-              <p class="ccard__role">Payload Electronics Lead, live downlink to NASA</p>
+              <p class="ccard__role">Payload Electronics, live downlink to NASA</p>
               <div class="ccard__rule"></div>
-              <p class="ccard__team">NYU ROGUE AEROSPACE · 144–148 MHz VHF</p>
+              <p class="ccard__team">NYU ROGUE AEROSPACE · 144 MHz · 2-METER VHF BAND</p>
               <p class="ccard__desc">
-                Led payload electronics for a NASA University Student Launch Initiative
+                Built payload electronics for a NASA University Student Launch Initiative
                 rocket, designing the full telemetry chain that transmitted live flight
                 data to NASA's ground receiver during flight. On the ground, the data
                 fed a mission-control GUI I built to arm, disarm, and launch the payload
@@ -364,7 +362,7 @@
                 documentation NASA required before launch.
               </p>
               <ul class="ccard__bullets">
-                <li>Built the telemetry chain: Arduino + BMP390 + RTC → APRS over VHF radio.</li>
+                <li>Built the telemetry chain: Arduino + BMP390 + RTC → APRS on the 144 MHz 2-meter VHF amateur band.</li>
                 <li>Encoded APRS messages over AFSK 1200 baud; Mobilinkd TNC4 → Yaesu FT-70DR → NASA receiver.</li>
                 <li>Wrote a mission-control GUI to arm / disarm / launch and plot live data.</li>
                 <li>Planned battery, shielding &amp; manual override; authored NASA review docs.</li>
@@ -384,22 +382,23 @@
               </div>
               <p class="ccard__period">AEROSPACE · ML / CV</p>
               <h3 class="ccard__org">Celestial Navigation System</h3>
-              <p class="ccard__role">Position fixing from the sky &amp; skyline</p>
+              <p class="ccard__role">Position fixing from a photo of the stars</p>
               <div class="ccard__rule"></div>
-              <p class="ccard__team">PYTORCH · OPENCV · ASTROMETRY</p>
+              <p class="ccard__team">PYTORCH · STELLARIUM · MATLAB</p>
               <p class="ccard__desc">
-                A vision and ML system that estimates geographic position from celestial
-                and skyline imagery, with no GPS required.
+                A vision-and-ML system that derives a location on Earth from a single
+                photo of the night sky — built for GPS-denied environments where
+                conventional positioning fails.
               </p>
               <ul class="ccard__bullets">
-                <li>Generated a large training set of 100k sky images in Stellarium, spanning many locations and times.</li>
-                <li>Trained a 1D convolutional neural network on the identified star data to regress a position on Earth.</li>
-                <li>Used Haversine loss so the network optimizes for real-world great-circle distance rather than raw coordinate error.</li>
-                <li>After star identification, computed the final fix in MATLAB using spherical trigonometry.</li>
+                <li>Generated a large training set of 100k sky images in Stellarium, spanning many locations and times, paired with sensor outputs.</li>
+                <li>Built a data pipeline that extracts each star's centroid and local neighborhood from the raw image and flattens it into a compact 1-D array for the network.</li>
+                <li>Started with a 1D convolutional neural network that regressed latitude and longitude directly, trained with a Haversine loss so it optimized for real-world great-circle distance rather than raw coordinate error.</li>
+                <li>Refined the design into a two-stage pipeline: the CNN identifies the stars, then a MATLAB script computes the final position fix using spherical trigonometry.</li>
                 <li>Reached fixes accurate to roughly a mile.</li>
               </ul>
               <div class="ccard__chips">
-                <span>PyTorch</span><span>1D CNN</span><span>Stellarium</span><span>MATLAB</span><span>Haversine Loss</span><span>Geolocation</span>
+                <span>PyTorch</span><span>1D CNN</span><span>Stellarium</span><span>MATLAB</span><span>Haversine Loss</span><span>Star Identification</span><span>GPS-Denied Nav</span>
               </div>
             </article>
 
@@ -409,21 +408,22 @@
               </div>
               <p class="ccard__period">HARDWARE · FLIGHT CONTROL</p>
               <h3 class="ccard__org">Drone Controller PCB</h3>
-              <p class="ccard__role">STM-based flight controller driving ESCs</p>
+              <p class="ccard__role">STM32F405 flight controller, schematic to layout</p>
               <div class="ccard__rule"></div>
-              <p class="ccard__team">STM32 · ESC / PWM · IMU</p>
+              <p class="ccard__team">STM32F405 · ALTIUM · POWER + SENSOR I/O</p>
               <p class="ccard__desc">
-                A custom drone flight-controller board built around an STM32, taken from
-                schematic through layout and firmware.
+                A custom drone flight-controller board built around an STM32F405, designed
+                from multi-page schematic through full PCB layout in Altium Designer.
               </p>
               <ul class="ccard__bullets">
-                <li>Generated the PWM signals that drive the ESCs and motors from the microcontroller.</li>
-                <li>Read an onboard IMU for attitude and fed it into the control loop.</li>
-                <li>Designed power regulation and all peripherals onto a single PCB.</li>
-                <li>Wrote the low-level control loop and drivers in embedded C.</li>
+                <li>Designed the complete flight controller around an STM32F405RGT6 in Altium, organized as multi-page schematics spanning MCU, power, and peripheral subsystems.</li>
+                <li>Architected a two-stage power tree — battery/VBUS feeding a buck converter to a 5V rail, then a 3.3V LDO for the MCU, IMU, and EEPROM — isolating noisy motor power from sensitive logic.</li>
+                <li>Engineered protection and monitoring: reverse-polarity MOSFETs, power muxing between USB-C and battery, TVS/ESD diodes, and an INA226 measuring bus voltage and current over I²C.</li>
+                <li>Wired the full sensor and control interface — IMU over SPI, EEPROM config storage over I²C, FlySky iBUS receiver over UART, and four PWM ESC outputs — with USB-C differential-pair routing and an HSE crystal.</li>
+                <li>Laid the board out over a solid ground plane with short return paths, centering the IMU by the MCU to minimize SPI trace length and EMI.</li>
               </ul>
               <div class="ccard__chips">
-                <span>STM32</span><span>ESC / PWM</span><span>PCB Design</span><span>IMU</span><span>Embedded C</span>
+                <span>STM32F405</span><span>Altium</span><span>Buck / LDO Power</span><span>INA226</span><span>SPI / I²C / UART</span><span>ESC / PWM</span>
               </div>
             </article>
 
@@ -433,21 +433,23 @@
               </div>
               <p class="ccard__period">HARDWARE · PCB DESIGN</p>
               <h3 class="ccard__org">Arduino-on-STM Board</h3>
-              <p class="ccard__role">Custom Arduino-compatible board from scratch</p>
+              <p class="ccard__role">"NYUno" — a reimagined Arduino Uno on an STM32F405</p>
               <div class="ccard__rule"></div>
-              <p class="ccard__team">STM32 · SCHEMATIC → LAYOUT → BRING-UP</p>
+              <p class="ccard__team">STM32F405 · 4-LAYER · SCHEMATIC → LAYOUT</p>
               <p class="ccard__desc">
-                A custom PCB built around an STM32, recreating Arduino-style functionality
-                from first principles instead of using an off-the-shelf board.
+                A ground-up redesign of the Arduino Uno, swapping the ATmega328P for an
+                STM32F405 and re-engineering the power and I/O to handle real-world inputs —
+                captured as a multi-page schematic and laid out on a 4-layer board.
               </p>
               <ul class="ccard__bullets">
-                <li>Captured the schematic and selected components from the microcontroller up.</li>
-                <li>Laid out the board and sent it out for fabrication.</li>
-                <li>Soldered and brought up the board, then flashed firmware to confirm it worked.</li>
-                <li>Debugged hardware and firmware together to get a clean bring-up.</li>
+                <li>Replaced the ATmega328P with an STM32F405, using its native USB controller to drop the USB-to-serial bridge and cut component count.</li>
+                <li>Designed a wide-input power tree — an XT30 feeding an LMR51450 buck converter down to 5V, then an LDO to a clean 3.3V — handling inputs up to 36V without the thermal blowup a single LDO would hit.</li>
+                <li>Added a TPS2113A power mux to switch seamlessly between USB and external supply, plus TVS/ESD protection, USB rail filtering, bulk energy storage, and inrush current limiting.</li>
+                <li>Organized the design as a multi-page schematic (power, MCU, USB, connectors) with global labels, per-pin decoupling, and functional-group pin selection across SPI, I²C, and UART for clean routing to external headers.</li>
+                <li>Laid the board out on a 4-layer JLCPCB stackup with ground planes for tight return paths, 90 Ω USB differential pairs, via stitching, and a minimized buck switching loop to keep EMI down.</li>
               </ul>
               <div class="ccard__chips">
-                <span>STM32</span><span>PCB Layout</span><span>Embedded C</span><span>Bring-Up</span>
+                <span>STM32F405</span><span>Buck / LDO Power</span><span>TPS2113A Mux</span><span>USB DFU / SWD</span><span>4-Layer Layout</span>
               </div>
             </article>
 
@@ -467,7 +469,7 @@
                 <li>Recognized contracted and extended fingers with OpenCV at around 98% accuracy per finger.</li>
                 <li>Used contour detection to calculate the angles between fingers and read the gesture.</li>
                 <li>Mapped the detected hand pose to servo angles that drive each actuated joint with minimal lag.</li>
-                <li>Modeled the hand in SolidWorks and 3D printed it on a Prusa for clean part articulation.</li>
+                <li>Modeled the hand in SolidWorks for clean part articulation across each joint.</li>
               </ul>
               <div class="ccard__chips">
                 <span>OpenCV</span><span>Python</span><span>Arduino</span><span>Servos</span><span>SolidWorks</span>
@@ -532,7 +534,7 @@
           <div class="chips">
             <span>Python</span><span>C / C++</span><span>Embedded C</span><span>Java</span>
             <span>JavaScript</span><span>MATLAB</span><span>SQL</span>
-            <span>RTL (Verilog)</span><span>Assembly</span><span>HTML / CSS</span><span>Bash</span>
+            <span>RTL (Verilog)</span><span>Assembly</span><span>HTML / CSS</span>
           </div>
         </div>
         <div class="skill-card reveal">
@@ -540,7 +542,7 @@
           <div class="chips">
             <span>Flight Software (C&amp;DH)</span><span>Telemetry &amp; Command</span>
             <span>RF / Radio Links (VHF · APRS)</span><span>Sensor Integration</span>
-            <span>Fault Detection (FDIR)</span><span>Hardware-in-the-Loop (HIL)</span>
+            <span>Hardware-in-the-Loop (HIL)</span>
             <span>GNC Modeling</span>
           </div>
         </div>
@@ -556,7 +558,7 @@
           <h3>Robotics &amp; Sensor Fusion</h3>
           <div class="chips">
             <span>ROS2 (Humble)</span><span>LiDAR · IMU · GNSS</span><span>Sensor Fusion</span>
-            <span>PPS Time-Sync</span><span>Jetson Integration</span><span>Real-Time Pipelines</span>
+            <span>Jetson Integration</span><span>Real-Time Pipelines</span>
           </div>
         </div>
         <div class="skill-card reveal">
@@ -600,9 +602,9 @@
           </div>
           <h4>Focus Areas</h4>
           <div class="chips">
-            <span>Avionics &amp; Embedded</span><span>Control Systems</span>
-            <span>Signal Processing</span><span>Machine Learning</span>
-            <span>Computer Architecture</span><span>Networking</span>
+            <span>Avionics &amp; Embedded</span><span>PCB &amp; Hardware Design</span>
+            <span>Robotics &amp; Sensor Fusion</span><span>Machine Learning</span>
+            <span>Control Systems</span><span>Computer Architecture</span>
           </div>
         </article>
       </div>
@@ -624,12 +626,12 @@
                 </div>
                 <p class="ccard__period">FALL 2024 – PRESENT</p>
                 <h3 class="ccard__org">NYU Rogue Aerospace</h3>
-                <p class="ccard__role">Lead Avionics Systems Engineer</p>
+                <p class="ccard__role">Avionics Systems Engineer</p>
                 <p class="ccard__loc">NASA USLI · FAR/OUT · Brooklyn, NY</p>
                 <div class="ccard__rule"></div>
                 <p class="ccard__team">STUDENT LAUNCH · AVIONICS TEAM</p>
                 <p class="ccard__desc">
-                  Lead the avionics side of the rocketry team, which has competed in
+                  Work on the avionics side of the rocketry team, which has competed in
                   NASA USLI and now also flies in the FAR/OUT competition.
                 </p>
                 <ul class="ccard__bullets">
@@ -660,7 +662,7 @@
                   and helped develop curriculum for the course labs.
                 </p>
                 <ul class="ccard__bullets">
-                  <li>Ran experiments for 400+ students per semester on circuits, CAD, and core engineering concepts.</li>
+                  <li>Ran experiments for students each semester on circuits, CAD, and core engineering concepts.</li>
                   <li>Assessed technical writing and presentation skills with weekly grading and feedback.</li>
                   <li>Mentored students on hands-on projects using Arduino, Raspberry Pi, Python / C++, and SolidWorks.</li>
                 </ul>
@@ -716,13 +718,10 @@
         <ul class="extra__list">
           <li><span class="extra__role">Vice President</span>IEEE NYU Chapter</li>
           <li><span class="extra__role">Secretary</span>NYU Theta Tau</li>
-          <li><span class="extra__role">Member</span>Society of Asian Scientists and Engineers</li>
           <li><span class="extra__role">Study Abroad</span>NYU Paris</li>
           <li><span class="extra__role">Study Abroad</span>Hanyang University</li>
           <li><span class="extra__role">Wildlife Conservation Volunteer</span>FNPF - Bali, Indonesia</li>
-          <li><span class="extra__role">Member</span>NYU Indian Cultural Club</li>
           <li><span class="extra__role">Member</span>Space Exploration Society</li>
-          <li><span class="extra__role">Member</span>Chess Club</li>
         </ul>
       </div>
 
@@ -790,9 +789,10 @@
         <p class="contact__eyebrow">Contact</p>
         <h2 class="contact__title">Get in touch</h2>
         <p class="contact__text">
-          I'm looking for roles in aerospace, avionics, embedded systems, and
-          flight software. If you're working on something in that space, I'd
-          like to hear about it.
+          I'm looking for roles in embedded systems, hardware design, robotics,
+          and machine learning — building software and electronics that bridge
+          the digital and physical worlds. If you're working on something in
+          that space, I'd like to hear about it.
         </p>
         <div class="contact__actions">
           <a href="mailto:aryanmitta@gmail.com" class="btn btn--primary">aryanmitta@gmail.com<span class="btn__arrow">→</span></a>

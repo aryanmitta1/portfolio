@@ -366,7 +366,7 @@ const COARSE  = matchMedia("(pointer: coarse)").matches;
   const el = document.getElementById("decryptText");
   if (!el || REDUCED) return;
   const titles = [
-    "Avionics Software Engineer", "Embedded Systems Developer", "Aerospace Software",
+    "Avionics Software Engineer", "Embedded Systems Developer", "Flight Systems Engineer",
     "Telemetry & Test Engineer", "Sensor Fusion Tinkerer",
   ];
   const charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&_/<>*";
